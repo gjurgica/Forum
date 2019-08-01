@@ -37,6 +37,7 @@ namespace ForumWeb.Controllers
             {
                 Id = p.Id,
                 Title = p.Title,
+                Content = p.Content,
                 AuthorId = p.User.Id,
                 AuthorName = p.User.FirstName,
                 DatePosted = p.Created.ToString(),

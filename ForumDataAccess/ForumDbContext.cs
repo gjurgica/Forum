@@ -60,6 +60,18 @@ namespace ForumDataAccess
 
                 }
                 );
+            modelBuilder.Entity<Post>()
+              .HasData(
+                new Post
+                {
+                    Id =1,
+                    Title = "Is it easy to learn Python?",
+                    Content = "What is the best way to learn Python by myself? Are there any recommended websites/forums and textbooks?",
+                    Created = DateTime.Now,
+                    ForumId = 1,
+                    UserId = 3
+                }
+                );
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

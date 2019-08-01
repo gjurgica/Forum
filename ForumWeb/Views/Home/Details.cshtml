@@ -7,12 +7,32 @@
 <h2>Details</h2>
 
 <div>
-    <h4>TopicViewModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-    </dl>
+    <h4><a asp-action="Index">@Model.Forum.Title</a></h4>
+    @if (Model.Posts.Any())
+    {
+        <table>
+            <tbody>
+                @foreach(var post in Model.Posts)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(post.Title,"Index","Post",new { id = post.Id})</td>
+                        <td>@post.Content</td>
+                        <td>@post.AuthorName</td>
+                        <td>@post.DatePosted</td>
+                        <td>@post.RepliesCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="no-posts">
+            <h3>No posts</h3>
+            <p>Why not @Html.ActionLink("Create", "Add", "Post", new { id = Model.Forum.Id }) one?</p>
+        </div>
+    }
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) 
 </div>

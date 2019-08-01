@@ -1,5 +1,6 @@
 ﻿using ForumDataAccess.Interfaces;
 using ForumDomain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,12 @@ namespace ForumDataAccess.Repositories
 
         public Post GetPostById(int id)
         {
-            return _context.Posts.FirstOrDefault(x => x.Id == id);
+            return _context.Posts
+                .Include(p => p.User)
+                .Include(p => p.Replies)
+                    .ThenInclude(r => r.User)
+                .Include(p => p.Forum)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public List<Post> GetPostsByForum(int id)
