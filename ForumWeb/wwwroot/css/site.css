@@ -3,11 +3,76 @@ html, body {
     height: 100%;
     font-family: 'Roboto Mono', monospace;
     font-size: 15px;
+    background-image: url('https://images.pexels.com/photos/326256/pexels-photo-326256.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position:center;
 }
-h2{
-    color:white;
-    margin:20px;
-    font-size:40px;
+.front-page-title {
+    background-image: url("https://images.pexels.com/photos/53214/trekking-hiking-group-alpine-53214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity:0.6;
+}
+.front-page-learn{
+    padding:12px 0 0 32px;
+    height:360px;
+}
+.front-page-heading {
+    font-size: 2.6em;
+    padding: 10px 0;
+    margin: 16px 0;
+    font-weight:bold;
+}
+.front-page-sub-heading{
+    font-size:1.6em;
+    padding:10px 0;
+    font-weight:bold;
+}
+.homeSearch{
+    width:100%;
+    margin-top:8px;
+    background:rgba(0,0,0,0.1);
+    padding:8px;
+    border:0px;
+    height:1.8em;
+    font-size:1.4em;
+    font-weight:bold;
+    transition:ease-in 0.2s;
+}
+.homeSearch:focus {
+        border: none;
+        outline: none;
+        transition: ease-in 0.2s;
+        color:#03A9F4;
+        background-color:rgba(0,0,0,0.7);
+        box-shadow:0 5px 4px -6px #000;
+}
+.front-page-content{
+    background-color:rgba(255,255,255,0.4);
+    padding:16px;
+}
+.latest-forums{
+    font-size:1.2em;
+    font-weight:bold;
+    color:#333;
+    margin:4px 0 16px 0;
+}
+.forum-title {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+    .forum-title a {
+        color: rgb(32,32,32);
+    }
+.forum-sub-title{
+    font-size:0.8em;
+}
+/*h2 {
+    color: white;
+    margin: 20px;
+    font-size: 40px;
 }
 .row-register{
     margin-top:100px;
@@ -109,4 +174,4 @@ input:focus {
 .form-group{
     width:200px;
     margin:10px;
-}
+}*/

@@ -25,14 +25,15 @@ namespace ForumWeb.Controllers
             {
                 Id = x.Id,
                 Title = x.Title,
-                Description = x.Description
+                Description = x.Description,
+                ImageUrl = x.ImageUrl
             });
             return View(forums);
         }
         public IActionResult Details(int id)
         {
             var forum = _forumRepository.GetForumById(id);
-            var post = forum.Posts;
+            var post = forum.Posts.OrderByDescending(p => p.Created).Take(5);
             var selected = post.Select(p => new PostViewModel
             {
                 Id = p.Id,

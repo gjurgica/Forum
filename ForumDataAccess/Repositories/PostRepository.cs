@@ -46,7 +46,12 @@ namespace ForumDataAccess.Repositories
 
         public List<Post> GetAllPosts()
         {
-            return _context.Posts.ToList();
+            return _context.Posts
+                .Include(p => p.User)
+                .Include(p => p.Replies)
+                    .ThenInclude(r => r.User)
+                .Include(p => p.Forum).
+                ToList();
         }
 
         public Post GetPostById(int id)
