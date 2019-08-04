@@ -4,14 +4,16 @@ using ForumDataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ForumDataAccess.Migrations
 {
     [DbContext(typeof(ForumDbContext))]
-    partial class ForumDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190802072337_create post method")]
+    partial class createpostmethod
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,8 +34,6 @@ namespace ForumDataAccess.Migrations
 
                     b.Property<string>("ImageUrl");
 
-                    b.Property<int>("PostId");
-
                     b.Property<string>("Title")
                         .IsRequired();
 
@@ -46,8 +46,8 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("Forums");
 
                     b.HasData(
-                        new { Id = 1, Created = new DateTime(2019, 8, 3, 19, 24, 7, 0, DateTimeKind.Local), Description = "Python is an interpreted, high-level, general-purpose programming language.", ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png", PostId = 0, Title = "Pyton" },
-                        new { Id = 2, Created = new DateTime(2019, 8, 3, 19, 24, 7, 2, DateTimeKind.Local), Description = "ReactJS is an open-source JavaScript library which is used for building user interfaces specifically for single page applications.", ImageUrl = "https://hackernoon.com/hn-images/1*y6C4nSvy2Woe0m7bWEn4BA.png", PostId = 0, Title = "React.js" }
+                        new { Id = 1, Created = new DateTime(2019, 8, 2, 9, 23, 37, 79, DateTimeKind.Local), Description = "Python is an interpreted, high-level, general-purpose programming language.", ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png", Title = "Pyton" },
+                        new { Id = 2, Created = new DateTime(2019, 8, 2, 9, 23, 37, 81, DateTimeKind.Local), Description = "ReactJS is an open-source JavaScript library which is used for building user interfaces specifically for single page applications.", ImageUrl = "https://hackernoon.com/hn-images/1*y6C4nSvy2Woe0m7bWEn4BA.png", Title = "React.js" }
                     );
                 });
 
@@ -78,8 +78,7 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("Posts");
 
                     b.HasData(
-                        new { Id = 1, Content = "What is the best way to learn Python by myself? Are there any recommended websites/forums and textbooks?", Created = new DateTime(2019, 8, 3, 19, 24, 7, 2, DateTimeKind.Local), ForumId = 1, Title = "Is it easy to learn Python?", UserId = 3 },
-                        new { Id = 2, Content = "I’ve been working with javascript for a while now and I’m comfortable with it. I like all the libraries and flexibility that I have with it. I want to eventually start messing around with another language like Python or even Java but I’m not really seeing much of what something like python adds that I can’t really already do in javascript.Can someone explain to this noob why I should start learning Python (or Java)?", Created = new DateTime(2019, 8, 3, 19, 24, 7, 2, DateTimeKind.Local), ForumId = 1, Title = "Is Python worth learning 2019?", UserId = 1 }
+                        new { Id = 1, Content = "What is the best way to learn Python by myself? Are there any recommended websites/forums and textbooks?", Created = new DateTime(2019, 8, 2, 9, 23, 37, 81, DateTimeKind.Local), ForumId = 1, Title = "Is it easy to learn Python?", UserId = 3 }
                     );
                 });
 

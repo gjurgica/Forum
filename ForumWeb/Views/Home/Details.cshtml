@@ -4,7 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+
 
 <div>
     <h4><a asp-action="Index">@Model.Forum.Title</a></h4>
@@ -35,4 +35,9 @@
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) 
+</div>
+<div>
+    <span>
+        @Html.ActionLink("Create New Post?", "Add", "Post", new { id = Model.Forum.Id },  new { @class = "btn btn-newPost" })
+    </span>
 </div>

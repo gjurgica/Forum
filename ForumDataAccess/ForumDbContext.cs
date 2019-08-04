@@ -72,6 +72,18 @@ namespace ForumDataAccess
                     UserId = 3
                 }
                 );
+            modelBuilder.Entity<Post>()
+              .HasData(
+                new Post
+                {
+                    Id = 2,
+                    Title = "Is Python worth learning 2019?",
+                    Content = "I’ve been working with javascript for a while now and I’m comfortable with it. I like all the libraries and flexibility that I have with it. I want to eventually start messing around with another language like Python or even Java but I’m not really seeing much of what something like python adds that I can’t really already do in javascript.Can someone explain to this noob why I should start learning Python (or Java)?",
+                    Created = DateTime.Now,
+                    ForumId = 1,
+                    UserId = 1
+                }
+                );
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

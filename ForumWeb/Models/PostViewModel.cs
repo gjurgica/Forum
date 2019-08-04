@@ -15,9 +15,12 @@ namespace ForumWeb.Models
         public int AuthorId { get; set; }
         public string AuthorImageUrl { get; set; }
         public string DatePosted { get; set; }
+        public int ForumId { get; set; }
+        public string ForumTitle { get; set; }
 
         public ForumViewModel Forum { get; set; }
         public IEnumerable<PostReplyViewModel> Replies { get; set; }
+        public User User { get; set; }
 
         public int RepliesCount { get; set; }
     }

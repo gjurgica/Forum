@@ -17,7 +17,9 @@ namespace ForumDomain
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public string ImageUrl { get; set; }
+        public int PostId { get; set; }
 
         public virtual List<Post> Posts { get; set; }
+        public virtual User User { get; set; }
     }
 }
