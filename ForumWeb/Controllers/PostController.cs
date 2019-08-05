@@ -25,18 +25,18 @@ namespace ForumWeb.Controllers
         {
             var post = _postRepository.GetPostById(id);
             var replies = BuildPostReplies(post.Replies);
-            var model = new PostViewModel
-            {
-                Id = post.Id,
-                Title = post.Title,
-                Content = post.Content,
-                AuthorId = post.User.Id,
-                AuthorName = post.User.UserName,
-                AuthorImageUrl = post.User.Url,
-                DatePosted = post.Created.ToString(),
-                RepliesCount = post.Replies.Count(),
-                Replies = replies
-            };
+            var model = new PostViewModel();
+            model.Id = post.Id;
+            model.Title = post.Title;
+            model.Content = post.Content;
+            model.AuthorId = post.User.Id;
+            model.AuthorName = post.User.UserName;
+            model.AuthorImageUrl = post.User.Url;
+            model.DatePosted = post.Created.ToString();
+            model.RepliesCount = post.Replies.Count();
+            model.Replies = replies;
+            model.ForumId = post.Forum.Id;
+            model.ForumTitle = post.Forum.Title;
             return View(model);
         }
         public IActionResult Add(int id)
@@ -50,7 +50,7 @@ namespace ForumWeb.Controllers
         [HttpPost]
         public IActionResult Add(PostViewModel viewPost)
         {
-            var user = _userRepository.GetUserById(2);
+            var user = _userRepository.GetUserById(3);
             var post = BuildPostReplies(viewPost,user);
              _postRepository.AddPost(post);
              return RedirectToAction("Details","Home",new {id = post.Id });

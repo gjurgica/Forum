@@ -1,43 +1,57 @@
 ﻿@model ForumWeb.Models.TopicViewModel
 
-@{
-    ViewData["Title"] = "Details";
-}
 
 
-
-<div>
-    <h4><a asp-action="Index">@Model.Forum.Title</a></h4>
-    @if (Model.Posts.Any())
-    {
-        <table>
-            <tbody>
-                @foreach(var post in Model.Posts)
-                {
-                    <tr>
-                        <td>@Html.ActionLink(post.Title,"Index","Post",new { id = post.Id})</td>
-                        <td>@post.Content</td>
-                        <td>@post.AuthorName</td>
-                        <td>@post.DatePosted</td>
-                        <td>@post.RepliesCount</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <div class="no-posts">
-            <h3>No posts</h3>
-            <p>Why not @Html.ActionLink("Create", "Add", "Post", new { id = Model.Forum.Id }) one?</p>
+<div class="container body-content">
+    <div class="row post-header">
+        <div class="section-description">
+            <img src="@Model.Forum.ImageUrl" style="width:40px; height:40px; margin-right:20px; border-radius:3px;" />
+            <div style="display:inline-block">Welcome to @Model.Forum.Title Forum</div>
         </div>
-    }
+    </div>
+    <div class="row post-index-content">
+        @if (Model.Posts.Any())
+        {
+            <table class="table table-bordered table-hover" id="forum-index-table">
+                <tbody>
+                    @foreach (var post in Model.Posts)
+                    {
+                        <tr>
+                            <td>
+                                <div class="forum-title">@Html.ActionLink(post.Title, "Index", "Post", new { id = post.Id })</div>
+                                <div class="forum-sub-title">
+                                    <div>
+                                        <span class="post-author">@Html.ActionLink(post.AuthorName, "Index", "Post", new { id = post.AuthorId })</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="post-reply-count">
+                                    Replies:@post.RepliesCount
+                                </div>
+                            </td>
+                            <td>
+                                <div class="post-date">
+                                    @post.DatePosted
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="no-posts">
+                <i class="material-icons md-72">question_answer</i>
+                <h3>No posts</h3>
+            </div>
+        }
+    </div>
+    <div class="section-heading">
+        <span>
+            @Html.ActionLink("Create Post", "Add", "Post", new { id = Model.Forum.Id }, new { @class = "btn btn-newPost" })
+        </span>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) 
-</div>
-<div>
-    <span>
-        @Html.ActionLink("Create New Post?", "Add", "Post", new { id = Model.Forum.Id },  new { @class = "btn btn-newPost" })
-    </span>
-</div>
+

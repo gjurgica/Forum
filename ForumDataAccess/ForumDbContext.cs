@@ -56,7 +56,7 @@ namespace ForumDataAccess
                     Title = "React.js",
                     Description = "ReactJS is an open-source JavaScript library which is used for building user interfaces specifically for single page applications.",
                     Created = DateTime.Now,
-                    ImageUrl = "https://hackernoon.com/hn-images/1*y6C4nSvy2Woe0m7bWEn4BA.png"
+                    ImageUrl = "https://cdn.worldvectorlogo.com/logos/react.svg"
 
                 }
                 );

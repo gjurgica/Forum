@@ -4,50 +4,44 @@
     ViewData["Title"] = "Index";
 }
 
-
-<div>
-    <h4>@Model.Title</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AuthorName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AuthorId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorImageUrl)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AuthorImageUrl)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DatePosted)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DatePosted)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.RepliesCount)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RepliesCount)
-        </dd>
-    </dl>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-controller="Home" asp-action="Index">Back to List</a>
-</div>
+<div class="container body-content">
+    <div class="row post-header">
+            <span class="post-title">@Model.Title</span>
+            <span id="heading-btn">@Html.ActionLink( "Back to" + @Model.ForumTitle, "Details", "Home", new { id = @Model.ForumId },new { @class= "btn btn-back"})</span>
+    </div>
+    <div class="row post-index-content">
+        <div class="col-md-3 post-author">
+            <div class="post-author-img">
+                <img src="@Model.AuthorImageUrl" style="width:80px; height:80px;"/>
+            </div>
+            @Html.ActionLink( @Model.AuthorName, "Details", "Home", new { id = @Model.AuthorId }, new { @class = "btn btn-back" })
+            <br/><span class="post-date">@Model.DatePosted</span>
+        </div>
+        <div class="col-md-9 post-content-container">
+            <div class="post-content">
+                @Html.Raw(Model.Content)
+            </div>
+        </div>
+    </div>
+        <div class="row reply-divider"></div>
+        <div class="row">
+            <span>@Html.ActionLink("Post Reply", "Add", "Reply",new { id = Model.Id}, new { @class = "btn btn-new-reply" })</span>
+        </div>
+    @if (Model.Replies.Any())
+    {
+        foreach(var reply in Model.Replies)
+        {
+            <div class="row reply-content">
+                <div class="col-md-3 reply-author">
+                    <div class="post-author-img"><img src="@reply.AuthorImageUrl" /></div>
+                    @Html.ActionLink(@Model.AuthorName, "Details", "Home", new { id = @Model.AuthorId }, new { @class = "btn btn-default" })
+                    <span>@reply.DatePosted</span>
+                </div>
+                <div class="col-md-9 reply-content">
+                    <div class="post-content">
+                        @Html.Raw(reply.Content)
+                    </div>
+                </div>
+            </div>
+        }
+    }

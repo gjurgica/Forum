@@ -9,6 +9,11 @@ html, body {
     background-attachment:fixed;
     background-position:center;
 }
+.body-content{
+    padding-left:15px;
+    padding-right:15px;
+
+}
 .front-page-title {
     background-image: url("https://images.pexels.com/photos/53214/trekking-hiking-group-alpine-53214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     background-repeat: no-repeat;
@@ -68,6 +73,73 @@ html, body {
     }
 .forum-sub-title{
     font-size:0.8em;
+}
+.post-index-content{
+    background-color:white;
+    box-shadow:0 10px 20px rgba(0,0,0,0.2),0 6px 6px rgba(0,0,0,0.3);
+}
+.post-header{
+    background-color:#212121;
+    padding:8px 0 24px 24px;
+    color:#ddd;
+}
+#heading-btn{
+    margin-left:20px;
+}
+.btn-back {
+    background-color: #555;
+    color: #fff;
+    transition: ease-in 0 1s;
+    border-radius: 0px;
+}
+    .btn-back:hover {
+        transition: ease-in 0 1s;
+        background-color:#1e88e5;
+    }
+.btn-new-reply {
+    background-color: #5c6bco;
+    color: #fff;
+    transition: ease-in 0 1s;
+    border-radius: 0px;
+}
+    .btn-new-reply:hover {
+        background-color: #9fa8da;
+        transition: ease-in 0 1s;
+    }
+.btn-newPost {
+    background-color: #c62828;
+    color: #fff;
+    transition: ease-in 0 1s;
+    border-radius: 0px;
+}
+.btn-newPost:hover {
+    transition: ease-in 0 1s;
+    background-color:#e53935;
+    color:#fff;
+}
+.btn-submit {
+    background-color: #00695c;
+    color: #fff;
+    transition: ease-in 0 1s;
+    border-radius: 0px;
+}
+.btn-submit:hover {
+    transition: ease-in 0 1s;
+    background-color: #008978;
+    color: #fff;
+}
+.post-author {
+    padding: 12px;
+    color: #444;
+    width: 190px;
+}
+.post-title{
+    font-size:1.4em;
+}
+.post-content-container{
+    color:#222;
+    padding:22px;
+    border-left:1px solid #ddd;
 }
 /*h2 {
     color: white;
