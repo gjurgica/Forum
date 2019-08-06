@@ -50,7 +50,7 @@ namespace ForumWeb.Controllers
         [HttpPost]
         public IActionResult Add(PostViewModel viewPost)
         {
-            var user = _userRepository.GetUserById(3);
+            var user = _userRepository.GetUserById(viewPost.AuthorId);
             var post = BuildPostReplies(viewPost,user);
              _postRepository.AddPost(post);
              return RedirectToAction("Details","Home",new {id = post.Id });

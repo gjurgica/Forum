@@ -141,6 +141,20 @@ html, body {
     padding:22px;
     border-left:1px solid #ddd;
 }
+.user-profile{
+    padding:32px 0 64px 24px;
+    background-color:#fff;
+}
+.user-email{
+    display:block;
+    color:#444;
+    padding-top:4px
+}
+.user-name{
+    display:block;
+    color:#2569d5;
+    font-size:1.7em;
+}
 /*h2 {
     color: white;
     margin: 20px;

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ForumWeb.Models;
 using ForumDataAccess.Interfaces;
 using ForumDomain;
+using ForumDataAccess;
 
 namespace ForumWeb.Controllers
 {
@@ -14,14 +15,17 @@ namespace ForumWeb.Controllers
     {
         private IForumRepository _forumRepository;
         private IPostRepository _postRepository;
-        public HomeController(IForumRepository forumRepository,IPostRepository postRepository)
+        private IUserRepository _userRepository;
+        public HomeController(IForumRepository forumRepository,IPostRepository postRepository,IUserRepository userRepository)
         {
             _forumRepository = forumRepository;
             _postRepository = postRepository;
+            _userRepository = userRepository;
         }
         public IActionResult Index()
         {
-            var forums = _forumRepository.GetAllForums().Select(x => new ForumViewModel
+            var takeFive = _forumRepository.GetAllForums().OrderBy(x => x.Created).Take(5);
+            var forums = takeFive.Select(x => new ForumViewModel
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -53,7 +57,28 @@ namespace ForumWeb.Controllers
             };
             return View(model);
         }
-
+        [HttpPost]
+        public IActionResult Search(int id)
+        {
+            return View();
+        }
+        public IActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Add(ForumViewModel forum)
+        {
+            User user = _userRepository.GetUserById(forum.AuthorId);
+            Forum newForum = new Forum();
+            newForum.Title = forum.Title;
+            newForum.Description = forum.Description;
+            newForum.ImageUrl = forum.ImageUrl;
+            newForum.User = user;
+            newForum.Created = DateTime.Now;
+            _forumRepository.AddForum(newForum);
+            return RedirectToAction("Index", "Home");
+        }
         private ForumViewModel BuildForumView(Post post)
         {
             var forum = post.Forum;

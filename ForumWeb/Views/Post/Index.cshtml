@@ -7,14 +7,14 @@
 <div class="container body-content">
     <div class="row post-header">
             <span class="post-title">@Model.Title</span>
-            <span id="heading-btn">@Html.ActionLink( "Back to" + @Model.ForumTitle, "Details", "Home", new { id = @Model.ForumId },new { @class= "btn btn-back"})</span>
+            <span id="heading-btn">@Html.ActionLink( "Back to " +  @Model.ForumTitle, "Details", "Home", new { id = @Model.ForumId },new { @class= "btn btn-back"})</span>
     </div>
     <div class="row post-index-content">
         <div class="col-md-3 post-author">
             <div class="post-author-img">
                 <img src="@Model.AuthorImageUrl" style="width:80px; height:80px;"/>
             </div>
-            @Html.ActionLink( @Model.AuthorName, "Details", "Home", new { id = @Model.AuthorId }, new { @class = "btn btn-back" })
+            @Html.ActionLink( @Model.AuthorName, "Details", "Profile", new { id = @Model.AuthorId }, new { @class = "btn btn-back" })
             <br/><span class="post-date">@Model.DatePosted</span>
         </div>
         <div class="col-md-9 post-content-container">
@@ -34,7 +34,7 @@
             <div class="row reply-content">
                 <div class="col-md-3 reply-author">
                     <div class="post-author-img"><img src="@reply.AuthorImageUrl" /></div>
-                    @Html.ActionLink(@Model.AuthorName, "Details", "Home", new { id = @Model.AuthorId }, new { @class = "btn btn-default" })
+                    @Html.ActionLink(@Model.AuthorName, "Details", "Home", new { id = @Model.AuthorId })
                     <span>@reply.DatePosted</span>
                 </div>
                 <div class="col-md-9 reply-content">
@@ -45,3 +45,4 @@
             </div>
         }
     }
+</div>

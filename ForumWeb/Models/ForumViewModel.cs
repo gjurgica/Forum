@@ -12,6 +12,7 @@ namespace ForumWeb.Models
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public string AuthorName { get; set; }
+        public int AuthorId { get; set; }
         public int PostId { get; set; }
         public string PostTitle { get; set; }
         public string PostDescription { get; set; }
