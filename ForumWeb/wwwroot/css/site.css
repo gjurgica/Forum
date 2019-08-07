@@ -155,109 +155,119 @@ html, body {
     color:#2569d5;
     font-size:1.7em;
 }
-/*h2 {
-    color: white;
-    margin: 20px;
-    font-size: 40px;
-}
-.row-register{
-    margin-top:100px;
-}
-.register-btn{
-    margin:20px;
-}
-.container .register {
-    height: 100vh;
-    width: 100vw;
-    background-image: url('https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
-    background-size: cover;
-    background-repeat: no-repeat;
+.wrapper {
     display: flex;
+    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
 }
-.control-label {
+.formContent {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+}
+ input[type=submit] {
+    background-color: #56baed;
+    border: none;
     color: white;
+    padding: 15px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 13px;
+    box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 5px 20px 40px 20px;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
-.container .login {
-    height: 100vh;
-    width: 100vw;
-    align-content: center;
-    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKYYqcVh2g_JAJYLBKUz4VV0BOHzze9AhDH6JijQ4WjBNh-_K6g");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.card {
-    height: 370px;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 400px;
-    background-color: rgba(0,0,0,0.5) !important;
-}
-
-.social_icon span {
-    font-size: 60px;
-    margin-left: 10px;
-    color: #FFC312;
-}
-
-    .social_icon span:hover {
-        color: white;
-        cursor: pointer;
+  input[type=submit]:hover{
+        background-color: #39ace7;
     }
 
-.card-header h3 {
-    color: white;
+     input[type=submit]:active, {
+        transform: scale(0.95);
+    }
+input[type=text] {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 80%;
+    border: 2px solid #f6f6f6;
+    transition: all 0.5s ease-in-out;
+}
+    input[type=text]:focus {
+        background-color: #fff;
+        border-bottom: 2px solid #5fbae9;
+    }
+.fadeInDown {
+    animation-name: fadeInDown;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+#formFooter {
+    background-color: #f6f6f6;
+    border-top: 1px solid #dce8f1;
+    padding: 25px;
+    text-align: center;
+    -webkit-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
 }
 
-.social_icon {
-    position: absolute;
-    right: 20px;
-    top: -45px;
-}
-
-.input-group-prepend span {
-    width: 50px;
-    background-color: #FFC312;
-    color: black;
-    border: 0 !important;
-}
-
-input:focus {
-    outline: 0 0 0 0 !important;
-    box-shadow: 0 0 0 0 !important;
-}
-
-.remember {
-    color: white;
-}
-
-    .remember input {
-        width: 20px;
-        height: 20px;
-        margin-left: 15px;
-        margin-right: 5px;
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
     }
 
-.login_btn {
-    color: black;
-    background-color: #FFC312;
-    width: 100px;
+    100% {
+        opacity: 1;
+        transform: none;
+    }
 }
-
-    .login_btn:hover {
-        color: black;
-        background-color: white;
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
     }
 
-.links {
-    color: white;
+    100% {
+        opacity: 1;
+        transform: none;
+    }
 }
-
-    .links a {
-        margin-left: 4px;
+.fadeIn {
+    animation: fadeIn ease-in 1;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+}
+    .fadeIn.second {
+        animation-delay: 0.6s;
     }
 
-.form-group{
-    width:200px;
-    margin:10px;
-}*/
+    .fadeIn.third {
+        animation-delay: 0.8s;
+    }
+
+    .fadeIn.fourth {
+        animation-delay: 1s;
+    }

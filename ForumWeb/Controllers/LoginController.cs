@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ForumDataAccess;
 using ForumDomain;
+using ForumWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForumWeb.Controllers
@@ -19,6 +20,17 @@ namespace ForumWeb.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+        public IActionResult Login(UserViewModel user)
+        {
+            List<User> users = _userRepository.GetAllUsers();
+            var check = users.FirstOrDefault(x => x.UserName == user.UserName && x.Password == user.Password);
+            if(check != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Login");
+
         }
         public IActionResult Add()
         {
