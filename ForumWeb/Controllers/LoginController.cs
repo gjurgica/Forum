@@ -27,7 +27,7 @@ namespace ForumWeb.Controllers
             var check = users.FirstOrDefault(x => x.UserName == user.UserName && x.Password == user.Password);
             if(check != null)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home",new { id = check.Id});
             }
             return RedirectToAction("Index", "Login");
 

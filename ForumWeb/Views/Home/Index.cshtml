@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ForumWeb.Models.ForumViewModel>
+﻿@model ForumWeb.Models.ForumUserViewModel
 
 
 
@@ -16,21 +16,21 @@
         <h3 class="latest-forums">Latest Forums</h3>
         <table class="table table-hover" id="latest-forums">
             <tbody>
-                @foreach (var item in Model)
+                @foreach (var item in Model.Forums)
                 {
-                    <tr>
-                        <td>
-                            <img src="@item.ImageUrl" class="forum-logo" style="width:40px; height:40px; margin-right:20px; border-radius:3px;" />
-                        </td>
-                        <td>
-                            <div class="forum-title">
-                                @Html.ActionLink(item.Title, "Details", new { id = item.Id })
-                            </div>
-                            <div class="forum-sub-title">
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </div>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        <img src="@item.ImageUrl" class="forum-logo" style="width:40px; height:40px; margin-right:20px; border-radius:3px;" />
+                    </td>
+                    <td>
+                        <div class="forum-title">
+                            @Html.ActionLink(item.Title, "Details", new { id = item.Id,user = Model.User.Id })
+                        </div>
+                        <div class="forum-sub-title">
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </div>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
@@ -38,7 +38,7 @@
 </div>
 <div class="section-heading">
     <span>
-        @Html.ActionLink("Create Forum", "Add", "Home", new { @class = "btn" }, new { @style = "background-color: #c62828; color: #fff;transition: ease-in 0 1s;padding:0 10px 10px 10px;" })
+        @Html.ActionLink("Create Forum", "Add", "Home",new { id = Model.User.Id}, new { @class = "btn btn-back" })
     </span>
 </div>
 
