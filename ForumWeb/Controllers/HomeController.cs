@@ -17,6 +17,7 @@ namespace ForumWeb.Controllers
         private IForumRepository _forumRepository;
         private IPostRepository _postRepository;
         private IUserRepository _userRepository;
+        public int loggedUserId = 0;
         public HomeController(IForumRepository forumRepository,IPostRepository postRepository,IUserRepository userRepository)
         {
             _forumRepository = forumRepository;
@@ -25,14 +26,9 @@ namespace ForumWeb.Controllers
         }
         public ActionResult Index(int id)
         {
+            loggedUserId = id;
             var takeFive = _forumRepository.GetAllForums().OrderByDescending(x => x.Created).Take(5);
             var user = _userRepository.GetUserById(id);
-            var logged = new UserViewModel
-            {
-                Id = user.Id,
-                UserName = user.UserName,
-                Url = user.Url
-            };
 
             var forums = takeFive.Select(x => new ForumViewModel
             {
@@ -41,24 +37,20 @@ namespace ForumWeb.Controllers
                 Description = x.Description,
                 ImageUrl = x.ImageUrl
             });
-            var model = new ForumUserViewModel
-            {
-                Forums = forums,
-                User = logged
-            };
-            return View(model);
+            return View(forums);
         }
-        public IActionResult Details(int id,int userId)
+        public async Task<IActionResult> Details(int id)
         {
-            var user = _userRepository.GetUserById(userId);
-            var forum = _forumRepository.GetForumById(id);
+            var user = await _userRepository.GetUserById(loggedUserId);
+            var forum = await _forumRepository.GetForumById(id);
             var post = forum.Posts.OrderByDescending(p => p.Created).Take(5);
             var selected = post.Select(p => new PostViewModel
             {
                 Id = p.Id,
                 Title = p.Title,
                 Content = p.Content,
-                //AuthorName = user.UserName,
+                AuthorId = loggedUserId,
+               // AuthorName = user.UserName,
                 DatePosted = p.Created.ToString(),
                 RepliesCount = p.Replies.Count(),
                 Forum = BuildForumView(p)
@@ -66,7 +58,8 @@ namespace ForumWeb.Controllers
             var model = new TopicViewModel
             {
                 Posts = selected,
-                Forum = BuildForumView(forum)
+                Forum = BuildForumView(forum),
+                UserId = loggedUserId
 
             };
             return View(model);
@@ -76,31 +69,21 @@ namespace ForumWeb.Controllers
         {
             return View();
         }
-        public IActionResult Add(int id)
+        public IActionResult Add()
         {
-            var user = _userRepository.GetUserById(id);
-            var model = new OneForumUserViewModel
-            {
-                User = new UserViewModel
-                {
-                    Id = user.Id,
-                    UserName = user.UserName,
-                    Url = user.Url
-                }
-            };
-            return View(model);
+            return View();
         }
         [HttpPost]
-        public IActionResult Add(OneForumUserViewModel model)
+        public async Task<IActionResult> Add(OneForumUserViewModel model)
         {
-            User user = _userRepository.GetUserById(model.User.Id);
+            User user = await _userRepository.GetUserById(model.User.Id);
             Forum newForum = new Forum();
             newForum.Title = model.Forum.Title;
             newForum.Description = model.Forum.Description;
             newForum.ImageUrl = model.Forum.ImageUrl;
             newForum.User = user;
             newForum.Created = DateTime.Now;
-            _forumRepository.AddForum(newForum);
+            await _forumRepository.AddForum(newForum);
             return RedirectToAction("Index", "Home");
         }
         private ForumViewModel BuildForumView(Post post)

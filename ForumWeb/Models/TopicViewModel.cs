@@ -10,5 +10,6 @@ namespace ForumWeb.Models
     {
         public IEnumerable<PostViewModel> Posts { get; set; }
         public ForumViewModel Forum { get; set; }
+        public int UserId { get; set; }
     }
 }

@@ -16,9 +16,9 @@ namespace ForumWeb.Controllers
         {
             _userRepository = userRepository;
         }
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            User user = _userRepository.GetUserById(id);
+            User user = await _userRepository.GetUserById(id);
             UserViewModel viewUser = new UserViewModel();
             viewUser.Id = user.Id;
             viewUser.FirstName = user.FirstName;

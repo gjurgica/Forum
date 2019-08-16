@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ForumDataAccess
 {
@@ -14,10 +15,10 @@ namespace ForumDataAccess
         {
             _context = context;
         }
-        public void AddUser(User user)
+        public async Task  AddUser(User user)
         {
-            _context.Users.Add(user);
-            _context.SaveChanges();
+             _context.Users.Add(user);
+            await _context.SaveChangesAsync();
         }
 
         public List<User> GetAllUsers()
@@ -25,9 +26,9 @@ namespace ForumDataAccess
             return _context.Users.ToList();
         }
 
-        public User GetUserById(int id)
+        public async Task<User> GetUserById(int id)
         {
-            return _context.Users.FirstOrDefault(x => x.Id == id);
+            return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

@@ -50,7 +50,7 @@
     </div>
     <div class="section-heading">
         <span>
-            @Html.ActionLink("Create Post", "Add", "Post", new { id = Model.Forum.Id }, new { @class = "btn btn-newPost" })
+            @Html.ActionLink("Create Post", "Add", "Post", new { id = Model.Forum.Id,userId = Model.UserId }, new { @class = "btn btn-newPost" })
         </span>
     </div>
 </div>

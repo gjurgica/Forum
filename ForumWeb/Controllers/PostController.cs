@@ -15,15 +15,16 @@ namespace ForumWeb.Controllers
         private IPostRepository _postRepository;
         private IForumRepository _forumRepository;
         private IUserRepository  _userRepository;
+        public int loggedUserId = 0;
         public PostController(IPostRepository postRepository,IForumRepository forumRepository,IUserRepository userRepository)
         {
             _postRepository = postRepository;
             _forumRepository = forumRepository;
             _userRepository = userRepository;
         }
-        public IActionResult Index(int id)
+        public async Task<IActionResult> Index(int id)
         {
-            var post = _postRepository.GetPostById(id);
+            var post = await _postRepository.GetPostById(id);
             var replies = BuildPostReplies(post.Replies);
             var model = new PostViewModel();
             model.Id = post.Id;
@@ -39,36 +40,31 @@ namespace ForumWeb.Controllers
             model.ForumTitle = post.Forum.Title;
             return View(model);
         }
-        public IActionResult Add(int id)
+        public async Task<IActionResult> Add(int id,int userId)
         {
-            Forum forum = _forumRepository.GetForumById(id);
+            loggedUserId = userId;
+            Forum forum = await _forumRepository.GetForumById(id);
             PostViewModel model = new PostViewModel();
             model.ForumId = forum.Id;
             model.ForumTitle = forum.Title;
             return View(model);
         }
         [HttpPost]
-        public IActionResult Add(PostViewModel viewPost)
+        public async Task<IActionResult> Add(PostViewModel viewPost)
         {
-            var user = _userRepository.GetUserById(viewPost.AuthorId);
-            var post = BuildPostReplies(viewPost,user);
-             _postRepository.AddPost(post);
-             return RedirectToAction("Details","Home",new {id = post.Id });
-           
-        }
-
-        private Post BuildPostReplies(PostViewModel viewPost,User user)
-        {
-            var forum = _forumRepository.GetForumById(viewPost.ForumId);
-            Post post = new Post();
+            var forum = await _forumRepository.GetForumById(viewPost.ForumId);
+            var user = await _userRepository.GetUserById(loggedUserId);
+            var post = new Post();
             post.Title = viewPost.Title;
             post.Content = viewPost.Content;
             post.Created = DateTime.Now;
             post.ForumId = viewPost.ForumId;
-            post.UserId = 2;
+            post.UserId = loggedUserId;
             post.User = user;
             post.Forum = forum;
-            return post;
+            await _postRepository.AddPost(post);
+            return RedirectToAction("Details", "Home", new { id = post.Id });
+
         }
 
         private IEnumerable<PostReplyViewModel> BuildPostReplies(List<PostReply> replies)

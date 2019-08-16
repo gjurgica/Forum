@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ForumDataAccess.Repositories
 {
@@ -16,10 +17,10 @@ namespace ForumDataAccess.Repositories
         {
             _context = context;
         }
-        public void AddForum(Forum forum)
+        public async Task AddForum(Forum forum)
         {
-            _context.Forums.Add(forum);
-            _context.SaveChanges();
+              _context.Forums.Add(forum);
+             await _context.SaveChangesAsync();
         }
 
         public void DeleteForum(int id)
@@ -48,15 +49,16 @@ namespace ForumDataAccess.Repositories
             return _context.Forums.Include(x => x.Posts).ToList();
         }
 
-        public Forum GetForumById(int id)
+        public async  Task<Forum> GetForumById(int id)
         {
-            var forum = _context.Forums
+            Forum forum = await _context.Forums
                 .Include(x => x.Posts)
                     .ThenInclude(p => p.User)
                 .Include(x => x.Posts)
                     .ThenInclude(p => p.Replies)
                         .ThenInclude(r => r.User)
-                .FirstOrDefault(x => x.Id == id);
+                        .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
            
             return forum;
         }
