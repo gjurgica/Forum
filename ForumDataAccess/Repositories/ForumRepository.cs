@@ -44,14 +44,21 @@ namespace ForumDataAccess.Repositories
             }
         }
 
-        public List<Forum> GetAllForums()
+        public IEnumerable<Forum> GetAllForums()
         {
-            return _context.Forums.Include(x => x.Posts).ToList();
+            return _context.Forums
+                .Include(x => x.User)
+                .Include(x => x.Posts)
+                    .ThenInclude(x => x.User)
+                .Include(x => x.Posts)
+                    .ThenInclude(x => x.Replies)
+                        .ThenInclude(x => x.User);
         }
 
         public async  Task<Forum> GetForumById(int id)
         {
             Forum forum = await _context.Forums
+                .Include(x => x.User)
                 .Include(x => x.Posts)
                     .ThenInclude(p => p.User)
                 .Include(x => x.Posts)

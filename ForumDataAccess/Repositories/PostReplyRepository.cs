@@ -42,7 +42,7 @@ namespace ForumDataAccess.Repositories
             }
         }
 
-        public List<PostReply> GetAllReplies()
+        public IEnumerable<PostReply> GetAllReplies()
         {
             return _context.Replies.ToList();
         }

@@ -7,7 +7,7 @@ namespace ForumDataAccess.Interfaces
 {
     public interface IPostReplyRepository
     {
-        List<PostReply> GetAllReplies();
+        IEnumerable<PostReply> GetAllReplies();
         PostReply GetReplyById(int id);
         void EditReply(PostReply reply);
         void AddReply(PostReply reply);

@@ -23,7 +23,7 @@ namespace ForumWeb.Controllers
         }
         public IActionResult Login(UserViewModel user)
         {
-            List<User> users = _userRepository.GetAllUsers();
+            List<User> users = _userRepository.GetAllUsers().ToList();
             var check = users.FirstOrDefault(x => x.UserName == user.UserName && x.Password == user.Password);
             if(check != null)
             {

@@ -21,7 +21,7 @@ namespace ForumDataAccess
             await _context.SaveChangesAsync();
         }
 
-        public List<User> GetAllUsers()
+        public IEnumerable<User> GetAllUsers()
         {
             return _context.Users.ToList();
         }

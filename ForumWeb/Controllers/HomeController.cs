@@ -26,31 +26,32 @@ namespace ForumWeb.Controllers
         }
         public ActionResult Index(int id)
         {
-            loggedUserId = id;
-            var takeFive = _forumRepository.GetAllForums().OrderByDescending(x => x.Created).Take(5);
-            var user = _userRepository.GetUserById(id);
-
-            var forums = takeFive.Select(x => new ForumViewModel
-            {
-                Id = x.Id,
-                Title = x.Title,
-                Description = x.Description,
-                ImageUrl = x.ImageUrl
-            });
+            var forums =  _forumRepository.GetAllForums()
+                .Select(x => new ForumViewModel
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    Description = x.Description,
+                    ImageUrl = x.ImageUrl,
+                    Created = DateTime.Now
+                }
+                ).OrderByDescending(x => x.Created).Take(5);
             return View(forums);
         }
         public async Task<IActionResult> Details(int id)
         {
-            var user = await _userRepository.GetUserById(loggedUserId);
             var forum = await _forumRepository.GetForumById(id);
+            if(forum.Posts != null)
+            {
+
             var post = forum.Posts.OrderByDescending(p => p.Created).Take(5);
             var selected = post.Select(p => new PostViewModel
             {
                 Id = p.Id,
                 Title = p.Title,
                 Content = p.Content,
-                AuthorId = loggedUserId,
-               // AuthorName = user.UserName,
+                AuthorId = 2,
+               // AuthorName = p.User.UserName,
                 DatePosted = p.Created.ToString(),
                 RepliesCount = p.Replies.Count(),
                 Forum = BuildForumView(p)
@@ -63,6 +64,13 @@ namespace ForumWeb.Controllers
 
             };
             return View(model);
+            }
+            var model1 = new TopicViewModel()
+            {
+                Forum = BuildForumView(forum),
+                UserId = loggedUserId
+            };
+            return View(model1);
         }
         [HttpPost]
         public IActionResult Search(int id)

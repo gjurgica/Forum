@@ -45,7 +45,7 @@ namespace ForumDataAccess.Repositories
             }
         }
 
-        public List<Post> GetAllPosts()
+        public IEnumerable<Post> GetAllPosts()
         {
             return _context.Posts
                 .Include(p => p.User)
@@ -65,7 +65,7 @@ namespace ForumDataAccess.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public List<Post> GetPostsByForum(int id)
+        public IEnumerable<Post> GetPostsByForum(int id)
         {
             return  _context.Forums.Where(f => f.Id == id).First().Posts;
         }

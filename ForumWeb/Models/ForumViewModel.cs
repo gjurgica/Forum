@@ -11,6 +11,7 @@ namespace ForumWeb.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
+        public DateTime Created { get; set; }
         public string AuthorName { get; set; }
         public int AuthorId { get; set; }
         public int PostId { get; set; }

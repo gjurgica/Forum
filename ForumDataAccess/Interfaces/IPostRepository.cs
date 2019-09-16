@@ -8,11 +8,11 @@ namespace ForumDataAccess.Interfaces
 {
     public interface IPostRepository
     {
-        List<Post> GetAllPosts();
+        IEnumerable<Post> GetAllPosts();
         Task<Post> GetPostById(int id);
         Task AddPost(Post post);
         void EditPost(Post post);
         void DeletePost(int id);
-        List<Post> GetPostsByForum(int id);
+        IEnumerable<Post> GetPostsByForum(int id);
     }
 }
