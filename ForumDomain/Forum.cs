@@ -19,7 +19,7 @@ namespace ForumDomain
         public string ImageUrl { get; set; }
         public int PostId { get; set; }
 
-        public virtual List<Post> Posts { get; set; }
+        public virtual IEnumerable<Post> Posts { get; set; }
         public virtual User User { get; set; }
     }
 }

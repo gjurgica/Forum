@@ -21,6 +21,6 @@ namespace ForumDomain
 
         public virtual User User { get; set; }
         public virtual Forum Forum { get; set; }
-        public virtual List<PostReply> Replies{ get; set; }
+        public virtual IEnumerable<PostReply> Replies{ get; set; }
     }
 }

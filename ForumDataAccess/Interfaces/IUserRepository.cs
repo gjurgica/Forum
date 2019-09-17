@@ -9,7 +9,7 @@ namespace ForumDataAccess
     public interface IUserRepository
     {
         IEnumerable<User> GetAllUsers();
-        Task<User> GetUserById(int id);
-        Task AddUser(User user);
+        User GetUserById(int id);
+        void AddUser(User user);
     }
 }

@@ -9,8 +9,8 @@ namespace ForumDataAccess.Interfaces
     public interface IForumRepository
     {
         IEnumerable<Forum> GetAllForums();
-        Task<Forum> GetForumById(int id);
-        Task AddForum(Forum forum);
+        Forum GetForumById(int id);
+        void AddForum(Forum forum);
         void EditForum(Forum forum);
         void DeleteForum(int id);
     }

@@ -22,15 +22,15 @@ namespace ForumWeb.Controllers
             _forumRepository = forumRepository;
             _userRepository = userRepository;
         }
-        public async Task<IActionResult> Index(int id)
+        public IActionResult Index(int id)
         {
-            var post = await _postRepository.GetPostById(id);
+            var post =  _postRepository.GetPostById(id);
             var replies = BuildPostReplies(post.Replies);
             var model = new PostViewModel();
             model.Id = post.Id;
             model.Title = post.Title;
             model.Content = post.Content;
-            model.AuthorId = post.User.Id;
+            model.AuthorId = 2;
             model.AuthorName = post.User.UserName;
             model.AuthorImageUrl = post.User.Url;
             model.DatePosted = post.Created.ToString();
@@ -40,41 +40,37 @@ namespace ForumWeb.Controllers
             model.ForumTitle = post.Forum.Title;
             return View(model);
         }
-        public async Task<IActionResult> Add(int id,int userId)
+        public IActionResult Add(int id)
         {
-            loggedUserId = userId;
-            Forum forum = await _forumRepository.GetForumById(id);
+            Forum forum =  _forumRepository.GetForumById(id);
             PostViewModel model = new PostViewModel();
             model.ForumId = forum.Id;
             model.ForumTitle = forum.Title;
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Add(PostViewModel viewPost)
+        public IActionResult Add(PostViewModel viewPost)
         {
-            var forum = await _forumRepository.GetForumById(viewPost.ForumId);
-            var user = await _userRepository.GetUserById(loggedUserId);
+            var forum =  _forumRepository.GetForumById(viewPost.ForumId);
             var post = new Post();
             post.Title = viewPost.Title;
             post.Content = viewPost.Content;
             post.Created = DateTime.Now;
-            post.ForumId = viewPost.ForumId;
-            post.UserId = loggedUserId;
-            post.User = user;
-            post.Forum = forum;
-            await _postRepository.AddPost(post);
+            post.ForumId = forum.Id;
+            post.UserId = 2;
+             _postRepository.AddPost(post);
             return RedirectToAction("Details", "Home", new { id = post.Id });
 
         }
 
-        private IEnumerable<PostReplyViewModel> BuildPostReplies(List<PostReply> replies)
+        private IEnumerable<PostReplyViewModel> BuildPostReplies(IEnumerable<PostReply> replies)
         {
             return replies.Select(r => new PostReplyViewModel
             {
                 Id = r.Id,
-                AuthorId = r.User.Id,
-                AuthorName = r.User.UserName,
-                AuthorImageUrl = r.User.Url,
+                AuthorId = 2,
+                //AuthorName = r.User.UserName,
+                //AuthorImageUrl = r.User.Url,
                 DatePosted = r.Created.ToString(),
                 Content = r.Content
             });

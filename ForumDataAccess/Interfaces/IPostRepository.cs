@@ -9,8 +9,8 @@ namespace ForumDataAccess.Interfaces
     public interface IPostRepository
     {
         IEnumerable<Post> GetAllPosts();
-        Task<Post> GetPostById(int id);
-        Task AddPost(Post post);
+        Post GetPostById(int id);
+        void AddPost(Post post);
         void EditPost(Post post);
         void DeletePost(int id);
         IEnumerable<Post> GetPostsByForum(int id);

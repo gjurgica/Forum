@@ -17,10 +17,10 @@ namespace ForumDataAccess.Repositories
         {
             _context = context;
         }
-        public async Task AddForum(Forum forum)
+        public void   AddForum(Forum forum)
         {
               _context.Forums.Add(forum);
-             await _context.SaveChangesAsync();
+              _context.SaveChanges();
         }
 
         public void DeleteForum(int id)
@@ -55,9 +55,9 @@ namespace ForumDataAccess.Repositories
                         .ThenInclude(x => x.User);
         }
 
-        public async  Task<Forum> GetForumById(int id)
+        public Forum GetForumById(int id)
         {
-            Forum forum = await _context.Forums
+            Forum forum = _context.Forums
                 .Include(x => x.User)
                 .Include(x => x.Posts)
                     .ThenInclude(p => p.User)
@@ -65,7 +65,7 @@ namespace ForumDataAccess.Repositories
                     .ThenInclude(p => p.Replies)
                         .ThenInclude(r => r.User)
                         .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefault(x => x.Id == id);
            
             return forum;
         }

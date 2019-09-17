@@ -17,10 +17,10 @@ namespace ForumDataAccess.Repositories
         {
             _context = context;
         }
-        public async Task AddPost(Post post)
+        public void  AddPost(Post post)
         {
             _context.Posts.Add(post);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
 
@@ -55,14 +55,14 @@ namespace ForumDataAccess.Repositories
                 ToList();
         }
 
-        public async Task<Post> GetPostById(int id)
+        public Post GetPostById(int id)
         {
-            return await _context.Posts
+            return  _context.Posts
                 .Include(p => p.User)
                 .Include(p => p.Replies)
                     .ThenInclude(r => r.User)
                 .Include(p => p.Forum)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public IEnumerable<Post> GetPostsByForum(int id)

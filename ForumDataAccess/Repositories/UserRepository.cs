@@ -15,10 +15,10 @@ namespace ForumDataAccess
         {
             _context = context;
         }
-        public async Task  AddUser(User user)
+        public void  AddUser(User user)
         {
              _context.Users.Add(user);
-            await _context.SaveChangesAsync();
+             _context.SaveChanges();
         }
 
         public IEnumerable<User> GetAllUsers()
@@ -26,9 +26,9 @@ namespace ForumDataAccess
             return _context.Users.ToList();
         }
 
-        public async Task<User> GetUserById(int id)
+        public User GetUserById(int id)
         {
-            return await _context.Users.FirstOrDefaultAsync(x => x.Id == id);
+            return _context.Users.FirstOrDefault(x => x.Id == id);
         }
     }
 }

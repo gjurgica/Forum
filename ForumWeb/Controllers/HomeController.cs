@@ -17,7 +17,7 @@ namespace ForumWeb.Controllers
         private IForumRepository _forumRepository;
         private IPostRepository _postRepository;
         private IUserRepository _userRepository;
-        public int loggedUserId = 0;
+        public int loggedUserId = 1;
         public HomeController(IForumRepository forumRepository,IPostRepository postRepository,IUserRepository userRepository)
         {
             _forumRepository = forumRepository;
@@ -38,9 +38,9 @@ namespace ForumWeb.Controllers
                 ).OrderByDescending(x => x.Created).Take(5);
             return View(forums);
         }
-        public async Task<IActionResult> Details(int id)
+        public IActionResult Details(int id)
         {
-            var forum = await _forumRepository.GetForumById(id);
+            var forum =  _forumRepository.GetForumById(id);
             if(forum.Posts != null)
             {
 
@@ -82,16 +82,16 @@ namespace ForumWeb.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Add(OneForumUserViewModel model)
+        public IActionResult Add(OneForumUserViewModel model)
         {
-            User user = await _userRepository.GetUserById(model.User.Id);
+            User user = _userRepository.GetUserById(model.User.Id);
             Forum newForum = new Forum();
             newForum.Title = model.Forum.Title;
             newForum.Description = model.Forum.Description;
             newForum.ImageUrl = model.Forum.ImageUrl;
             newForum.User = user;
             newForum.Created = DateTime.Now;
-            await _forumRepository.AddForum(newForum);
+            _forumRepository.AddForum(newForum);
             return RedirectToAction("Index", "Home");
         }
         private ForumViewModel BuildForumView(Post post)
