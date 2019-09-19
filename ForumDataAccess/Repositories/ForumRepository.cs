@@ -10,41 +10,18 @@ using System.Threading.Tasks;
 
 namespace ForumDataAccess.Repositories
 {
-    public class ForumRepository : IForumRepository
+    public class ForumRepository : BaseRepository<ForumDbContext>,  IRepository<Forum>
     {
-        private ForumDbContext _context;
-        public ForumRepository(ForumDbContext context)
+        public ForumRepository(ForumDbContext context) : base(context) { }
+
+        public int Delete(int id)
         {
-            _context = context;
-        }
-        public void   AddForum(Forum forum)
-        {
-              _context.Forums.Add(forum);
-              _context.SaveChanges();
+            var forum = _context.Forums.FirstOrDefault(x => x.Id == id);
+            _context.Forums.Remove(forum);
+            return _context.SaveChanges();
         }
 
-        public void DeleteForum(int id)
-        {
-            var deleted = _context.Forums.FirstOrDefault(x => x.Id == id);
-            if(deleted != null)
-            {
-                _context.Forums.Remove(deleted);
-                _context.SaveChanges();
-            }
-        }
-
-        public void EditForum(Forum forum)
-        {
-            Forum edit = _context.Forums.FirstOrDefault(x => x.Id == forum.Id);
-            if (edit != null)
-            {
-                int index = _context.Forums.IndexOf(edit);
-                _context.Forums.ToList()[index] = forum;
-                _context.SaveChanges();
-            }
-        }
-
-        public IEnumerable<Forum> GetAllForums()
+        public IEnumerable<Forum> GetAll()
         {
             return _context.Forums
                 .Include(x => x.User)
@@ -55,19 +32,28 @@ namespace ForumDataAccess.Repositories
                         .ThenInclude(x => x.User);
         }
 
-        public Forum GetForumById(int id)
+        public Forum GetById(int id)
         {
-            Forum forum = _context.Forums
-                .Include(x => x.User)
-                .Include(x => x.Posts)
-                    .ThenInclude(p => p.User)
-                .Include(x => x.Posts)
-                    .ThenInclude(p => p.Replies)
-                        .ThenInclude(r => r.User)
-                        .AsNoTracking()
-                .FirstOrDefault(x => x.Id == id);
-           
-            return forum;
+            return _context.Forums
+               .Include(x => x.User)
+               .Include(x => x.Posts)
+                   .ThenInclude(x => x.User)
+               .Include(x => x.Posts)
+                   .ThenInclude(x => x.Replies)
+                       .ThenInclude(x => x.User)
+               .FirstOrDefault(x => x.Id == id);
+        }
+
+        public int Insert(Forum entity)
+        {
+            _context.Forums.Add(entity);
+            return _context.SaveChanges();
+        }
+
+        public int Update(Forum entity)
+        {
+            _context.Forums.Update(entity);
+            return _context.SaveChanges();
         }
     }
 }

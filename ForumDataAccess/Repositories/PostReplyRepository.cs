@@ -1,5 +1,6 @@
 ﻿using ForumDataAccess.Interfaces;
 using ForumDomain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
@@ -8,48 +9,48 @@ using System.Text;
 
 namespace ForumDataAccess.Repositories
 {
-    public class PostReplyRepository : IPostReplyRepository
+    public class PostReplyRepository : BaseRepository<ForumDbContext>, IRepository<PostReply>
     {
-        private ForumDbContext _context;
-        public PostReplyRepository(ForumDbContext context)
+        public PostReplyRepository(ForumDbContext context) : base(context) { }
+
+        public int Delete(int id)
         {
-            _context = context;
-        }
-        public void AddReply(PostReply reply)
-        {
-            _context.Replies.Add(reply);
-            _context.SaveChanges();
+            var reply = _context.PostReplaies.FirstOrDefault(x => x.Id == id);
+            _context.PostReplaies.Remove(reply);
+            return _context.SaveChanges();
         }
 
-        public void DeleteReply(int id)
+        public IEnumerable<PostReply> GetAll()
         {
-            var deleted = _context.Replies.FirstOrDefault(x => x.Id == id);
-            if(deleted != null)
-            {
-                _context.Replies.Remove(deleted);
-                _context.SaveChanges();
-            }
+            return _context.PostReplaies
+                .Include(x => x.User)
+                .Include(x => x.Post)
+                    .ThenInclude(x => x.User)
+                .Include(x => x.Post)
+                    .ThenInclude(x => x.Forum);
         }
 
-        public void EditReply(PostReply reply)
+        public PostReply GetById(int id)
         {
-            var edit = _context.Replies.FirstOrDefault(x => x.Id == reply.Id);
-            if(edit != null)
-            {
-                var index = _context.Replies.IndexOf(edit);
-                _context.Replies.ToList()[index] = reply;
-                _context.SaveChanges();
-            }
+            return _context.PostReplaies
+                .Include(x => x.User)
+                .Include(x => x.Post)
+                    .ThenInclude(x => x.User)
+                .Include(x => x.Post)
+                    .ThenInclude(x => x.Forum)
+                .FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<PostReply> GetAllReplies()
+        public int Insert(PostReply entity)
         {
-            return _context.Replies.ToList();
+            _context.PostReplaies.Add(entity);
+            return _context.SaveChanges();
         }
 
-        public PostReply GetReplyById(int id)
+        public int Update(PostReply entity)
         {
-            return _context.Replies.FirstOrDefault(x => x.Id == id);
+            _context.PostReplaies.Update(entity);
+            return _context.SaveChanges();
         }
     }
 }

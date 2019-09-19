@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumWeb", "ForumWeb\ForumWeb.csproj", "{25C4179D-1E6D-41C3-9366-3A7F930B0670}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForumWeb", "ForumWeb\ForumWeb.csproj", "{25C4179D-1E6D-41C3-9366-3A7F930B0670}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumDomain", "ForumDomain\ForumDomain.csproj", "{27C2D2B0-19B8-4F6C-897B-CCC9BE3DBAF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForumDomain", "ForumDomain\ForumDomain.csproj", "{27C2D2B0-19B8-4F6C-897B-CCC9BE3DBAF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumDataAccess", "ForumDataAccess\ForumDataAccess.csproj", "{DDF81085-B0CC-47D2-81C9-3D03FD15DFF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForumDataAccess", "ForumDataAccess\ForumDataAccess.csproj", "{DDF81085-B0CC-47D2-81C9-3D03FD15DFF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumViewModels", "ForumViewModels\ForumViewModels.csproj", "{7AED5A47-9B8F-4EB7-A537-B356B2897D62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForumServices", "ForumServices\ForumServices.csproj", "{F6907D2C-694D-430A-B81C-D58954AE6A0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{DDF81085-B0CC-47D2-81C9-3D03FD15DFF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDF81085-B0CC-47D2-81C9-3D03FD15DFF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDF81085-B0CC-47D2-81C9-3D03FD15DFF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AED5A47-9B8F-4EB7-A537-B356B2897D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AED5A47-9B8F-4EB7-A537-B356B2897D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AED5A47-9B8F-4EB7-A537-B356B2897D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AED5A47-9B8F-4EB7-A537-B356B2897D62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6907D2C-694D-430A-B81C-D58954AE6A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6907D2C-694D-430A-B81C-D58954AE6A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6907D2C-694D-430A-B81C-D58954AE6A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6907D2C-694D-430A-B81C-D58954AE6A0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,68 +9,28 @@ using ForumDataAccess.Interfaces;
 using ForumDomain;
 using ForumDataAccess;
 using System.Runtime.CompilerServices;
+using ForumServices.Interfaces;
+using ForumViewModels.ViewModels;
 
 namespace ForumWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private IForumRepository _forumRepository;
-        private IPostRepository _postRepository;
-        private IUserRepository _userRepository;
-        public int loggedUserId = 1;
-        public HomeController(IForumRepository forumRepository,IPostRepository postRepository,IUserRepository userRepository)
+        private IForumService _forumService;
+        public HomeController(IForumService forumService)
         {
-            _forumRepository = forumRepository;
-            _postRepository = postRepository;
-            _userRepository = userRepository;
+            _forumService = forumService;
         }
         public ActionResult Index(int id)
         {
-            var forums =  _forumRepository.GetAllForums()
-                .Select(x => new ForumViewModel
-                {
-                    Id = x.Id,
-                    Title = x.Title,
-                    Description = x.Description,
-                    ImageUrl = x.ImageUrl,
-                    Created = DateTime.Now
-                }
-                ).OrderByDescending(x => x.Created).Take(5);
+            var forums = _forumService.GetAllForums();  
             return View(forums);
         }
         public IActionResult Details(int id)
         {
-            var forum =  _forumRepository.GetForumById(id);
-            if(forum.Posts != null)
-            {
-
-            var post = forum.Posts.OrderByDescending(p => p.Created).Take(5);
-            var selected = post.Select(p => new PostViewModel
-            {
-                Id = p.Id,
-                Title = p.Title,
-                Content = p.Content,
-                AuthorId = 2,
-               // AuthorName = p.User.UserName,
-                DatePosted = p.Created.ToString(),
-                RepliesCount = p.Replies.Count(),
-                Forum = BuildForumView(p)
-            });
-            var model = new TopicViewModel
-            {
-                Posts = selected,
-                Forum = BuildForumView(forum),
-                UserId = loggedUserId
-
-            };
-            return View(model);
-            }
-            var model1 = new TopicViewModel()
-            {
-                Forum = BuildForumView(forum),
-                UserId = loggedUserId
-            };
-            return View(model1);
+            var forum =  _forumService.GetForumById(id);
+ 
+            return View(forum);
         }
         [HttpPost]
         public IActionResult Search(int id)
@@ -82,33 +42,10 @@ namespace ForumWeb.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Add(OneForumUserViewModel model)
+        public IActionResult Add(ForumViewModel model)
         {
-            User user = _userRepository.GetUserById(model.User.Id);
-            Forum newForum = new Forum();
-            newForum.Title = model.Forum.Title;
-            newForum.Description = model.Forum.Description;
-            newForum.ImageUrl = model.Forum.ImageUrl;
-            newForum.User = user;
-            newForum.Created = DateTime.Now;
-            _forumRepository.AddForum(newForum);
+            _forumService.CreateForum(model);
             return RedirectToAction("Index", "Home");
-        }
-        private ForumViewModel BuildForumView(Post post)
-        {
-            var forum = post.Forum;
-            return BuildForumView(forum);
-           
-        }
-        private ForumViewModel BuildForumView(Forum forum)
-        {
-            return new ForumViewModel
-            {
-                Id = forum.Id,
-                Title = forum.Title,
-                Description = forum.Description,
-                ImageUrl = forum.ImageUrl
-            };
         }
     }
 }

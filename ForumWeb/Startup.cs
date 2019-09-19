@@ -1,10 +1,17 @@
-﻿using ForumDataAccess;
+﻿using AutoMapper;
+using ForumDataAccess;
 using ForumDataAccess.Interfaces;
 using ForumDataAccess.Repositories;
+using ForumDomain;
+using ForumServices.Helpers;
+using ForumServices.Interfaces;
+using ForumServices.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -29,12 +36,30 @@ namespace ForumWeb
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IForumRepository, ForumRepository>();
-            services.AddScoped<IPostRepository, PostRepository>();
-            services.AddScoped<IPostReplyRepository, PostReplyRepository>();
-            services.AddDbContext<ForumDbContext>();
 
+            services.AddTransient<IUserRepository<User>, UserRepository>();
+            services.AddTransient<IRepository<Forum>, ForumRepository>();
+            services.AddTransient<IPostRepository<Post>, PostRepository>();
+            services.AddTransient<IRepository<PostReply>, PostReplyRepository>();
+
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IForumService, ForumService>();
+            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<IPostReplyService, PostReplyService>();
+
+            services.AddDbContext<ForumDbContext>(ob => ob.UseSqlServer(
+                Configuration.GetConnectionString("ForumDbConnection")
+            ));
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = false;
+            });
+
+            services.AddAutoMapper(opts =>
+            {
+                opts.AddProfile<MapProfile>();
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

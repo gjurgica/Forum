@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace ForumDataAccess.Interfaces
 {
-    public interface IPostRepository
+    public interface IPostRepository<T> : IRepository<T>
     {
-        IEnumerable<Post> GetAllPosts();
-        Post GetPostById(int id);
-        void AddPost(Post post);
-        void EditPost(Post post);
-        void DeletePost(int id);
-        IEnumerable<Post> GetPostsByForum(int id);
+        IEnumerable<T> GetPostsByForum(int id);
     }
 }

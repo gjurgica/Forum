@@ -1,4 +1,4 @@
-﻿@model ForumWeb.Models.PostViewModel
+﻿@model ForumViewModels.ViewModels.PostViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -7,15 +7,15 @@
 <div class="container body-content">
     <div class="row post-header">
             <span class="post-title">@Model.Title</span>
-            <span id="heading-btn">@Html.ActionLink( "Back to " +  @Model.ForumTitle, "Details", "Home", new { id = @Model.ForumId },new { @class= "btn btn-back"})</span>
+            <span id="heading-btn">@Html.ActionLink( "Back to " +  @Model.Forum.Title, "Details", "Home", new { id = @Model.Forum.Id },new { @class= "btn btn-back"})</span>
     </div>
     <div class="row post-index-content">
         <div class="col-md-3 post-author">
             <div class="post-author-img">
-                <img src="@Model.AuthorImageUrl" style="width:80px; height:80px;"/>
+                <img src="@Model.User.Url" style="width:80px; height:80px;"/>
             </div>
-            @Html.ActionLink( @Model.AuthorName, "Details", "Profile", new { id = @Model.AuthorId }, new { @class = "btn btn-back" })
-            <br/><span class="post-date">@Model.DatePosted</span>
+            @Html.ActionLink( @Model.User.UserName, "Details", "Profile", new { id = @Model.User.Id }, new { @class = "btn btn-back" })
+            <br/><span class="post-date">@Model.Created</span>
         </div>
         <div class="col-md-9 post-content-container">
             <div class="post-content">
@@ -33,9 +33,9 @@
         {
             <div class="row reply-content">
                 <div class="col-md-3 reply-author">
-                    <div class="post-author-img"><img src="@reply.AuthorImageUrl" /></div>
-                    @Html.ActionLink(@Model.AuthorName, "Details", "Home", new { id = @Model.AuthorId })
-                    <span>@reply.DatePosted</span>
+                    <div class="post-author-img"><img src="@reply.User.Url" /></div>
+                    @Html.ActionLink(@Model.User.UserName, "Details", "Home", new { id = @Model.User.Id })
+                    <span>@reply.Created</span>
                 </div>
                 <div class="col-md-9 reply-content">
                     <div class="post-content">
