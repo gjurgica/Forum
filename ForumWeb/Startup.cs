@@ -51,10 +51,15 @@ namespace ForumWeb
                 Configuration.GetConnectionString("ForumDbConnection")
             ));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<User, IdentityRole>(opts =>
             {
-                options.User.RequireUniqueEmail = false;
-            });
+                opts.User.RequireUniqueEmail = true;
+                opts.Password.RequireNonAlphanumeric = true;
+            })
+           .AddRoleManager<RoleManager<IdentityRole>>()
+           .AddEntityFrameworkStores<ForumDbContext>()
+           .AddDefaultTokenProviders();
+
 
             services.AddAutoMapper(opts =>
             {
@@ -77,6 +82,8 @@ namespace ForumWeb
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseHttpsRedirection();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

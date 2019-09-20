@@ -11,11 +11,11 @@ namespace ForumServices.Helpers
     {
         public MapProfile()
         {
-            CreateMap<Forum, ForumViewModel>();
-            CreateMap<Post, PostViewModel>();
-            CreateMap<PostReply, PostReplyViewModel>();
-            CreateMap<User, UserViewModel>();
-            CreateMap<User, RegisterViewModel>();
+            CreateMap<Forum, ForumViewModel>().ReverseMap();
+            CreateMap<Post, PostViewModel>().ReverseMap();
+            CreateMap<PostReply, PostReplyViewModel>().ReverseMap();
+            CreateMap<User, UserViewModel>().ReverseMap();
+            CreateMap<RegisterViewModel, User>();
         }
     }
 }

@@ -54,7 +54,7 @@ namespace ForumServices.Services
 
             if (result.IsNotAllowed)
             {
-                _signInManager.SignOutAsync();
+                throw new Exception("Username or password is wrong!");
             }
         }
 
@@ -65,7 +65,7 @@ namespace ForumServices.Services
 
         public void Register(RegisterViewModel registerModel)
         {
-            if (_userService.GetByUsername(registerModel.UserName) == null)
+            if (_userService.GetByUsername(registerModel.UserName) != null)
                 throw new Exception("Username already exists!");
             if (registerModel.Password != registerModel.ConfirmPassword)
                 throw new Exception("Passwords does not match!");
@@ -77,6 +77,8 @@ namespace ForumServices.Services
                 var currentUser = _userManager.FindByNameAsync(user.UserName).Result;
                 _userManager.AddToRoleAsync(currentUser, "customer");
             }
+            else
+                throw new Exception(result.Errors.ToString());
 
             Login(new LoginViewModel
             {
