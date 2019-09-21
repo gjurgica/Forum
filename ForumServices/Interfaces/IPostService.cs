@@ -12,5 +12,6 @@ namespace ForumServices.Interfaces
         void CreatePost(PostViewModel post);
         void EditPost(PostViewModel post);
         void DeletePost(int id);
+        IEnumerable<PostViewModel> GetPostsByForum(int id);
     }
 }

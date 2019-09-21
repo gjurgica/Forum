@@ -15,7 +15,8 @@ namespace ForumServices.Helpers
             CreateMap<Post, PostViewModel>().ReverseMap();
             CreateMap<PostReply, PostReplyViewModel>().ReverseMap();
             CreateMap<User, UserViewModel>().ReverseMap();
-            CreateMap<RegisterViewModel, User>();
+            CreateMap<RegisterViewModel, User>()
+                .ForMember(u => u.EmailConfirmed, src => src.UseValue(true));
         }
     }
 }

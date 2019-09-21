@@ -22,7 +22,7 @@ namespace ForumWeb.Controllers
         }
         public IActionResult Index(int id)
         {
-            var post =  _postService.GetPostById(id);
+            var post =  _postService.GetPostsByForum(id);
             return View(post);
         }
         public IActionResult Add(int id)

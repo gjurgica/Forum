@@ -1,17 +1,11 @@
 ﻿using AutoMapper;
-using ForumDataAccess;
-using ForumDataAccess.Interfaces;
-using ForumDataAccess.Repositories;
-using ForumDomain;
 using ForumServices.Helpers;
 using ForumServices.Interfaces;
 using ForumServices.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -37,28 +31,19 @@ namespace ForumWeb
             });
 
 
-            services.AddTransient<IUserRepository<User>, UserRepository>();
-            services.AddTransient<IRepository<Forum>, ForumRepository>();
-            services.AddTransient<IPostRepository<Post>, PostRepository>();
-            services.AddTransient<IRepository<PostReply>, PostReplyRepository>();
+            
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IForumService, ForumService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<IPostReplyService, PostReplyService>();
 
-            services.AddDbContext<ForumDbContext>(ob => ob.UseSqlServer(
-                Configuration.GetConnectionString("ForumDbConnection")
-            ));
 
-            services.AddIdentity<User, IdentityRole>(opts =>
-            {
-                opts.User.RequireUniqueEmail = true;
-                opts.Password.RequireNonAlphanumeric = true;
-            })
-           .AddRoleManager<RoleManager<IdentityRole>>()
-           .AddEntityFrameworkStores<ForumDbContext>()
-           .AddDefaultTokenProviders();
+
+            DiModule.RegisterModules(
+                 services,
+                 Configuration.GetConnectionString("ForumDbConnection")
+             );
 
 
             services.AddAutoMapper(opts =>

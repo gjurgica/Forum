@@ -32,11 +32,6 @@ namespace ForumWeb.Controllers
  
             return View(forum);
         }
-        [HttpPost]
-        public IActionResult Search(int id)
-        {
-            return View();
-        }
         public IActionResult Add()
         {
             return View();

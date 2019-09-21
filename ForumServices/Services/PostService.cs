@@ -12,10 +12,10 @@ namespace ForumServices.Services
 {
     public class PostService : IPostService
     {
-        private readonly IRepository<Post> _postService;
+        private readonly IPostRepository<Post> _postService;
         private readonly IMapper _mapper;
 
-        public PostService(IRepository<Post> postService, IMapper mapper)
+        public PostService(IPostRepository<Post> postService, IMapper mapper)
         {
             _postService = postService;
             _mapper = mapper;
@@ -48,6 +48,11 @@ namespace ForumServices.Services
                 throw new Exception("Post does not exist");
             }
             return _mapper.Map<PostViewModel>(post);
+        }
+
+        public IEnumerable<PostViewModel> GetPostsByForum(int id)
+        {
+            return _postService.GetPostsByForum(id).Select(x => _mapper.Map<PostViewModel>(x)).ToList();
         }
     }
 }

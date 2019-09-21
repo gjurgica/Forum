@@ -29,7 +29,7 @@ namespace ForumDataAccess.Repositories
                     .ThenInclude(x => x.User)
                 .Include(x => x.Posts)
                     .ThenInclude(x => x.Replies)
-                        .ThenInclude(x => x.User);
+                        .ThenInclude(x => x.User).ToList();
         }
 
         public Forum GetById(int id)

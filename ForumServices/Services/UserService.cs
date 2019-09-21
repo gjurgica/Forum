@@ -66,9 +66,15 @@ namespace ForumServices.Services
         public void Register(RegisterViewModel registerModel)
         {
             if (_userService.GetByUsername(registerModel.UserName) != null)
+            {
+
                 throw new Exception("Username already exists!");
+            }
             if (registerModel.Password != registerModel.ConfirmPassword)
+            {
+
                 throw new Exception("Passwords does not match!");
+            }
             var user = _mapper.Map<User>(registerModel);
             var result = _userManager.CreateAsync(user, registerModel.Password).Result;
 

@@ -26,7 +26,7 @@ namespace ForumDataAccess.Repositories
                 .Include(x => x.User)
                 .Include(x => x.Forum)
                 .Include(x => x.Replies)
-                    .ThenInclude(x => x.User);
+                    .ThenInclude(x => x.User).ToList() ;
         }
 
         public Post GetById(int id)
@@ -43,6 +43,7 @@ namespace ForumDataAccess.Repositories
         {
             return _context.Forums.Where(x => x.Id == id)
                 .FirstOrDefault().Posts;
+                
         }
 
         public int Insert(Post entity)
