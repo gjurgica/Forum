@@ -241,8 +241,8 @@ namespace ForumDataAccess.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "619dcb8c-a1cd-4671-80ed-fd772652f140", "0a6ba74b-36e6-430c-92d8-79a2e23e841a", "admin", "ADMIN" },
-                    { "ebf1eed4-87dc-43ab-b54c-206bfa1d24a9", "2550fb97-d5e3-4e73-a2b0-36f82232314c", "customer", "CUSTOMER" }
+                    { "5200be7f-2dd1-4bd0-a723-6d9045f36475", "e263bcb7-c3e9-4bfe-a79b-ddb110717676", "admin", "ADMIN" },
+                    { "f03f25f2-c8c6-4ef8-bbfb-2297e8c67afd", "c6f103af-f0c8-4d29-9723-8eeb4262dd6d", "customer", "CUSTOMER" }
                 });
 
             migrationBuilder.InsertData(
@@ -250,8 +250,8 @@ namespace ForumDataAccess.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "Url", "UserName" },
                 values: new object[,]
                 {
-                    { "20d7a124-1067-4b8b-95a6-b732827aec80", 0, "28daf194-c8ce-4a68-8b63-3f5fb5375a36", "bob@gmail.com", true, "Bob", "Bobsky", false, null, "BOB@GMAIL.COM", "BOBY", "AQAAAAEAACcQAAAAEIhU1TH+AEjs+Dc3a4ZKkHO7reFGd6De2Rclh1tSj3q8Qx5MJLXN587CXnvRV7wZ2Q==", null, false, "", false, null, "Boby" },
-                    { "f8c1fc71-5bae-41c7-99a1-68e7723ba2de", 0, "186ecc41-f806-45b7-b799-bb32cdddeb28", "alek88@gmail.com", true, "Aleksandar", "Veljanovski", false, null, "ALEK88@GMAIL.COM", "ALEKS", "AQAAAAEAACcQAAAAEDa7B74IURk/ztQ25H63EbN8FYHbQq9B6/A7KKStY27/xcg+4+PMGdO5f1NULCgS2A==", null, false, "", false, null, "Aleks" }
+                    { "ae7f5879-980f-4756-bd0e-dec18abc303f", 0, "28742d9e-543b-492e-83f2-bd5ea8abaa7f", "bob@gmail.com", true, "Bob", "Bobsky", false, null, "BOB@GMAIL.COM", "BOBY", "AQAAAAEAACcQAAAAEJltWtoRtQL59QGTFzcb0NY2qZWAoEgsxU38R4vmpJArIylBi6xD8Y5TKBHTCoayxA==", null, false, "", false, null, "Boby" },
+                    { "f2c33be2-991d-45b3-a208-67b68c26703b", 0, "0f4b98de-f9c5-47df-ad01-b1769f600e01", "alek88@gmail.com", true, "Aleksandar", "Veljanovski", false, null, "ALEK88@GMAIL.COM", "ALEKS", "AQAAAAEAACcQAAAAEEH5rwPae7BYgrwQy5DHux2tH5BwN30MfjgcIGeLUtX/dEJ7elSYkI9cN0ElcvyMdQ==", null, false, "", false, null, "Aleks" }
                 });
 
             migrationBuilder.InsertData(
@@ -259,8 +259,8 @@ namespace ForumDataAccess.Migrations
                 columns: new[] { "UserId", "RoleId" },
                 values: new object[,]
                 {
-                    { "20d7a124-1067-4b8b-95a6-b732827aec80", "619dcb8c-a1cd-4671-80ed-fd772652f140" },
-                    { "f8c1fc71-5bae-41c7-99a1-68e7723ba2de", "ebf1eed4-87dc-43ab-b54c-206bfa1d24a9" }
+                    { "ae7f5879-980f-4756-bd0e-dec18abc303f", "5200be7f-2dd1-4bd0-a723-6d9045f36475" },
+                    { "f2c33be2-991d-45b3-a208-67b68c26703b", "f03f25f2-c8c6-4ef8-bbfb-2297e8c67afd" }
                 });
 
             migrationBuilder.InsertData(
@@ -268,19 +268,19 @@ namespace ForumDataAccess.Migrations
                 columns: new[] { "Id", "Created", "Description", "ImageUrl", "Title", "UserId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2019, 9, 19, 15, 38, 10, 111, DateTimeKind.Local), "Python is an interpreted, high-level, general-purpose programming language.", "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png", "Pyton", "20d7a124-1067-4b8b-95a6-b732827aec80" },
-                    { 2, new DateTime(2019, 9, 19, 15, 38, 10, 113, DateTimeKind.Local), "ReactJS is an open-source JavaScript library which is used for building user interfaces specifically for single page applications.", "https://cdn.worldvectorlogo.com/logos/react.svg", "React.js", "20d7a124-1067-4b8b-95a6-b732827aec80" }
+                    { 1, new DateTime(2019, 9, 23, 11, 12, 5, 713, DateTimeKind.Local), "Python is an interpreted, high-level, general-purpose programming language.", "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png", "Pyton", "ae7f5879-980f-4756-bd0e-dec18abc303f" },
+                    { 2, new DateTime(2019, 9, 23, 11, 12, 5, 715, DateTimeKind.Local), "ReactJS is an open-source JavaScript library which is used for building user interfaces specifically for single page applications.", "https://cdn.worldvectorlogo.com/logos/react.svg", "React.js", "ae7f5879-980f-4756-bd0e-dec18abc303f" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Posts",
                 columns: new[] { "Id", "Content", "Created", "ForumId", "Title", "UserId" },
-                values: new object[] { 1, "What is the best way to learn Python by myself? Are there any recommended websites/forums and textbooks?", new DateTime(2019, 9, 19, 15, 38, 10, 113, DateTimeKind.Local), 1, "Is it easy to learn Python?", "20d7a124-1067-4b8b-95a6-b732827aec80" });
+                values: new object[] { 1, "What is the best way to learn Python by myself? Are there any recommended websites/forums and textbooks?", new DateTime(2019, 9, 23, 11, 12, 5, 715, DateTimeKind.Local), 1, "Is it easy to learn Python?", "ae7f5879-980f-4756-bd0e-dec18abc303f" });
 
             migrationBuilder.InsertData(
                 table: "Posts",
                 columns: new[] { "Id", "Content", "Created", "ForumId", "Title", "UserId" },
-                values: new object[] { 2, "I’ve been working with javascript for a while now and I’m comfortable with it. I like all the libraries and flexibility that I have with it. I want to eventually start messing around with another language like Python or even Java but I’m not really seeing much of what something like python adds that I can’t really already do in javascript.Can someone explain to this noob why I should start learning Python (or Java)?", new DateTime(2019, 9, 19, 15, 38, 10, 113, DateTimeKind.Local), 1, "Is Python worth learning 2019?", "f8c1fc71-5bae-41c7-99a1-68e7723ba2de" });
+                values: new object[] { 2, "I’ve been working with javascript for a while now and I’m comfortable with it. I like all the libraries and flexibility that I have with it. I want to eventually start messing around with another language like Python or even Java but I’m not really seeing much of what something like python adds that I can’t really already do in javascript.Can someone explain to this noob why I should start learning Python (or Java)?", new DateTime(2019, 9, 23, 11, 12, 5, 715, DateTimeKind.Local), 1, "Is Python worth learning 2019?", "f2c33be2-991d-45b3-a208-67b68c26703b" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

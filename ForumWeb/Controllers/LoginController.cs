@@ -26,7 +26,6 @@ namespace ForumWeb.Controllers
         public IActionResult Login(LoginViewModel user)
         {
              _userService.Login(user);
-
             return RedirectToAction("Index", "Home");
 
         }

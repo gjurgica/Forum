@@ -92,7 +92,7 @@ namespace ForumDataAccess
              Email = "bob@gmail.com",
              NormalizedEmail = "BOB@GMAIL.COM",
              EmailConfirmed = true,
-             PasswordHash = hasher.HashPassword(null, "ananas"),
+             PasswordHash = hasher.HashPassword(null, "Bob123456"),
              SecurityStamp = string.Empty
          },
          new User()
@@ -105,7 +105,7 @@ namespace ForumDataAccess
              Email = "alek88@gmail.com",
              NormalizedEmail = "ALEK88@GMAIL.COM",
              EmailConfirmed = true,
-             PasswordHash = hasher.HashPassword(null, "alek789"),
+             PasswordHash = hasher.HashPassword(null, "Alek7891011"),
              SecurityStamp = string.Empty
          }
          );
