@@ -39,5 +39,10 @@ namespace ForumWeb.Controllers
                 _userService.Register(user);
                 return Redirect("/Home/Index");
         }
+        public IActionResult LogOut()
+        {
+            _userService.Logout();
+            return RedirectToAction("index", "home");
+        }
     }
 }

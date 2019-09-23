@@ -1,0 +1,27 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ForumDomain;
+
+
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-action="Logout" asp-controller="Login"  class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-action="Add" asp-controller="Login">Register</a></li>
+        <li><a asp-action="Login" asp-controller="Login">Login</a></li>
+    </ul>
+}
