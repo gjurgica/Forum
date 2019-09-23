@@ -9,7 +9,8 @@
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Turret+Road&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Turret+Road:400,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
@@ -20,9 +21,36 @@
     </environment>
 </head>
 <body>
-  
-    <partial name="_CookieConsentPartial" />
 
+    <partial name="_CookieConsentPartial" />
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+        <a class="navbar-brand logo" href="#" style="font-size:30px;font-weight:bold;color:darkslateblue;font-family: 'Turret Road', cursive;"><i class="fab fa-android"></i> CodeForum</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-info text-uppercase" href=@Url.Action("Index","Home")>Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-info text-uppercase" href="#">Recent Posts</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2 homeSearch" type="search" placeholder="Search" aria-label="Search">
+            </form>
+            <ul class="navbar-nav  justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link text-info text-uppercase" href=@Url.Action("Index","Login")>Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-info text-uppercase" href=@Url.Action("Add","Login")>Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container body-content">
         @RenderBody()
 
