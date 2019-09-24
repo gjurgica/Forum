@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Forum.DataAccess\Forum.DataAccess.csproj" />
+    <ProjectReference Include="..\Forum.DomainClasses\Forum.DomainClasses.csproj" />
+    <ProjectReference Include="..\Forum.WebModels\Forum.WebModels.csproj" />
+  </ItemGroup>
+
+</Project>

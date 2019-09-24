@@ -1,0 +1,72 @@
+﻿@using Forum.WebModels.ViewModels
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 offset-md-4">
+            <div>
+                <h3>Registration</h3>
+                <form asp-controller="User" asp-action="Registration" method="post" class="form-group w-100">
+                    <label asp-for="FirstName"></label><br />
+                    <input asp-for="FirstName" /> <br />
+                    <span asp-validation-for="FirstName"></span><br />
+                    <label asp-for="LastName"></label><br />
+                    <input asp-for="LastName" /> <br />
+                    <span asp-validation-for="LastName"></span><br />
+                    <label asp-for="Username"></label><br />
+                    <input asp-for="Username" /> <br />
+                    <span asp-validation-for="Username"></span><br />
+                    <label asp-for="Password"></label><br />
+                    <input type="password" asp-for="Password" /> <br />
+                    <span asp-validation-for="Password"></span><br />
+                    <label asp-for="ConfirmPassword"></label><br />
+                    <input type="password" asp-for="ConfirmPassword" /> <br />
+                    <span asp-validation-for="ConfirmPassword"></span><br />
+                    <label asp-for="Email"></label><br />
+                    <input asp-for="Email" /> <br />
+                    <span asp-validation-for="Email"></span><br />
+                    <button type="submit">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*@using (@Html.BeginForm("Registration", "User", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.LabelFor(m => m.FirstName)
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FirstName)
+            <br />
+            @Html.LabelFor(m => m.LastName)
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LastName)
+            <br />
+            @Html.LabelFor(m => m.Username)
+            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Username)
+            <br />
+            @Html.LabelFor(m => m.Password)
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password)
+            <br />
+            @Html.LabelFor(m => m.ConfirmPassword)
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            <br />
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email)
+            <button  type=“submit”  class=“btn  btn-­‐primary”>Save</button>
+        </div>
+    }*@
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
