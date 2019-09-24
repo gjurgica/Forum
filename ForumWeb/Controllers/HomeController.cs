@@ -17,9 +17,11 @@ namespace ForumWeb.Controllers
     public class HomeController : Controller
     {
         private IForumService _forumService;
-        public HomeController(IForumService forumService)
+        private IUserService _userService;
+        public HomeController(IForumService forumService,IUserService userService)
         {
             _forumService = forumService;
+            _userService = userService;
         }
         public ActionResult Index(int id)
         {
@@ -39,6 +41,8 @@ namespace ForumWeb.Controllers
         [HttpPost]
         public IActionResult Add(ForumViewModel model)
         {
+            UserViewModel user = _userService.GetCurrentUser(User.Identity.Name);
+            model.User = user;
             _forumService.CreateForum(model);
             return RedirectToAction("Index", "Home");
         }

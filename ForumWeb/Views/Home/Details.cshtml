@@ -21,7 +21,7 @@
                                 <div class="forum-title">@Html.ActionLink(post.Title, "Index", "Post", new { id = post.Id })</div>
                                 <div class="forum-sub-title">
                                     <div>
-                                        @*<span class="post-author">@Html.ActionLink(post.AuthorName, "Details", "Profile")</span>*@
+                                        <span class="post-author">@Html.ActionLink(post.User.UserName, "Details", "Profile")</span>
                                     </div>
                                 </div>
                             </td>

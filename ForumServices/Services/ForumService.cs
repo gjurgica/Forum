@@ -22,6 +22,7 @@ namespace ForumServices.Services
         }
         public void CreateForum(ForumViewModel forum)
         {
+
             _forumService.Insert(_mapper.Map<Forum>(forum));
         }
 

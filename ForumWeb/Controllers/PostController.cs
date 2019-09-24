@@ -15,25 +15,33 @@ namespace ForumWeb.Controllers
     public class PostController : Controller
     {
         private IPostService _postService;
-        public PostController(IPostService postService)
+        private IUserService _userService;
+        private IForumService _forumService;
+        public PostController(IPostService postService,IUserService userService,IForumService forumService)
         {
             _postService = postService;
+            _userService = userService;
+            _forumService = forumService;
 
         }
         public IActionResult Index(int id)
         {
-            var post =  _postService.GetPostsByForum(id);
+            var post =  _postService.GetPostById(id);
             return View(post);
         }
-        public IActionResult Add(int id)
+        public IActionResult Add()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult Add(PostViewModel post)
+        public IActionResult Add(PostViewModel post,int id)
         {
-             _postService.CreatePost(post);
-            return RedirectToAction("Details", "Home", new { id = post.Id });
+            UserViewModel user = _userService.GetCurrentUser(User.Identity.Name);
+            var forum = _forumService.GetForumById(id);
+            post.User = user;
+            post.Forum = forum;
+            _postService.CreatePost(post);
+            return RedirectToAction("Details", "Home");
 
         }
     }

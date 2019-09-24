@@ -15,10 +15,13 @@
                     </td>
                     <td>
                         <div class="forum-title">
-                            @Html.ActionLink(item.Title,"Details", "Home", new { id = item.Id})
+                            @Html.ActionLink(item.Title, "Details", "Home", new { id = item.Id })
                         </div>
                         <div class="forum-sub-title">
                             @Html.DisplayFor(modelItem => item.Description)
+                        </div>
+                        <div class="forum-sub-title">
+                            @Html.DisplayFor(modelItem => item.Created)
                         </div>
                     </td>
                 </tr>
@@ -29,7 +32,7 @@
 </div>
 <div class="section-heading">
     <span>
-        @Html.ActionLink("Create Forum", "Add", "Home", new { @class = "btn btn-back" })
+        @Html.ActionLink("Create Forum", "Add", "Home", new { @class = "btn btn-newPost" })
     </span>
 </div>
 

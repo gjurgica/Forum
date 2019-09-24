@@ -74,9 +74,9 @@ html, body {
 .forum-sub-title{
     font-size:0.8em;
 }
-.post-index-content{
-    background-color:white;
-    box-shadow:0 10px 20px rgba(0,0,0,0.2),0 6px 6px rgba(0,0,0,0.3);
+.post-index-content {
+    background-color: rgba(255,255,255,0.7);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2),0 6px 6px rgba(0,0,0,0.3);
 }
 .post-header{
     background-color:#212121;
