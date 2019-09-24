@@ -1,0 +1,9 @@
+C:\Users\Master\Desktop\Forum\Forum\Forum.DomainClasses\bin\Debug\netcoreapp2.1\Forum.DomainClasses.deps.json
+C:\Users\Master\Desktop\Forum\Forum\Forum.DomainClasses\bin\Debug\netcoreapp2.1\Forum.DomainClasses.dll
+C:\Users\Master\Desktop\Forum\Forum\Forum.DomainClasses\bin\Debug\netcoreapp2.1\Forum.DomainClasses.pdb
+C:\Users\Master\Desktop\Forum\Forum\Forum.DomainClasses\obj\Debug\netcoreapp2.1\Forum.DomainClasses.csprojAssemblyReference.cache
+C:\Users\Master\Desktop\Forum\Forum\Forum.DomainClasses\obj\Debug\netcoreapp2.1\Forum.DomainClasses.csproj.CoreCompileInputs.cache
+C:\Users\Master\Desktop\Forum\Forum\Forum.DomainClasses\obj\Debug\netcoreapp2.1\Forum.DomainClasses.AssemblyInfoInputs.cache
+C:\Users\Master\Desktop\Forum\Forum\Forum.DomainClasses\obj\Debug\netcoreapp2.1\Forum.DomainClasses.AssemblyInfo.cs
+C:\Users\Master\Desktop\Forum\Forum\Forum.DomainClasses\obj\Debug\netcoreapp2.1\Forum.DomainClasses.dll
+C:\Users\Master\Desktop\Forum\Forum\Forum.DomainClasses\obj\Debug\netcoreapp2.1\Forum.DomainClasses.pdb

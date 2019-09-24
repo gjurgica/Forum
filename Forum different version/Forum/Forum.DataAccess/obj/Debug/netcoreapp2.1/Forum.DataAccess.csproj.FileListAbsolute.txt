@@ -1,0 +1,12 @@
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\bin\Debug\netcoreapp2.1\Forum.DataAccess.deps.json
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\bin\Debug\netcoreapp2.1\Forum.DataAccess.dll
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\obj\Debug\netcoreapp2.1\Forum.DataAccess.csprojAssemblyReference.cache
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\obj\Debug\netcoreapp2.1\Forum.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\obj\Debug\netcoreapp2.1\Forum.DataAccess.AssemblyInfoInputs.cache
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\obj\Debug\netcoreapp2.1\Forum.DataAccess.AssemblyInfo.cs
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\bin\Debug\netcoreapp2.1\Forum.DataAccess.pdb
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\bin\Debug\netcoreapp2.1\Forum.DomainClasses.dll
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\bin\Debug\netcoreapp2.1\Forum.DomainClasses.pdb
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\obj\Debug\netcoreapp2.1\Forum.DataAccess.csproj.CopyComplete
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\obj\Debug\netcoreapp2.1\Forum.DataAccess.dll
+C:\Users\Master\Desktop\Forum\Forum\Forum.DataAccess\obj\Debug\netcoreapp2.1\Forum.DataAccess.pdb
