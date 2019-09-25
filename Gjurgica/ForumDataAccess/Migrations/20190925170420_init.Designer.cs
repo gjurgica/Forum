@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ForumDataAccess.Migrations
 {
     [DbContext(typeof(ForumDbContext))]
-    [Migration("20190923091206_init")]
+    [Migration("20190925170420_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,8 +46,8 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("Forums");
 
                     b.HasData(
-                        new { Id = 1, Created = new DateTime(2019, 9, 23, 11, 12, 5, 713, DateTimeKind.Local), Description = "Python is an interpreted, high-level, general-purpose programming language.", ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png", Title = "Pyton", UserId = "ae7f5879-980f-4756-bd0e-dec18abc303f" },
-                        new { Id = 2, Created = new DateTime(2019, 9, 23, 11, 12, 5, 715, DateTimeKind.Local), Description = "ReactJS is an open-source JavaScript library which is used for building user interfaces specifically for single page applications.", ImageUrl = "https://cdn.worldvectorlogo.com/logos/react.svg", Title = "React.js", UserId = "ae7f5879-980f-4756-bd0e-dec18abc303f" }
+                        new { Id = 1, Created = new DateTime(2019, 9, 25, 19, 4, 19, 780, DateTimeKind.Local), Description = "Python is an interpreted, high-level, general-purpose programming language.", ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png", Title = "Pyton", UserId = "3132bca6-d7fb-4c50-9806-9ea7b92dcac0" },
+                        new { Id = 2, Created = new DateTime(2019, 9, 25, 19, 4, 19, 781, DateTimeKind.Local), Description = "ReactJS is an open-source JavaScript library which is used for building user interfaces specifically for single page applications.", ImageUrl = "https://cdn.worldvectorlogo.com/logos/react.svg", Title = "React.js", UserId = "3132bca6-d7fb-4c50-9806-9ea7b92dcac0" }
                     );
                 });
 
@@ -78,8 +78,8 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("Posts");
 
                     b.HasData(
-                        new { Id = 1, Content = "What is the best way to learn Python by myself? Are there any recommended websites/forums and textbooks?", Created = new DateTime(2019, 9, 23, 11, 12, 5, 715, DateTimeKind.Local), ForumId = 1, Title = "Is it easy to learn Python?", UserId = "ae7f5879-980f-4756-bd0e-dec18abc303f" },
-                        new { Id = 2, Content = "I’ve been working with javascript for a while now and I’m comfortable with it. I like all the libraries and flexibility that I have with it. I want to eventually start messing around with another language like Python or even Java but I’m not really seeing much of what something like python adds that I can’t really already do in javascript.Can someone explain to this noob why I should start learning Python (or Java)?", Created = new DateTime(2019, 9, 23, 11, 12, 5, 715, DateTimeKind.Local), ForumId = 1, Title = "Is Python worth learning 2019?", UserId = "f2c33be2-991d-45b3-a208-67b68c26703b" }
+                        new { Id = 1, Content = "What is the best way to learn Python by myself? Are there any recommended websites/forums and textbooks?", Created = new DateTime(2019, 9, 25, 19, 4, 19, 781, DateTimeKind.Local), ForumId = 1, Title = "Is it easy to learn Python?", UserId = "3132bca6-d7fb-4c50-9806-9ea7b92dcac0" },
+                        new { Id = 2, Content = "I’ve been working with javascript for a while now and I’m comfortable with it. I like all the libraries and flexibility that I have with it. I want to eventually start messing around with another language like Python or even Java but I’m not really seeing much of what something like python adds that I can’t really already do in javascript.Can someone explain to this noob why I should start learning Python (or Java)?", Created = new DateTime(2019, 9, 25, 19, 4, 19, 782, DateTimeKind.Local), ForumId = 1, Title = "Is Python worth learning 2019?", UserId = "826e5eb0-15bc-4c0a-acd4-0246497e273f" }
                     );
                 });
 
@@ -166,8 +166,8 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("AspNetUsers");
 
                     b.HasData(
-                        new { Id = "ae7f5879-980f-4756-bd0e-dec18abc303f", AccessFailedCount = 0, ConcurrencyStamp = "28742d9e-543b-492e-83f2-bd5ea8abaa7f", Email = "bob@gmail.com", EmailConfirmed = true, FirstName = "Bob", LastName = "Bobsky", LockoutEnabled = false, NormalizedEmail = "BOB@GMAIL.COM", NormalizedUserName = "BOBY", PasswordHash = "AQAAAAEAACcQAAAAEJltWtoRtQL59QGTFzcb0NY2qZWAoEgsxU38R4vmpJArIylBi6xD8Y5TKBHTCoayxA==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "Boby" },
-                        new { Id = "f2c33be2-991d-45b3-a208-67b68c26703b", AccessFailedCount = 0, ConcurrencyStamp = "0f4b98de-f9c5-47df-ad01-b1769f600e01", Email = "alek88@gmail.com", EmailConfirmed = true, FirstName = "Aleksandar", LastName = "Veljanovski", LockoutEnabled = false, NormalizedEmail = "ALEK88@GMAIL.COM", NormalizedUserName = "ALEKS", PasswordHash = "AQAAAAEAACcQAAAAEEH5rwPae7BYgrwQy5DHux2tH5BwN30MfjgcIGeLUtX/dEJ7elSYkI9cN0ElcvyMdQ==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "Aleks" }
+                        new { Id = "3132bca6-d7fb-4c50-9806-9ea7b92dcac0", AccessFailedCount = 0, ConcurrencyStamp = "4e6c6735-7077-4ff5-90df-77d689cbf3cb", Email = "bob@gmail.com", EmailConfirmed = true, FirstName = "Bob", LastName = "Bobsky", LockoutEnabled = false, NormalizedEmail = "BOB@GMAIL.COM", NormalizedUserName = "BOBY", PasswordHash = "AQAAAAEAACcQAAAAEHRSftCke467veKVz54xgcDE2bYuSJG+YETagxseyou2g3zIvg8YZKLnbvpXTwBcXQ==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "Boby" },
+                        new { Id = "826e5eb0-15bc-4c0a-acd4-0246497e273f", AccessFailedCount = 0, ConcurrencyStamp = "e0fb5d5a-8abc-4589-9528-887bc6f7f660", Email = "alek88@gmail.com", EmailConfirmed = true, FirstName = "Aleksandar", LastName = "Veljanovski", LockoutEnabled = false, NormalizedEmail = "ALEK88@GMAIL.COM", NormalizedUserName = "ALEKS", PasswordHash = "AQAAAAEAACcQAAAAEOZ1VSciMdXDHX2vOA54HeIopb4NmeiyO3DSUwT3GX84zOfsqdsPOlOkcu5D0rBJPw==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "Aleks" }
                     );
                 });
 
@@ -195,8 +195,8 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("AspNetRoles");
 
                     b.HasData(
-                        new { Id = "5200be7f-2dd1-4bd0-a723-6d9045f36475", ConcurrencyStamp = "e263bcb7-c3e9-4bfe-a79b-ddb110717676", Name = "admin", NormalizedName = "ADMIN" },
-                        new { Id = "f03f25f2-c8c6-4ef8-bbfb-2297e8c67afd", ConcurrencyStamp = "c6f103af-f0c8-4d29-9723-8eeb4262dd6d", Name = "customer", NormalizedName = "CUSTOMER" }
+                        new { Id = "5ad85b57-378b-4aac-832b-066ced0de102", ConcurrencyStamp = "a7eab7ee-5cd1-4409-8873-35d5ef0efedb", Name = "admin", NormalizedName = "ADMIN" },
+                        new { Id = "620b9817-3e53-4fcd-ad53-b30c7fba5bf9", ConcurrencyStamp = "fe4616f6-78f6-4069-83b3-3751f61ad8e6", Name = "customer", NormalizedName = "CUSTOMER" }
                     );
                 });
 
@@ -271,8 +271,8 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("AspNetUserRoles");
 
                     b.HasData(
-                        new { UserId = "ae7f5879-980f-4756-bd0e-dec18abc303f", RoleId = "5200be7f-2dd1-4bd0-a723-6d9045f36475" },
-                        new { UserId = "f2c33be2-991d-45b3-a208-67b68c26703b", RoleId = "f03f25f2-c8c6-4ef8-bbfb-2297e8c67afd" }
+                        new { UserId = "3132bca6-d7fb-4c50-9806-9ea7b92dcac0", RoleId = "5ad85b57-378b-4aac-832b-066ced0de102" },
+                        new { UserId = "826e5eb0-15bc-4c0a-acd4-0246497e273f", RoleId = "620b9817-3e53-4fcd-ad53-b30c7fba5bf9" }
                     );
                 });
 

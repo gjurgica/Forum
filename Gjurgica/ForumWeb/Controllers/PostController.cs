@@ -29,19 +29,22 @@ namespace ForumWeb.Controllers
             var post =  _postService.GetPostById(id);
             return View(post);
         }
-        public IActionResult Add()
+        public IActionResult Add(int id)
         {
-            return View();
+            var forum = _forumService.GetForumById(id);
+            ViewBag.Id = forum.Id.ToString();
+            ViewBag.title = forum.Title;
+            return View(new PostViewModel());
         }
         [HttpPost]
-        public IActionResult Add(PostViewModel post,int id)
+        public IActionResult Add(PostViewModel post,string id)
         {
             UserViewModel user = _userService.GetCurrentUser(User.Identity.Name);
-            var forum = _forumService.GetForumById(id);
+            var forum = _forumService.GetForumById(int.Parse(id));
             post.User = user;
             post.Forum = forum;
             _postService.CreatePost(post);
-            return RedirectToAction("Details", "Home");
+            return RedirectToAction("Details", "Home",  new { forum.Id });
 
         }
     }
