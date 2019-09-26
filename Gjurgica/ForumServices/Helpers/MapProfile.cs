@@ -14,6 +14,7 @@ namespace ForumServices.Helpers
             CreateMap<Thread, ThreadViewModel>()
                 .ForMember(fv => fv.Created, src => src.UseValue(DateTime.UtcNow))
                 .ForMember(t => t.Category,src => src.MapFrom(tv => tv.Category))
+                .ForMember(t => t.Posts,src => src.MapFrom(tv => tv.Posts))
                 .ReverseMap();
             CreateMap<Post, PostViewModel>()
                 .ForMember(p => p.User, src => src.MapFrom(pv => pv.User))

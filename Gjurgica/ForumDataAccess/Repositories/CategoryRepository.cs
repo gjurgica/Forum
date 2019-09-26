@@ -21,13 +21,16 @@ namespace ForumDataAccess.Repositories
         public IEnumerable<Category> GetAll()
         {
             return _context.Categories
-                .Include(x => x.Threads).ToList();
+                .Include(x => x.Threads)
+                    .ThenInclude(x => x.Posts)
+                .ToList();
         }
 
         public Category GetById(int id)
         {
             return _context.Categories
                 .Include(x => x.Threads)
+                    .ThenInclude(x => x.Posts)
                 .FirstOrDefault(x => x.Id == id);
         }
 

@@ -26,8 +26,8 @@ namespace ForumWeb.Controllers
         }
         public IActionResult Index(int id)
         {
-            var post =  _postService.GetPostById(id);
-            return View(post);
+            var thread =  _threadService.GetThreadById(id);
+            return View(thread);
         }
         public IActionResult Add(int id)
         {

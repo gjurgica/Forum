@@ -14,23 +14,28 @@
         {
             <table class="table table-bordered table-hover" id="forum-index-table">
                 <tbody>
-                    @foreach (var post in Model.Threads)
+                    @foreach (var thread in Model.Threads)
                     {
-                        <tr>
-                            <td>
-                                @*<div class="forum-title">@Html.ActionLink(post.Title, "Index", "Post", new { id = post.Id })</div>*@
-                                <div class="forum-sub-title">
-                                    <div>
-                                        <span class="post-author">@Html.ActionLink(post.Title, "Index", "Post", new { id = post.Id})</span>
-                                    </div>
+                    <tr>
+                        <td>
+                            @*<div class="forum-title">@Html.ActionLink(post.Title, "Index", "Post", new { id = post.Id })</div>*@
+                            <div class="forum-title">
+                                <div>
+                                    <span class="post-author">@Html.ActionLink(thread.Title, "Index", "Post", new { id = thread.Id })</span>
                                 </div>
-                            </td>
-                            <td>
-                                <div class="post-date">
-                                    @post.Created
-                                </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="post-date">
+                                @thread.Created
+                            </div>
+                        </td>
+                        <td>
+                            <div class="forum-sub-title">
+                               Posts: @thread.Posts.Count()
+                            </div>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

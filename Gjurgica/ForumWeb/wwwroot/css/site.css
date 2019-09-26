@@ -55,14 +55,15 @@ html, body {
         box-shadow:0 5px 4px -6px #000;
 }
 .front-page-content {
-    background-color: rgba(255,255,255,0.4);
+    background-color: rgba(102, 100, 100,0.4);
     padding: 16px;
 }
-.latest-forums{
-    font-size:1.2em;
-    font-weight:bold;
-    color:#333;
-    margin:4px 0 16px 0;
+#latest-forums {
+    font-size: 1.2em;
+    font-weight: bolder;
+    color: #262626;
+    margin: 4px 0 16px 0;
+    background-color: rgba(255, 255, 255,0.4);
 }
 .forum-title {
     font-size: 1.1em;
@@ -70,6 +71,7 @@ html, body {
 }
     .forum-title a {
         color: rgb(32,32,32);
+        text-decoration: none;
     }
 .forum-sub-title{
     font-size:0.8em;
@@ -78,10 +80,10 @@ html, body {
     background-color: rgba(255,255,255,0.7);
     box-shadow: 0 10px 20px rgba(0,0,0,0.2),0 6px 6px rgba(0,0,0,0.3);
 }
-.post-header{
-    background-color:#212121;
-    padding:8px 0 24px 24px;
-    color:#ddd;
+.post-header {
+    background-color: rgba(33,33,33,0.7);
+    padding: 8px 0 24px 24px;
+    color: #ddd;
 }
 #heading-btn{
     margin-left:20px;

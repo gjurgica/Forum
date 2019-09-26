@@ -37,8 +37,8 @@ namespace ForumDataAccess.Repositories
         {
             return _context.Threads
                .Include(x => x.Posts)
-                .ThenInclude(x => x.User)
-                .Include(x => x.Category)
+                    .ThenInclude(x => x.User)
+               .Include(x => x.Category)
                .Include(x => x.Posts)
                    .ThenInclude(x => x.Replies)
                        .ThenInclude(x => x.User)
