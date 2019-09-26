@@ -27,7 +27,7 @@ namespace ForumDataAccess.Repositories
                 .Include(x => x.Post)
                     .ThenInclude(x => x.User)
                 .Include(x => x.Post)
-                    .ThenInclude(x => x.Forum);
+                    .ThenInclude(x => x.Thread);
         }
 
         public PostReply GetById(int id)
@@ -37,7 +37,7 @@ namespace ForumDataAccess.Repositories
                 .Include(x => x.Post)
                     .ThenInclude(x => x.User)
                 .Include(x => x.Post)
-                    .ThenInclude(x => x.Forum)
+                    .ThenInclude(x => x.Thread)
                 .FirstOrDefault(x => x.Id == id);
         }
 

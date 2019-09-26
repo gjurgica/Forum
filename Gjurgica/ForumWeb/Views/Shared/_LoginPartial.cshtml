@@ -10,10 +10,10 @@
     <form asp-action="Logout" asp-controller="Login"  class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                <a asp-controller="Profile" asp-action="Details" asp-route-username="@UserManager.GetUserName(User)"  title="Manage" class="text-info">Hello @UserManager.GetUserName(User)!</a>
             </li>
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout</button>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link text-info">Logout</button>
             </li>
         </ul>
     </form>
@@ -21,7 +21,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a asp-action="Add" asp-controller="Login">Register</a></li>
-        <li><a asp-action="Index" asp-controller="Login">Login</a></li>
+        <li><a asp-action="Add" asp-controller="Login" class="text-info">Register</a></li>
+        <li><a asp-action="Index" asp-controller="Login" class="text-info">Login</a></li>
     </ul>
 }

@@ -8,6 +8,6 @@ namespace ForumDataAccess.Interfaces
 {
     public interface IPostRepository<T> : IRepository<T>
     {
-        IEnumerable<T> GetPostsByForum(int id);
+        IEnumerable<T> GetPostsByThread(int id);
     }
 }

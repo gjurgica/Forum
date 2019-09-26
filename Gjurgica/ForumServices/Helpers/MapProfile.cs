@@ -11,27 +11,35 @@ namespace ForumServices.Helpers
     {
         public MapProfile()
         {
-            CreateMap<Forum, ForumViewModel>()
-                .ForMember(fv => fv.User, src => src.MapFrom(f => f.User))
+            CreateMap<Thread, ThreadViewModel>()
                 .ForMember(fv => fv.Created, src => src.UseValue(DateTime.UtcNow))
-                .ReverseMap()
-                .ForMember(f => f.Created, src => src.UseValue(DateTime.UtcNow))
-                .ForMember(f => f.User, src => src.Ignore());
+                .ForMember(t => t.Category,src => src.MapFrom(tv => tv.Category))
+                .ReverseMap();
             CreateMap<Post, PostViewModel>()
                 .ForMember(p => p.User, src => src.MapFrom(pv => pv.User))
-                .ForMember(p => p.Forum, src => src.MapFrom(pv => pv.Forum))
+                .ForMember(p => p.Thread, src => src.MapFrom(pv => pv.Thread))
                 .ReverseMap()
                 .ForMember(p => p.Id, src => src.Ignore())
                 .ForMember(p => p.UserId, src => src.MapFrom(pv => pv.User.Id))
-                .ForMember(p => p.ForumId, src => src.MapFrom(pv => pv.Forum.Id))
-                .ForMember(p => p.Created, src => src.UseValue(DateTime.UtcNow))
+                .ForMember(p => p.ThreadId, src => src.MapFrom(pv => pv.Thread.Id))
                 .ForMember(p => p.User, src => src.Ignore())
-                .ForMember(p => p.Forum, src => src.Ignore())
+                .ForMember(p => p.Thread, src => src.Ignore())
                 .ForMember(p => p.Replies, src => src.Ignore());
-            CreateMap<PostReply, PostReplyViewModel>().ReverseMap();
+            CreateMap<PostReply, PostReplyViewModel>()
+                .ForMember(p => p.User, src => src.MapFrom(pv => pv.User))
+                .ForMember(p => p.Post, src => src.MapFrom(pv => pv.Post))
+                .ReverseMap()
+                .ForMember(p => p.Id, src => src.Ignore())
+                .ForMember(p => p.UserId, src => src.MapFrom(pv => pv.User.Id))
+                .ForMember(p => p.PostId, src => src.MapFrom(pv => pv.Post.Id))
+                .ForMember(p => p.User, src => src.Ignore())
+                .ForMember(p => p.Post, src => src.Ignore());
             CreateMap<User, UserViewModel>().ReverseMap();
             CreateMap<RegisterViewModel, User>()
                 .ForMember(u => u.EmailConfirmed, src => src.UseValue(true));
+            CreateMap<Category, CategoryViewModel>()
+                .ForMember(c => c.Threads,src => src.MapFrom(cv => cv.Threads))
+                .ReverseMap();
         }
     }
 }

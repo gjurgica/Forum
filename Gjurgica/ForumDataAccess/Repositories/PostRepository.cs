@@ -24,7 +24,7 @@ namespace ForumDataAccess.Repositories
         {
             return _context.Posts
                 .Include(x => x.User)
-                .Include(x => x.Forum)
+                .Include(x => x.Thread)
                 .Include(x => x.Replies)
                     .ThenInclude(x => x.User).ToList() ;
         }
@@ -33,15 +33,15 @@ namespace ForumDataAccess.Repositories
         {
             return _context.Posts
                .Include(x => x.User)
-               .Include(x => x.Forum)
+               .Include(x => x.Thread)
                .Include(x => x.Replies)
                    .ThenInclude(x => x.User)
                .FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<Post> GetPostsByForum(int id)
+        public IEnumerable<Post> GetPostsByThread(int id)
         {
-            return _context.Forums.Where(x => x.Id == id)
+            return _context.Threads.Where(x => x.Id == id)
                 .FirstOrDefault().Posts;
                 
         }

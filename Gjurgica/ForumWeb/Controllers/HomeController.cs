@@ -16,34 +16,34 @@ namespace ForumWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private IForumService _forumService;
+        private IThreadService _threadService;
         private IUserService _userService;
-        public HomeController(IForumService forumService,IUserService userService)
+        private ICategoryService _categoryService;
+        public HomeController(IThreadService threadService, IUserService userService, ICategoryService categoryService)
         {
-            _forumService = forumService;
+            _threadService = threadService;
             _userService = userService;
+            _categoryService = categoryService;
         }
         public ActionResult Index(int id)
         {
-            var forums = _forumService.GetAllForums();  
-            return View(forums);
+            var category = _categoryService.GetAllCategories();  
+            return View(category);
         }
         public IActionResult Details(int id)
         {
-            var forum =  _forumService.GetForumById(id);
+            var category = _categoryService.GetCategoryById(id);
  
-            return View(forum);
+            return View(category);
         }
         public IActionResult Add()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult Add(ForumViewModel model)
+        public IActionResult Add(ThreadViewModel model)
         {
-            UserViewModel user = _userService.GetCurrentUser(User.Identity.Name);
-            model.User = user;
-            _forumService.CreateForum(model);
+            _threadService.CreateThread(model);
             return RedirectToAction("Index", "Home");
         }
     }

@@ -50,9 +50,9 @@ namespace ForumServices.Services
             return _mapper.Map<PostViewModel>(post);
         }
 
-        public IEnumerable<PostViewModel> GetPostsByForum(int id)
+        public IEnumerable<PostViewModel> GetPostsByThread(int id)
         {
-            return _postService.GetPostsByForum(id).Select(x => _mapper.Map<PostViewModel>(x)).ToList();
+            return _postService.GetPostsByThread(id).Select(x => _mapper.Map<PostViewModel>(x)).ToList();
         }
     }
 }

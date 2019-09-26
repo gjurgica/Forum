@@ -16,9 +16,10 @@ namespace ForumServices.Helpers
         public static IServiceCollection RegisterModules(IServiceCollection services, string connectionString)
         {
             services.AddTransient<IUserRepository<User>, UserRepository>();
-            services.AddTransient<IRepository<Forum>, ForumRepository>();
+            services.AddTransient<IRepository<Thread>, ThreadRepository>();
             services.AddTransient<IPostRepository<Post>, PostRepository>();
             services.AddTransient<IRepository<PostReply>, PostReplyRepository>();
+            services.AddTransient<IRepository<Category>, CategoryRepository>();
 
             services.AddDbContext<ForumDbContext>(ob => ob.UseSqlServer(
                 connectionString

@@ -3,16 +3,16 @@
 
 <div class="container body-content">
     <div class="row post-header">
-            <span class="post-title">@Model.Title</span>
-            <span id="heading-btn">@Html.ActionLink( "Back to " +  @Model.Forum.Title, "Details", "Home", new { id = @Model.Forum.Id },new { @class= "btn btn-back"})</span>
+        @*<span class="post-title">@Model.Title</span>*@
+        <span id="heading-btn">@Html.ActionLink("Back to " + @Model.Thread.Title, "Details", "Home", new { id = @Model.Thread.Id }, new { @class = "btn btn-back" })</span>
     </div>
     <div class="row post-index-content">
         <div class="col-md-3 post-author">
             <div class="post-author-img">
-                <img src="@Model.User.Url" style="width:80px; height:80px;"/>
+                <img src="" style="width:80px; height:80px;" />
             </div>
-            @Html.ActionLink( @Model.User.UserName, "Details", "Profile", new { id = @Model.User.Id }, new { @class = "btn btn-back" })
-            <br/><span class="post-date">@Model.Created</span>
+            @Html.ActionLink(@Model.User.UserName, "Details", "Profile", new { username = @Model.User.UserName }, new { @class = "btn btn-back" })
+            <br /><span class="post-date">@Model.Created</span>
         </div>
         <div class="col-md-9 post-content-container">
             <div class="post-content">
@@ -20,18 +20,22 @@
             </div>
         </div>
     </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+
         <div class="row reply-divider"></div>
-        <div class="row">
-            <span>@Html.ActionLink("Post Reply", "Add", "Reply",new { id = Model.Id}, new { @class = "btn btn-new-reply" })</span>
-        </div>
+    <div class="row">
+        <span>@Html.ActionLink("Post Reply", "Add", "Reply", new { id = Model.Id }, new { @class = "btn btn-new-reply" })</span>
+    </div>
+    }
     @if (Model.Replies.Any())
     {
-        foreach(var reply in Model.Replies)
+        foreach (var reply in Model.Replies)
         {
             <div class="row reply-content">
                 <div class="col-md-3 reply-author">
-                    <div class="post-author-img"><img src="@reply.User.Url" /></div>
-                    @Html.ActionLink(@Model.User.UserName, "Details", "Home", new { id = @Model.User.Id })
+                    <div class="post-author-img"><img /></div>
+                    @Html.ActionLink(@Model.User.UserName, "Details", "Profile", new { username = @Model.User.UserName })
                     <span>@reply.Created</span>
                 </div>
                 <div class="col-md-9 reply-content">

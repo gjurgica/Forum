@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace ForumWeb
 {
@@ -31,12 +32,21 @@ namespace ForumWeb
             });
 
 
-            
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.LoginPath = "/Login/Login";
+                options.AccessDeniedPath = "/Login/Login";
+                options.SlidingExpiration = true;
+            });
 
             services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IForumService, ForumService>();
+            services.AddTransient<IThreadService, ThreadService>();
             services.AddTransient<IPostService, PostService>();
             services.AddTransient<IPostReplyService, PostReplyService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+
 
 
 

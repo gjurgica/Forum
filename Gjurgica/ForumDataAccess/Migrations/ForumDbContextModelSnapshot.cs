@@ -19,33 +19,24 @@ namespace ForumDataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ForumDomain.Forum", b =>
+            modelBuilder.Entity("ForumDomain.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Created");
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
                     b.Property<string>("ImageUrl");
 
-                    b.Property<string>("Title")
-                        .IsRequired();
-
-                    b.Property<string>("UserId");
+                    b.Property<string>("Title");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Forums");
+                    b.ToTable("Categories");
 
                     b.HasData(
-                        new { Id = 1, Created = new DateTime(2019, 9, 25, 19, 4, 19, 780, DateTimeKind.Local), Description = "Python is an interpreted, high-level, general-purpose programming language.", ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png", Title = "Pyton", UserId = "3132bca6-d7fb-4c50-9806-9ea7b92dcac0" },
-                        new { Id = 2, Created = new DateTime(2019, 9, 25, 19, 4, 19, 781, DateTimeKind.Local), Description = "ReactJS is an open-source JavaScript library which is used for building user interfaces specifically for single page applications.", ImageUrl = "https://cdn.worldvectorlogo.com/logos/react.svg", Title = "React.js", UserId = "3132bca6-d7fb-4c50-9806-9ea7b92dcac0" }
+                        new { Id = 1, ImageUrl = "https://www.cbronline.com/wp-content/uploads/2017/06/What-Your-Business-Needs-To-Resolve-Tech-And-Software-Problems.jpg", Title = "Software" },
+                        new { Id = 2, ImageUrl = "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Fforbes-finds%2Ffiles%2F2019%2F04%2Fmariokart8-1200x675.jpg", Title = "Games" },
+                        new { Id = 3, ImageUrl = "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Fallbusiness%2Ffiles%2F2018%2F10%2Fmachine-learning-1200x808.jpg", Title = "News" }
                     );
                 });
 
@@ -60,24 +51,23 @@ namespace ForumDataAccess.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<int?>("ForumId");
-
-                    b.Property<string>("Title")
-                        .IsRequired();
+                    b.Property<int?>("ThreadId");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ForumId");
+                    b.HasIndex("ThreadId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
 
                     b.HasData(
-                        new { Id = 1, Content = "What is the best way to learn Python by myself? Are there any recommended websites/forums and textbooks?", Created = new DateTime(2019, 9, 25, 19, 4, 19, 781, DateTimeKind.Local), ForumId = 1, Title = "Is it easy to learn Python?", UserId = "3132bca6-d7fb-4c50-9806-9ea7b92dcac0" },
-                        new { Id = 2, Content = "I’ve been working with javascript for a while now and I’m comfortable with it. I like all the libraries and flexibility that I have with it. I want to eventually start messing around with another language like Python or even Java but I’m not really seeing much of what something like python adds that I can’t really already do in javascript.Can someone explain to this noob why I should start learning Python (or Java)?", Created = new DateTime(2019, 9, 25, 19, 4, 19, 782, DateTimeKind.Local), ForumId = 1, Title = "Is Python worth learning 2019?", UserId = "826e5eb0-15bc-4c0a-acd4-0246497e273f" }
+                        new { Id = 1, Content = "The best free antivirus is Kespersky Cloud Free", Created = new DateTime(2019, 9, 26, 15, 58, 8, 881, DateTimeKind.Local), ThreadId = 1, UserId = "f95f9f1f-0d02-42d4-9327-71b22a6618bf" },
+                        new { Id = 2, Content = "Avast is another good free antivirus", Created = new DateTime(2019, 9, 26, 15, 58, 8, 881, DateTimeKind.Local), ThreadId = 1, UserId = "e07f3d4e-f09e-4d5b-9dbd-1592fa2ba99b" },
+                        new { Id = 3, Content = "I hope they've pathed some of the security holes", Created = new DateTime(2019, 9, 26, 15, 58, 8, 881, DateTimeKind.Local), ThreadId = 2, UserId = "f95f9f1f-0d02-42d4-9327-71b22a6618bf" },
+                        new { Id = 4, Content = "Call of Duty: Modern Warfare is the best one so far.", Created = new DateTime(2019, 9, 26, 15, 58, 8, 881, DateTimeKind.Local), ThreadId = 3, UserId = "e07f3d4e-f09e-4d5b-9dbd-1592fa2ba99b" }
                     );
                 });
 
@@ -105,6 +95,38 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("PostReplaies");
                 });
 
+            modelBuilder.Entity("ForumDomain.Thread", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<string>("Title")
+                        .IsRequired();
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Threads");
+
+                    b.HasData(
+                        new { Id = 1, CategoryId = 1, Created = new DateTime(2019, 9, 26, 15, 58, 8, 881, DateTimeKind.Local), ImageUrl = "https://ksassets.timeincuk.net/wp/uploads/sites/54/2019/06/best-free-antivirus-trusted-reviews-920x518.jpg", Title = "Best Free AV" },
+                        new { Id = 2, CategoryId = 3, Created = new DateTime(2019, 9, 26, 15, 58, 8, 881, DateTimeKind.Local), ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1200px-Firefox_Logo%2C_2017.svg.png", Title = "New version of FireFox is released" },
+                        new { Id = 3, CategoryId = 2, Created = new DateTime(2019, 9, 26, 15, 58, 8, 881, DateTimeKind.Local), ImageUrl = "https://ksassets.timeincuk.net/wp/uploads/sites/54/2019/01/Best-FPS-Games-920x613.jpg", Title = "The best FPS game in 2019" }
+                    );
+                });
+
             modelBuilder.Entity("ForumDomain.User", b =>
                 {
                     b.Property<string>("Id")
@@ -122,6 +144,10 @@ namespace ForumDataAccess.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired();
+
+                    b.Property<bool>("IsItOnline");
+
+                    b.Property<DateTime>("Joined");
 
                     b.Property<string>("LastName")
                         .IsRequired();
@@ -146,8 +172,6 @@ namespace ForumDataAccess.Migrations
 
                     b.Property<bool>("TwoFactorEnabled");
 
-                    b.Property<string>("Url");
-
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
@@ -164,8 +188,8 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("AspNetUsers");
 
                     b.HasData(
-                        new { Id = "3132bca6-d7fb-4c50-9806-9ea7b92dcac0", AccessFailedCount = 0, ConcurrencyStamp = "4e6c6735-7077-4ff5-90df-77d689cbf3cb", Email = "bob@gmail.com", EmailConfirmed = true, FirstName = "Bob", LastName = "Bobsky", LockoutEnabled = false, NormalizedEmail = "BOB@GMAIL.COM", NormalizedUserName = "BOBY", PasswordHash = "AQAAAAEAACcQAAAAEHRSftCke467veKVz54xgcDE2bYuSJG+YETagxseyou2g3zIvg8YZKLnbvpXTwBcXQ==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "Boby" },
-                        new { Id = "826e5eb0-15bc-4c0a-acd4-0246497e273f", AccessFailedCount = 0, ConcurrencyStamp = "e0fb5d5a-8abc-4589-9528-887bc6f7f660", Email = "alek88@gmail.com", EmailConfirmed = true, FirstName = "Aleksandar", LastName = "Veljanovski", LockoutEnabled = false, NormalizedEmail = "ALEK88@GMAIL.COM", NormalizedUserName = "ALEKS", PasswordHash = "AQAAAAEAACcQAAAAEOZ1VSciMdXDHX2vOA54HeIopb4NmeiyO3DSUwT3GX84zOfsqdsPOlOkcu5D0rBJPw==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "Aleks" }
+                        new { Id = "f95f9f1f-0d02-42d4-9327-71b22a6618bf", AccessFailedCount = 0, ConcurrencyStamp = "650287fd-78a4-4e88-bca0-2a70d285ddb9", Email = "bob@gmail.com", EmailConfirmed = true, FirstName = "Bob", IsItOnline = false, Joined = new DateTime(2019, 9, 26, 15, 58, 8, 870, DateTimeKind.Local), LastName = "Bobsky", LockoutEnabled = false, NormalizedEmail = "BOB@GMAIL.COM", NormalizedUserName = "BOBY", PasswordHash = "AQAAAAEAACcQAAAAEODpFOdXqr5bnS75MdjqO/Xaj0BkCjbQS+cmTr9MmZokjXb/A5xE+1r9IWrQQfim3g==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "Boby" },
+                        new { Id = "e07f3d4e-f09e-4d5b-9dbd-1592fa2ba99b", AccessFailedCount = 0, ConcurrencyStamp = "ce822b71-9b5a-4c1c-b312-9d64cd32ddb1", Email = "alek88@gmail.com", EmailConfirmed = true, FirstName = "Aleksandar", IsItOnline = false, Joined = new DateTime(2019, 9, 26, 15, 58, 8, 880, DateTimeKind.Local), LastName = "Veljanovski", LockoutEnabled = false, NormalizedEmail = "ALEK88@GMAIL.COM", NormalizedUserName = "ALEKS", PasswordHash = "AQAAAAEAACcQAAAAELxayfCUOdohhuBKcKAaRj/PgfYESg5D79wfWLfYom9qpmn6tAyrwqGEIDuFaubs/A==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "Aleks" }
                     );
                 });
 
@@ -193,8 +217,8 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("AspNetRoles");
 
                     b.HasData(
-                        new { Id = "5ad85b57-378b-4aac-832b-066ced0de102", ConcurrencyStamp = "a7eab7ee-5cd1-4409-8873-35d5ef0efedb", Name = "admin", NormalizedName = "ADMIN" },
-                        new { Id = "620b9817-3e53-4fcd-ad53-b30c7fba5bf9", ConcurrencyStamp = "fe4616f6-78f6-4069-83b3-3751f61ad8e6", Name = "customer", NormalizedName = "CUSTOMER" }
+                        new { Id = "82676832-57dd-4c85-83fd-40597833ca9f", ConcurrencyStamp = "5cb441ef-0ea6-4915-a258-3a52ed1698e0", Name = "admin", NormalizedName = "ADMIN" },
+                        new { Id = "2e081021-14e0-40cf-94e0-7f50daa0f9b7", ConcurrencyStamp = "982ac924-4e24-4d5e-a33c-81ac8e5a945e", Name = "customer", NormalizedName = "CUSTOMER" }
                     );
                 });
 
@@ -269,8 +293,8 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("AspNetUserRoles");
 
                     b.HasData(
-                        new { UserId = "3132bca6-d7fb-4c50-9806-9ea7b92dcac0", RoleId = "5ad85b57-378b-4aac-832b-066ced0de102" },
-                        new { UserId = "826e5eb0-15bc-4c0a-acd4-0246497e273f", RoleId = "620b9817-3e53-4fcd-ad53-b30c7fba5bf9" }
+                        new { UserId = "f95f9f1f-0d02-42d4-9327-71b22a6618bf", RoleId = "82676832-57dd-4c85-83fd-40597833ca9f" },
+                        new { UserId = "e07f3d4e-f09e-4d5b-9dbd-1592fa2ba99b", RoleId = "2e081021-14e0-40cf-94e0-7f50daa0f9b7" }
                     );
                 });
 
@@ -289,19 +313,11 @@ namespace ForumDataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ForumDomain.Forum", b =>
-                {
-                    b.HasOne("ForumDomain.User", "User")
-                        .WithMany("Forums")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.SetNull);
-                });
-
             modelBuilder.Entity("ForumDomain.Post", b =>
                 {
-                    b.HasOne("ForumDomain.Forum", "Forum")
+                    b.HasOne("ForumDomain.Thread", "Thread")
                         .WithMany("Posts")
-                        .HasForeignKey("ForumId")
+                        .HasForeignKey("ThreadId")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("ForumDomain.User", "User")
@@ -321,6 +337,18 @@ namespace ForumDataAccess.Migrations
                         .WithMany("PostReplays")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.SetNull);
+                });
+
+            modelBuilder.Entity("ForumDomain.Thread", b =>
+                {
+                    b.HasOne("ForumDomain.Category", "Category")
+                        .WithMany("Threads")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ForumDomain.User")
+                        .WithMany("Threads")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

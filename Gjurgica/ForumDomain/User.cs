@@ -13,10 +13,11 @@ namespace ForumDomain
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
-        public string Url { get; set; }
+        public DateTime Joined { get; set; }
+        public bool IsItOnline { get; set; } = false;
 
 
-        public virtual IEnumerable<Forum> Forums { get; set; }
+        public virtual IEnumerable<Thread> Threads { get; set; }
         public virtual IEnumerable<Post> Posts { get; set; }
         public virtual IEnumerable<PostReply> PostReplays { get; set; }
     }

@@ -14,20 +14,16 @@ namespace ForumDataAccess
         public ForumDbContext(DbContextOptions options)
            : base(options) { }
 
-        public DbSet<Forum> Forums { get; set; }
+        public DbSet<Thread> Threads { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostReply> PostReplaies { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
 
         protected override void OnModelCreating( ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>()
-               .HasMany(u => u.Forums)
-               .WithOne(o => o.User)
-               .HasForeignKey(o => o.UserId)
-               .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<User>()
                .HasMany(u => u.Posts)
@@ -41,10 +37,10 @@ namespace ForumDataAccess
                .HasForeignKey(o => o.UserId)
                .OnDelete(DeleteBehavior.SetNull);
 
-            modelBuilder.Entity<Forum>()
+            modelBuilder.Entity<Thread>()
                .HasMany(u => u.Posts)
-               .WithOne(o => o.Forum)
-               .HasForeignKey(o => o.ForumId)
+               .WithOne(o => o.Thread)
+               .HasForeignKey(o => o.ThreadId)
                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Post>()
@@ -93,7 +89,8 @@ namespace ForumDataAccess
              NormalizedEmail = "BOB@GMAIL.COM",
              EmailConfirmed = true,
              PasswordHash = hasher.HashPassword(null, "Bob123456"),
-             SecurityStamp = string.Empty
+             SecurityStamp = string.Empty,
+             Joined = DateTime.Now
          },
          new User()
          {
@@ -106,7 +103,8 @@ namespace ForumDataAccess
              NormalizedEmail = "ALEK88@GMAIL.COM",
              EmailConfirmed = true,
              PasswordHash = hasher.HashPassword(null, "Alek7891011"),
-             SecurityStamp = string.Empty
+             SecurityStamp = string.Empty,
+             Joined = DateTime.Now
          }
          );
 
@@ -124,38 +122,63 @@ namespace ForumDataAccess
                    UserId = aleksUserId
                }
            );
+            modelBuilder.Entity<Category>().HasData(
+                  new Category
+                  {
+                      Id = 1,
+                      Title = "Software",
+                      ImageUrl = "https://www.cbronline.com/wp-content/uploads/2017/06/What-Your-Business-Needs-To-Resolve-Tech-And-Software-Problems.jpg"
+                  },
+                  new Category
+                  {
+                      Id = 2,
+                      Title = "Games",
+                      ImageUrl = "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Fforbes-finds%2Ffiles%2F2019%2F04%2Fmariokart8-1200x675.jpg"
+                  },
+                  new Category
+                  {
+                      Id = 3,
+                      Title = "News",
+                      ImageUrl = "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Fallbusiness%2Ffiles%2F2018%2F10%2Fmachine-learning-1200x808.jpg"
+                  }
+              );
 
-            modelBuilder.Entity<Forum>()
+            modelBuilder.Entity<Thread>()
               .HasData(
-                new Forum()
+                new Thread()
                 {
                     Id = 1,
-                    Title = "Pyton",
-                    Description = "Python is an interpreted, high-level, general-purpose programming language.",
+                    Title = "Best Free AV",
                     Created = DateTime.Now,
-                    ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png",
-                    UserId = bobUserId
+                    ImageUrl = "https://ksassets.timeincuk.net/wp/uploads/sites/54/2019/06/best-free-antivirus-trusted-reviews-920x518.jpg",
+                    CategoryId = 1
                 },
-                new Forum()
+                new Thread()
                 {
                     Id = 2,
-                    Title = "React.js",
-                    Description = "ReactJS is an open-source JavaScript library which is used for building user interfaces specifically for single page applications.",
+                    Title = "New version of FireFox is released",
                     Created = DateTime.Now,
-                    ImageUrl = "https://cdn.worldvectorlogo.com/logos/react.svg",
-                    UserId = bobUserId
+                    ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Firefox_Logo%2C_2017.svg/1200px-Firefox_Logo%2C_2017.svg.png",
+                    CategoryId = 3
 
-                }
+                },
+                 new Thread
+                 {
+                     Id = 3,
+                     Title = "The best FPS game in 2019",
+                     Created = DateTime.Now,
+                     ImageUrl = "https://ksassets.timeincuk.net/wp/uploads/sites/54/2019/01/Best-FPS-Games-920x613.jpg",
+                     CategoryId = 2
+                 }
                 );
             modelBuilder.Entity<Post>()
               .HasData(
                 new Post
                 {
                     Id =1,
-                    Title = "Is it easy to learn Python?",
-                    Content = "What is the best way to learn Python by myself? Are there any recommended websites/forums and textbooks?",
+                    Content = "The best free antivirus is Kespersky Cloud Free",
                     Created = DateTime.Now,
-                    ForumId = 1,
+                    ThreadId = 1,
                     UserId = bobUserId
                 }
                 );
@@ -164,12 +187,27 @@ namespace ForumDataAccess
                 new Post
                 {
                     Id = 2,
-                    Title = "Is Python worth learning 2019?",
-                    Content = "I’ve been working with javascript for a while now and I’m comfortable with it. I like all the libraries and flexibility that I have with it. I want to eventually start messing around with another language like Python or even Java but I’m not really seeing much of what something like python adds that I can’t really already do in javascript.Can someone explain to this noob why I should start learning Python (or Java)?",
+                    Content = "Avast is another good free antivirus",
                     Created = DateTime.Now,
-                    ForumId = 1,
+                    ThreadId = 1,
                     UserId = aleksUserId
-                }
+                },
+                new Post
+                {
+                    Id = 3,
+                    ThreadId = 2,
+                    Content = "I hope they've pathed some of the security holes",
+                    Created = DateTime.Now,
+                    UserId = bobUserId
+                },
+                    new Post
+                    {
+                        Id = 4,
+                        ThreadId = 3,
+                        Content = "Call of Duty: Modern Warfare is the best one so far.",
+                        Created = DateTime.Now,
+                        UserId = aleksUserId
+                    }
                 );
         }
 

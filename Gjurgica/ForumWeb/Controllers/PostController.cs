@@ -16,12 +16,12 @@ namespace ForumWeb.Controllers
     {
         private IPostService _postService;
         private IUserService _userService;
-        private IForumService _forumService;
-        public PostController(IPostService postService,IUserService userService,IForumService forumService)
+        private IThreadService _threadService;
+        public PostController(IPostService postService,IUserService userService,IThreadService threadService)
         {
             _postService = postService;
             _userService = userService;
-            _forumService = forumService;
+            _threadService = threadService;
 
         }
         public IActionResult Index(int id)
@@ -31,20 +31,20 @@ namespace ForumWeb.Controllers
         }
         public IActionResult Add(int id)
         {
-            var forum = _forumService.GetForumById(id);
-            ViewBag.Id = forum.Id.ToString();
-            ViewBag.title = forum.Title;
+            var thread = _threadService.GetThreadById(id);
+            ViewBag.Id = thread.Id.ToString();
+            ViewBag.title = thread.Title;
             return View(new PostViewModel());
         }
         [HttpPost]
         public IActionResult Add(PostViewModel post,string id)
         {
             UserViewModel user = _userService.GetCurrentUser(User.Identity.Name);
-            var forum = _forumService.GetForumById(int.Parse(id));
+            var thread = _threadService.GetThreadById(int.Parse(id));
             post.User = user;
-            post.Forum = forum;
+            post.Thread = thread;
             _postService.CreatePost(post);
-            return RedirectToAction("Details", "Home",  new { forum.Id });
+            return RedirectToAction("Details", "Home",  new { thread.Id });
 
         }
     }

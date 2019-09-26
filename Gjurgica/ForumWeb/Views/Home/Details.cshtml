@@ -1,4 +1,4 @@
-﻿@model ForumViewModels.ViewModels.ForumViewModel
+﻿@model ForumViewModels.ViewModels.CategoryViewModel
 
 
 
@@ -10,18 +10,18 @@
         </div>
     </div>
     <div class="row post-index-content">
-        @if (Model.Posts.Any())
+        @if (Model.Threads.Any())
         {
             <table class="table table-bordered table-hover" id="forum-index-table">
                 <tbody>
-                    @foreach (var post in Model.Posts)
+                    @foreach (var post in Model.Threads)
                     {
                         <tr>
                             <td>
-                                <div class="forum-title">@Html.ActionLink(post.Title, "Index", "Post", new { id = post.Id })</div>
+                                @*<div class="forum-title">@Html.ActionLink(post.Title, "Index", "Post", new { id = post.Id })</div>*@
                                 <div class="forum-sub-title">
                                     <div>
-                                        <span class="post-author">@Html.ActionLink(post.User.UserName, "Details", "Profile")</span>
+                                        <span class="post-author">@Html.ActionLink(post.Title, "Index", "Post", new { id = post.Id})</span>
                                     </div>
                                 </div>
                             </td>
@@ -39,14 +39,18 @@
         {
             <div class="no-posts">
                 <i class="material-icons md-72">question_answer</i>
-                <h3>No posts</h3>
+                <h3>No threats</h3>
             </div>
         }
     </div>
-    <div class="section-heading">
-        <span>
-            @Html.ActionLink("Create Post", "Add", "Post", new { id = Model.Id }, new { @class = "btn btn-newPost" })
-        </span>
-    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        <div class="section-heading">
+            <span>
+                @Html.ActionLink("Create Thread", "Add", "Post", new { id = Model.Id }, new { @class = "btn btn-newPost" })
+            </span>
+        </div>
+    }
 </div>
 

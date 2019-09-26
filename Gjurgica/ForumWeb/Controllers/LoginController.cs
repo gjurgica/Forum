@@ -7,10 +7,12 @@ using ForumDomain;
 using ForumServices.Interfaces;
 using ForumViewModels.ViewModels;
 using ForumWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForumWeb.Controllers
 {
+    [Authorize]
     public class LoginController : Controller
     {
         private IUserService _userService;
@@ -18,21 +20,25 @@ namespace ForumWeb.Controllers
         {
             _userService = userService;
         }
-
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
+        [AllowAnonymous]
+        [HttpPost]
         public IActionResult Login(LoginViewModel user)
         {
              _userService.Login(user);
             return RedirectToAction("Index", "Home");
 
         }
+        [AllowAnonymous]
         public IActionResult Add()
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Add(RegisterViewModel user)
         {
