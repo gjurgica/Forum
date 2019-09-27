@@ -1,0 +1,26 @@
+﻿@model ForumViewModels.ViewModels.LoginViewModel
+
+
+<div class="wrapper fadeInDown">
+
+    <div class="col-md-4 formContent">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control fadeIn second" id="login" type="text" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control fadeIn third" id="password" type="text" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-default fadeIn fourth" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

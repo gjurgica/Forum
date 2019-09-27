@@ -1,0 +1,27 @@
+﻿@model ForumViewModels.ViewModels.ThreadViewModel
+
+
+<div class="container body-content">
+    <div class="row post-header">
+        <div class="section-description">
+            @Html.ActionLink((string)ViewBag.title, "Category", "Category", new { id = ViewBag.id })
+        </div>
+    </div>
+    <div class="row post-index-content ">
+        <div class="col-md-4">
+            <form asp-action="AddThread" asp-controller="Thread" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <textarea asp-for="Title" class="form-control"></textarea>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-submit" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,22 @@
+﻿@model ForumViewModels.ViewModels.UserViewModel
+<
+<div class="container body-content">
+    <div class="row post-header">
+        <div class="section-heading">
+            User
+        </div>
+    </div>
+    <div class="row user-profile">
+        <div class="col-md-4">
+            <img style="width:80px; height:80px;" />
+        </div>
+        <div class="col-md-8">
+            <span class="user-name">@Model.UserName</span>
+            <span class="user-email">@Model.Email</span>
+        </div>
+    </div>
+</div>
+
+<div>
+    <span id="heading-btn">@Html.ActionLink("Back to  Forum", "Index", "Category", new { @class = "btn" }, new { @style = "background-color: #555; color: #fff;transition: ease-in 0 1s;padding:0 10px 10px 10px;" })</span>
+</div>
