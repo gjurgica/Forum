@@ -15,6 +15,7 @@ namespace ForumDomain
         public string LastName { get; set; }
         public DateTime Joined { get; set; }
         public bool IsItOnline { get; set; } = false;
+        public string ImageUrl { get; set; }
 
 
         public virtual IEnumerable<Thread> Threads { get; set; }

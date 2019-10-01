@@ -8,13 +8,28 @@
     </div>
     <div class="row user-profile">
         <div class="col-md-4">
-            <img style="width:100px; height:100px;border:1px solid black" /><br/><br/>
-            <button class="btn btn-back">Upload Photo</button>
+                <img style="width:100px; height:100px;border:1px solid black" src="@Model.ImageUrl" /><br/><br/>
+            @if(Model.UserName == User.Identity.Name)
+            {
+
+            <form asp-action="UploadPhoto" asp-controller="Users" method="post" enctype="multipart/form-data">
+                <div id="upload">
+                    <label class="btn btn-default btn-file">
+                        Browse<input class="btn btn-back" type="file" name="photo" style="display:none"/>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input type="submit" value="Submit" id="btn-profile" class="btn btn-default"/>
+                </label>
+                </div>
+            </form>
+            }
         </div>
         <div class="col-md-8">
             <span class="user-name">@Model.FirstName @Model.LastName</span>
-            <span class="user-email">@Model.Email</span><br/><br/>
-            <span><span style="font-weight:bold">Joined:</span>@Model.Joined</span>
+            <span class="user-email">Email:@Model.Email</span><br/><br/>
+            <span><span style="font-weight:bold">Member since:</span>@Model.Joined</span>
         </div>
     </div>
 </div>

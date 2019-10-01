@@ -14,17 +14,21 @@ namespace ForumWeb.Controllers
 {
     public class ThreadController : Controller
     {
-        private IThreadService _threadService;
-        private ICategoryService _categoryService;
-        public ThreadController(IThreadService threadService, ICategoryService categoryService)
+        private readonly IThreadService _threadService;
+        private readonly ICategoryService _categoryService;
+        private readonly IUserService _userService;
+        public ThreadController(IThreadService threadService, ICategoryService categoryService, IUserService userService)
         {
             _threadService = threadService;
             _categoryService = categoryService;
+            _userService = userService;
 
         }
         public IActionResult Thread(int id)
         {
             var thread =  _threadService.GetThreadById(id);
+            var user = _userService.GetCurrentUser(User.Identity.Name);
+            ViewBag.user = user;
             return View(thread);
         }
         public IActionResult AddThread(int id)

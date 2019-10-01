@@ -38,14 +38,15 @@ namespace ForumDataAccess
         }
 
         public int Insert(User entity)
-        {
+        { 
             _context.Users.Add(entity);
             return _context.SaveChanges();
         }
 
         public int Update(User entity)
         {
-            _context.Users.Update(entity);
+            //_context.Users.Update(entity);
+            _context.Entry(entity).Property(x => x.ImageUrl).IsModified = true;
             return _context.SaveChanges();
         }
     }

@@ -12,5 +12,6 @@ namespace ForumServices.Interfaces
         UserViewModel GetCurrentUser(string username);
         void Logout();
         UserViewModel GetUserById(string id);
+        void UpdateUser(UserViewModel user);
     }
 }

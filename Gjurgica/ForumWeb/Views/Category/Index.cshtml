@@ -4,7 +4,7 @@
 
 <div class="container body-content">
     <div class="row front-page-content">
-        <h3 class="latest-forums">Discussions</h3>
+        @*<h3 class="latest-forums">Discussions</h3>*@
         <table class="table table-hover" id="latest-forums">
             <tbody>
                 @foreach (var item in Model)
@@ -29,12 +29,12 @@
         </table>
     </div>
 </div>
-@if (User.Identity.IsAuthenticated)
+@if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
 {
 
     <div class="section-heading">
         <span>
-            @Html.ActionLink("Start A Discussions", "AddCategory", "Category", new { @class = "btn" }, new { @style = "background-color: #555; color: #fff;transition: ease-in 0 1s;padding:0 10px 10px 10px" })
+            @Html.ActionLink("Create Categoy", "AddCategory", "Category", new { @class = "btn" }, new { @style = "background-color: #555; color: #fff;transition: ease-in 0 1s;padding:0 10px 10px 10px" })
         </span>
     </div>
 }

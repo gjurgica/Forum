@@ -13,5 +13,6 @@ namespace ForumViewModels.ViewModels
         public string Email { get; set; }
         public DateTime Joined { get; set; }
         public bool IsActive { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

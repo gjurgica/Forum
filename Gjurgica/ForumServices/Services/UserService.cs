@@ -92,5 +92,10 @@ namespace ForumServices.Services
                 Password = registerModel.Password
             });
         }
+
+        public void UpdateUser(UserViewModel user)
+        {
+            _userService.Update(_mapper.Map<User>(user));
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ForumDataAccess;
@@ -8,6 +9,8 @@ using ForumServices.Interfaces;
 using ForumViewModels.ViewModels;
 using ForumWeb.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForumWeb.Controllers
@@ -15,10 +18,12 @@ namespace ForumWeb.Controllers
     [Authorize]
     public class UsersController : Controller
     {
-        private IUserService _userService;
-        public UsersController(IUserService userService)
+        private readonly IUserService _userService;
+        private readonly IHostingEnvironment _hosting;
+        public UsersController(IUserService userService, IHostingEnvironment hosting)
         {
             _userService = userService;
+            _hosting = hosting;
         }
         [AllowAnonymous]
         public IActionResult Login()
@@ -50,10 +55,26 @@ namespace ForumWeb.Controllers
             _userService.Logout();
             return RedirectToAction("index", "Category");
         }
+        [AllowAnonymous]
         public IActionResult Profile(string username)
         {
             var user = _userService.GetCurrentUser(username);
             return View(user);
+        }
+        [HttpPost]
+        public IActionResult UploadPhoto(IFormFile photo)
+        {
+            if(photo != null)
+            {
+                var path = Path.Combine(_hosting.WebRootPath,Path.GetFileName(photo.FileName));
+                photo.CopyTo(new FileStream(path, FileMode.Create));
+                string image = "/" + Path.GetFileName(photo.FileName);
+                var user = _userService.GetCurrentUser(User.Identity.Name);
+                user.ImageUrl = image;
+                _userService.UpdateUser(user);
+
+            }
+            return RedirectToAction("Profile", "Users" ,new {username = User.Identity.Name});
         }
     }
 }

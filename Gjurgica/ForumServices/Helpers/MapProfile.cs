@@ -12,7 +12,7 @@ namespace ForumServices.Helpers
         public MapProfile()
         {
             CreateMap<Thread, ThreadViewModel>()
-                .ForMember(fv => fv.Created, src => src.UseValue(DateTime.UtcNow))
+                .ForMember(fv => fv.Created, src => src.UseValue(DateTime.UtcNow.Date))
                 .ForMember(t => t.Category, src => src.MapFrom(tv => tv.Category))
                 .ForMember(t => t.Posts, src => src.MapFrom(tv => tv.Posts))
                 .ReverseMap()
@@ -36,7 +36,10 @@ namespace ForumServices.Helpers
                 .ForMember(p => p.PostId, src => src.MapFrom(pv => pv.Post.Id))
                 .ForMember(p => p.User, src => src.Ignore())
                 .ForMember(p => p.Post, src => src.Ignore());
-            CreateMap<User, UserViewModel>().ReverseMap();
+            CreateMap<User, UserViewModel>()
+                .ReverseMap()
+                .ForMember(uv => uv.Id,src => src.Ignore())
+                .ForMember(u => u.EmailConfirmed, src => src.UseValue(true));
             CreateMap<RegisterViewModel, User>()
                 .ForMember(u => u.EmailConfirmed, src => src.UseValue(true));
             CreateMap<Category, CategoryViewModel>()

@@ -14,6 +14,9 @@ html, body {
     padding-right:15px;
 
 }
+.navbar{
+    box-shadow:0 5px 4px -6px #000;
+}
 .front-page-title {
     background-image: url("https://images.pexels.com/photos/53214/trekking-hiking-group-alpine-53214.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     background-repeat: no-repeat;
@@ -119,16 +122,33 @@ html, body {
     background-color:#e53935;
     color:#fff;
 }
-.btn-submit {
-    background-color: #00695c;
-    color: #fff;
-    transition: ease-in 0 1s;
-    border-radius: 0px;
+.btn-file{
+    color:white;
+    width:100%;
+    background-color:#4fc3f7;
+    transition:ease 0.3s;
+
 }
+    .btn-file:hover {
+        background-color: #039be5;
+        transition: ease 0.3s;
+    }
+ .btn-submit {
+        background-color: #00695c;
+        color: #fff;
+        transition: ease-in 0 1s;
+        border-radius: 0px;
+    }
 .btn-submit:hover {
     transition: ease-in 0 1s;
     background-color: #008978;
     color: #fff;
+}
+#btn-profile {
+    padding: 10px 60px;
+    display: block;
+    width: 100%;
+    margin-left: 0;
 }
 .post-author {
     padding: 12px;
@@ -142,6 +162,11 @@ html, body {
     color:#222;
     padding:22px;
     border-left:1px solid #ddd;
+}
+.no-posts{
+    text-align:center;
+    padding-top:30px;
+
 }
 .user-profile {
     padding: 32px 0 64px 24px;
