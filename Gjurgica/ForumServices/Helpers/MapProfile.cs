@@ -37,8 +37,7 @@ namespace ForumServices.Helpers
                 .ForMember(p => p.User, src => src.Ignore())
                 .ForMember(p => p.Post, src => src.Ignore());
             CreateMap<User, UserViewModel>()
-                .ReverseMap()
-                .ForMember(uv => uv.Id,src => src.Ignore())
+                .ReverseMap()               
                 .ForMember(u => u.EmailConfirmed, src => src.UseValue(true));
             CreateMap<RegisterViewModel, User>()
                 .ForMember(u => u.EmailConfirmed, src => src.UseValue(true));
