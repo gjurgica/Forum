@@ -91,15 +91,17 @@ html, body {
 #heading-btn{
     margin-left:20px;
 }
-.btn-back {
+.btn-back,
+a .btn-back {
     background-color: #555;
     color: #fff;
     transition: ease-in 0 1s;
     border-radius: 0px;
 }
-    .btn-back:hover {
+    .btn-back:hover,
+    a .btn-back:hover {
         transition: ease-in 0 1s;
-        background-color:#1e88e5;
+        background-color: #1e88e5;
     }
 .btn-new-reply {
     background-color: #61605c;
@@ -149,6 +151,9 @@ html, body {
     display: block;
     width: 100%;
     margin-left: 0;
+    margin-top: 0;
+    background-color: white;
+    color: grey;
 }
 .post-author {
     padding: 12px;
@@ -204,7 +209,7 @@ html, body {
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     text-align: center;
 }
- input[type=submit] {
+ input[type=submit]{
     background-color: #56baed;
     border: none;
     color: white;

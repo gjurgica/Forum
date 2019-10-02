@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using ForumServices.Interfaces;
 using ForumViewModels.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
+
 
 namespace ForumWeb.Controllers
 {
@@ -39,6 +42,14 @@ namespace ForumWeb.Controllers
             post.Thread = thread;
             _postService.CreatePost(post);
             return RedirectToAction("Thread", "Thread", new { thread.Id });
+        }
+        public   IActionResult GetRecentPosts(int page=1)
+        {
+            var posts =   _postService.GetAllPosts().AsQueryable().AsNoTracking().OrderByDescending(x => x.Created);
+            var pageingPosts = PagingList.Create(posts, 3, page);
+            var user = _userService.GetCurrentUser(User.Identity.Name);
+            ViewBag.user = user;
+            return View(pageingPosts);
         }
     }
 }
