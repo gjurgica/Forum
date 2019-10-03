@@ -14,9 +14,8 @@
             <div class="row post-index-content">
                 <div class="col-md-3 post-author">
                     <div class="post-author-img">
-                        <img src="@ViewBag.user.ImageUrl" style="width:80px; height:80px;" />
+                        <img src="@post.User.ImageUrl" style="width:120px; height:120px;" />
                     </div>
-                    Posted by:
                     @Html.ActionLink(post.User.UserName, "Profile", "Users", new { username = post.User.UserName }, new { @class = "btn btn-back" })
                     <br /><span class="post-date">@Model.Created</span>
                 </div>
