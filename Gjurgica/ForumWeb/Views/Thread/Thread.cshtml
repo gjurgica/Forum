@@ -11,20 +11,27 @@
     {
         @foreach (var post in Model.Posts)
         {
-            <div class="row post-index-content">
-                <div class="col-md-3 post-author">
-                    <div class="post-author-img">
-                        <img src="@post.User.ImageUrl" style="width:120px; height:120px;" />
-                    </div>
-                    @Html.ActionLink(post.User.UserName, "Profile", "Users", new { username = post.User.UserName }, new { @class = "btn btn-back" })
-                    <br /><span class="post-date">@Model.Created</span>
+        <div class="row post-index-content">
+            <div class="col-md-3 post-author">
+                <div class="post-author-img">
+                    <img src="@post.User.ImageUrl" style="width:120px; height:120px;" />
                 </div>
-                <div class="col-md-9 post-content-container">
-                    <div class="post-content">
-                        @Html.Raw(post.Content)
-                    </div>
-                </div>
+                @Html.ActionLink(post.User.UserName, "Profile", "Users", new { username = post.User.UserName }, new { @class = "btn btn-back" })
+                <br /><span class="post-date">@Model.Created</span>
             </div>
+            <div class="col-md-9 post-content-container">
+                <div class="post-content">
+                    @Html.Raw(post.Content)
+                </div>
+                @if (ViewBag.user.UserName == post.User.UserName)
+                {
+                    <div>
+                    @Html.ActionLink("Edit", "EditPost", "Post", new { id = post.Id }, new { @class = "btn btn-back" })
+                    @Html.ActionLink("Delete", "DeletePost", "Post", new { id = post.Id }, new { @class = "btn btn-back" })
+                    </div>
+                }
+            </div>
+        </div>
             <br />
         }
     }

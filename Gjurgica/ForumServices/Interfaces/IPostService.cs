@@ -9,7 +9,7 @@ namespace ForumServices.Interfaces
     {
         IEnumerable<PostViewModel> GetAllPosts();
         PostViewModel GetPostById(int id);
-        void CreatePost(PostViewModel post);
+        void CreatePost(CreatePostViewModel post);
         void EditPost(PostViewModel post);
         void DeletePost(int id);
         IEnumerable<PostViewModel> GetPostsByThread(int id);

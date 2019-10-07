@@ -20,7 +20,7 @@ namespace ForumServices.Services
             _postService = postService;
             _mapper = mapper;
         }
-        public void CreatePost(PostViewModel post)
+        public void CreatePost(CreatePostViewModel post)
         {
             _postService.Insert(_mapper.Map<Post>(post));
         }

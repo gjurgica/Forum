@@ -31,10 +31,10 @@ namespace ForumWeb.Controllers
             var thread = _threadService.GetThreadById(id);
             ViewBag.Id = thread.Id.ToString();
             ViewBag.title = thread.Title;
-            return View(new PostViewModel());
+            return View(new CreatePostViewModel());
         }
         [HttpPost]
-        public IActionResult CreatePost(PostViewModel post,string id)
+        public IActionResult CreatePost(CreatePostViewModel post,string id)
         {
             UserViewModel user = _userService.GetCurrentUser(User.Identity.Name);
             var thread = _threadService.GetThreadById(int.Parse(id));
@@ -50,6 +50,26 @@ namespace ForumWeb.Controllers
             var user = _userService.GetCurrentUser(User.Identity.Name);
             ViewBag.user = user;
             return View(pageingPosts);
+        }
+        public IActionResult EditPost(int id)
+        {
+            var post = _postService.GetPostById(id);
+            return View(post);
+        }
+        [HttpPost]
+        public IActionResult EditPost(PostViewModel post)
+        {
+            var editedPost = _postService.GetPostById(post.Id);
+            editedPost.Content = post.Content;
+            _postService.EditPost(editedPost);
+            return RedirectToAction("Thread", "Thread", new { editedPost.Thread.Id});
+        }
+        public IActionResult DeletePost(int id)
+        {
+            var deletedPost = _postService.GetPostById(id);
+            _postService.DeletePost(deletedPost.Id);
+            return RedirectToAction("Thread", "Thread", new { deletedPost.Thread.Id });
+
         }
     }
 }

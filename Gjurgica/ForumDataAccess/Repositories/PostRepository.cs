@@ -54,7 +54,8 @@ namespace ForumDataAccess.Repositories
 
         public int Update(Post entity)
         {
-            _context.Posts.Update(entity);
+            Post post = _context.Posts.FirstOrDefault(x => x.Id == entity.Id);
+            post.Content = entity.Content;
             return _context.SaveChanges();
         }
     }
