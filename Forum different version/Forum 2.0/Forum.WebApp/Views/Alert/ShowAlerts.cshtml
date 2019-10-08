@@ -1,0 +1,52 @@
+﻿@using Forum.WebModels.ViewModels
+@model List<AlertViewModel>
+@{
+    ViewData["Title"] = "ShowAlerts";
+    List<UserViewModel> users = (List<UserViewModel>)ViewData["Users"];
+    List<PostViewModel> posts = (List<PostViewModel>)ViewData["Posts"];
+}
+
+<h3 style="text-align:center">Alerts</h3>
+<br />
+@if (Model.Count() > 0)
+{
+    <table class="table-striped members" style="margin:0 auto">
+        <thead>
+            <tr>
+                <th style="width:15%; padding:1%">Reported</th>
+                <th class="text-center" style="width:50%">Content</th>
+                <th class="text-center" style="width:35%">Other</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (AlertViewModel alert in @Model)
+            {
+                string content = posts.FirstOrDefault(p => p.Id == alert.PostId).Content;
+                string reported = users.FirstOrDefault(u => u.Id == alert.UserId).Username;
+                bool isItAlreadySuspended = users.FirstOrDefault(u => u.Id == alert.UserId).IsItSuspended;
+
+                <tr>
+                    <td style="padding:1%">
+                        @reported
+                    </td>
+                    <td class="text-center">
+                        @content
+                    </td>
+                    <td class="text-center">
+                        @if (!isItAlreadySuspended)
+                        {
+                            <a class="btn btn-sm" style="background-color:darkorange; color:white" asp-action="Suspend2" asp-controller="User" asp-route-userId="@alert.UserId" asp-route-alertId="@alert.Id" asp-route-postId="@alert.PostId">Suspend User</a>
+                        }
+                        <a class="btn btn-danger btn-sm" asp-action="DeleteUser2" asp-controller="User" asp-route-userId="@alert.UserId">Delete User</a>
+                        <a style="margin-left:0.7%; color:#d9534f; text-decoration:none" asp-action="RemoveAlert" asp-controller="Alert" asp-route-alertId="@alert.Id"><b>Cancel</b></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h3 style="margin-left:35%">No reports at the moment.</h3>
+}
+<br />
