@@ -1,0 +1,53 @@
+﻿@using Forum.WebModels.ViewModels
+@model List<ThreadViewModel>
+@{
+    ViewData["Title"] = "ShowAllThreads";
+    IEnumerable<UserViewModel> users = (IEnumerable<UserViewModel>)ViewData["Users"];
+    var currentUser = users.FirstOrDefault(u => u.Username == User.Identity.Name);
+}
+
+<h2>@ViewData["CategoryTitle"]</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th style="padding:1.5%">Title</th>
+            <th style="text-align:center">Number of posts</th>
+            <th style="text-align:center">Date created</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ThreadViewModel thread in @Model.OrderByDescending(t => t.DateCreated.Date).ThenByDescending(t => t.DateCreated.TimeOfDay))
+        {
+
+            <tr style="background-color: #4e5d6c">
+                <td style="width: 70%; border-bottom: 1px solid #df691a;  padding:1.5%">
+                    <a asp-action="ShowThread" asp-controller="Category" asp-route-Id="@thread.Id">@thread.Title</a>
+                    @if (User.IsInRole("admin"))
+                    {
+                        ViewData["ThreadId"] = thread.Id;
+                        ViewData["ThreadTitle"] = thread.Title;
+
+                        string editThread = $"#thread{ViewData["ThreadId"]}";
+
+                        <a class="btn btn-danger btn-sm" style="float:right" asp-action="RemoveThread2" asp-controller="Thread" asp-route-threadId="@thread.Id">Delete</a>
+                        <a class="btn btn-warning btn-sm" style="float:right; margin-right:0.5%" data-toggle="modal" data-target="@editThread">Edit</a>
+                        <partial name="_EditThread2" view-data="ViewData" />
+                    }
+                </td>
+                <td style="width: 10%; border-bottom: 1px solid #df691a;  padding:1.5%; text-align:center">@thread.Posts.Count()</td>
+                <td style="width: 20%; border-bottom: 1px solid #df691a;  padding:0.9%; text-align:center">@thread.DateCreated</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+@if (User.Identity.IsAuthenticated && currentUser.IsItSuspended == false)
+{
+    <form asp-controller="Thread" asp-action="AddThread2" asp-route-categoryId="@ViewData["CategoryId"]" method="post" style="width: 50%;" class="center-block">
+        <div class="form-group">
+            <textarea name="title" class="form-control" id="title" rows="3" placeholder="Create new thread..."></textarea>
+        </div>
+        <div class="form-group text-center"><button class="btn btn-success">Create</button></div>
+    </form>
+}
