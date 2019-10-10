@@ -26,7 +26,7 @@ namespace ForumDataAccess.Repositories
                 .Include(x => x.User)
                 .Include(x => x.Thread)
                 .Include(x => x.Replies)
-                    .ThenInclude(x => x.User).ToList() ;
+                    .ThenInclude(x => x.User);
         }
 
         public Post GetById(int id)

@@ -37,7 +37,7 @@ namespace ForumServices.Services
 
         public IEnumerable<PostViewModel> GetAllPosts()
         {
-            return _postService.GetAll().Select(x => _mapper.Map<PostViewModel>(x)).ToList();
+            return _postService.GetAll().Select(x => _mapper.Map<PostViewModel>(x));
         }
 
         public PostViewModel GetPostById(int id)

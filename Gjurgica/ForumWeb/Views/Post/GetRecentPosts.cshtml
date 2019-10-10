@@ -1,11 +1,8 @@
-﻿@model ReflectionIT.Mvc.Paging.PagingList<ForumViewModels.ViewModels.PostViewModel>
-@using ReflectionIT.Mvc.Paging
-@addTagHelper *, ReflectionIT.Mvc.Paging
+﻿@model IEnumerable<ForumViewModels.ViewModels.PostViewModel>
 
 
-<nav aria-label="NewsFeed navigation example">
-    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
-</nav>
+
+
 @foreach (var post in Model)
 {
     <div class="row post-index-content">
@@ -20,10 +17,18 @@
             <div class="post-content">
                 @Html.Raw(post.Content)
             </div>
+            @if(ViewBag.user != null)
+            {
+                @if (ViewBag.user.UserName == post.User.UserName)
+                {
+                    <div>
+                        @Html.ActionLink("Edit", "EditPost", "Post", new { id = post.Id }, new { @class = "btn btn-back" })
+                        @Html.ActionLink("Delete", "DeletePost", "Post", new { id = post.Id }, new { @class = "btn btn-back" })
+                    </div>
+                }
+            }
         </div>
     </div>
     <br />
 }
-    <nav aria-label="Suppliers navigation example">
-        <vc:pager paging-list="@Model" />
-    </nav>
+   

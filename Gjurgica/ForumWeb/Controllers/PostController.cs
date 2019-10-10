@@ -6,7 +6,7 @@ using ForumServices.Interfaces;
 using ForumViewModels.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ReflectionIT.Mvc.Paging;
+
 
 
 namespace ForumWeb.Controllers
@@ -43,13 +43,18 @@ namespace ForumWeb.Controllers
             _postService.CreatePost(post);
             return RedirectToAction("Thread", "Thread", new { thread.Id });
         }
-        public   IActionResult GetRecentPosts(int page=1)
+        public IActionResult GetRecentPosts(int? page)
         {
-            var posts =   _postService.GetAllPosts().AsQueryable().AsNoTracking().OrderByDescending(x => x.Created);
-            var pageingPosts = PagingList.Create(posts, 3, page);
-            var user = _userService.GetCurrentUser(User.Identity.Name);
-            ViewBag.user = user;
-            return View(pageingPosts);
+            var posts = _postService.GetAllPosts();
+            if (User.Identity.IsAuthenticated)
+            {
+
+                var user = _userService.GetCurrentUser(User.Identity.Name);
+                ViewBag.user = user;
+                return View(posts);
+            }
+            ViewBag.user = null;
+            return View(posts);
         }
         public IActionResult EditPost(int id)
         {

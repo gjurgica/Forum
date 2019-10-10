@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ReflectionIT.Mvc.Paging;
 using System;
 
 namespace ForumWeb
@@ -62,7 +61,6 @@ namespace ForumWeb
                 opts.AddProfile<MapProfile>();
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddPaging();
 
         }
 
