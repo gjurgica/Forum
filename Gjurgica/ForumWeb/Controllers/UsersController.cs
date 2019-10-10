@@ -34,9 +34,12 @@ namespace ForumWeb.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel user)
         {
-             _userService.Login(user);
-            return RedirectToAction("Index", "Category");
-
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+                _userService.Login(user);
+                return RedirectToAction("Index", "Category");
         }
         [AllowAnonymous]
         public IActionResult Register()
@@ -47,6 +50,10 @@ namespace ForumWeb.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel user)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
                 _userService.Register(user);
                 return Redirect("/Category/Index");
         }
