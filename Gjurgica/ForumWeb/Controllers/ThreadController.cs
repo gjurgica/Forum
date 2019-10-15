@@ -27,8 +27,12 @@ namespace ForumWeb.Controllers
         public IActionResult Thread(int id)
         {
             var thread =  _threadService.GetThreadById(id);
-            var user = _userService.GetCurrentUser(User.Identity.Name);
-            ViewBag.user = user;
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = _userService.GetCurrentUser(User.Identity.Name);
+                ViewBag.user = user;
+                return View(thread);
+            }
             return View(thread);
         }
         public IActionResult AddThread(int id)

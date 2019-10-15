@@ -23,14 +23,17 @@
                 <div class="post-content">
                     @Html.Raw(post.Content)
                 </div>
-                @if (ViewBag.user.UserName == post.User.UserName)
+                @if (ViewBag.user != null)
                 {
-                    <div>
-                    @Html.ActionLink("Edit", "EditPost", "Post", new { id = post.Id }, new { @class = "btn btn-back" })
-                    @Html.ActionLink("Delete", "DeletePost", "Post", new { id = post.Id }, new { @class = "btn btn-back" })
-                    </div>
+                    @if (ViewBag.user.UserName == post.User.UserName)
+                    {
+                        <div>
+                            @Html.ActionLink("Edit", "EditPost", "Post", new { id = post.Id }, new { @class = "btn btn-back" })
+                            @Html.ActionLink("Delete", "DeletePost", "Post", new { id = post.Id }, new { @class = "btn btn-back" })
+                        </div>
+                    }
                 }
-            </div>
+                </div>
         </div>
             <br />
         }

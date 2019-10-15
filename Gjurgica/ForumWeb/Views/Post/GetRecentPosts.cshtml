@@ -1,9 +1,7 @@
-﻿@model IEnumerable<ForumViewModels.ViewModels.PostViewModel>
+﻿@model ForumViewModels.ViewModels.PaginationModel
 
 
-
-
-@foreach (var post in Model)
+@foreach (var post in Model.Data)
 {
     <div class="row post-index-content">
         <div class="col-md-3 post-author">
@@ -17,7 +15,7 @@
             <div class="post-content">
                 @Html.Raw(post.Content)
             </div>
-            @if(ViewBag.user != null)
+            @if (ViewBag.user != null)
             {
                 @if (ViewBag.user.UserName == post.User.UserName)
                 {
@@ -31,4 +29,13 @@
     </div>
     <br />
 }
-   
+<div>
+    <ul class="pagination">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-route-currentpage="@i" class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+</div>  

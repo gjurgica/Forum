@@ -20,7 +20,6 @@ namespace ForumServices.Helpers
             services.AddTransient<IPostRepository<Post>, PostRepository>();
             services.AddTransient<IRepository<PostReply>, PostReplyRepository>();
             services.AddTransient<IRepository<Category>, CategoryRepository>();
-
             services.AddDbContext<ForumDbContext>(ob => ob.UseSqlServer(
                 connectionString
             ));

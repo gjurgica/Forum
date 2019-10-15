@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ForumServices.Interfaces
 {
@@ -13,5 +14,7 @@ namespace ForumServices.Interfaces
         void EditPost(PostViewModel post);
         void DeletePost(int id);
         IEnumerable<PostViewModel> GetPostsByThread(int id);
+        List<PostViewModel> GetPaginatedResult(int currentPage, int pageSize = 3);
+        int GetCount();
     }
 }

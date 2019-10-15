@@ -48,8 +48,6 @@ namespace ForumWeb
             services.AddTransient<ICategoryService, CategoryService>();
 
 
-
-
             DiModule.RegisterModules(
                  services,
                  Configuration.GetConnectionString("ForumDbConnection")

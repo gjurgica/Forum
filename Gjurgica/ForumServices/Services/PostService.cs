@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ForumServices.Services
 {
@@ -37,7 +38,20 @@ namespace ForumServices.Services
 
         public IEnumerable<PostViewModel> GetAllPosts()
         {
-            return _postService.GetAll().Select(x => _mapper.Map<PostViewModel>(x));
+            return _postService.GetAll().Select(x => _mapper.Map<PostViewModel>(x)).ToList();
+        }
+
+        public int GetCount()
+        {
+            var data = GetAllPosts().ToList();
+            return data.Count;
+        }
+
+        public List<PostViewModel> GetPaginatedResult(int currentPage = 1, int pageSize = 3)
+        {
+            var data = GetAllPosts();
+            var orderedData = data.OrderByDescending(d => d.Created).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+            return orderedData;
         }
 
         public PostViewModel GetPostById(int id)

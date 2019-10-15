@@ -6,9 +6,6 @@ using ForumServices.Interfaces;
 using ForumViewModels.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
-
-
 namespace ForumWeb.Controllers
 {
     public class PostController : Controller
@@ -16,7 +13,7 @@ namespace ForumWeb.Controllers
         private readonly IPostService _postService;
         private readonly IUserService _userService;
         private readonly IThreadService _threadService;
-        public PostController(IPostService postService,IUserService userService, IThreadService threadService)
+        public PostController(IPostService postService, IUserService userService, IThreadService threadService)
         {
             _postService = postService;
             _userService = userService;
@@ -34,7 +31,7 @@ namespace ForumWeb.Controllers
             return View(new CreatePostViewModel());
         }
         [HttpPost]
-        public IActionResult CreatePost(CreatePostViewModel post,string id)
+        public IActionResult CreatePost(CreatePostViewModel post, string id)
         {
             UserViewModel user = _userService.GetCurrentUser(User.Identity.Name);
             var thread = _threadService.GetThreadById(int.Parse(id));
@@ -43,18 +40,21 @@ namespace ForumWeb.Controllers
             _postService.CreatePost(post);
             return RedirectToAction("Thread", "Thread", new { thread.Id });
         }
-        public IActionResult GetRecentPosts(int? page)
+        public IActionResult GetRecentPosts(int currentpage)
         {
-            var posts = _postService.GetAllPosts();
+            var model = new PaginationModel()
+            {
+                Data = _postService.GetPaginatedResult(currentpage),
+                Count = _postService.GetCount()
+        };
             if (User.Identity.IsAuthenticated)
             {
-
                 var user = _userService.GetCurrentUser(User.Identity.Name);
                 ViewBag.user = user;
-                return View(posts);
+                return View(model);
             }
             ViewBag.user = null;
-            return View(posts);
+            return View(model);
         }
         public IActionResult EditPost(int id)
         {
