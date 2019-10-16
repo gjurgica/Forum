@@ -42,11 +42,12 @@ namespace ForumWeb.Controllers
         }
         public IActionResult GetRecentPosts(int currentpage)
         {
+            var posts = _postService.GetAllPosts().OrderByDescending(x => x.Created).ToList();
             var model = new PaginationModel()
             {
-                Data = _postService.GetPaginatedResult(currentpage),
+                Data = _postService.GetPaginatedResult(posts,currentpage),
                 Count = _postService.GetCount()
-        };
+            };
             if (User.Identity.IsAuthenticated)
             {
                 var user = _userService.GetCurrentUser(User.Identity.Name);

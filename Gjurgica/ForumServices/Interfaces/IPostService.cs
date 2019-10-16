@@ -14,7 +14,7 @@ namespace ForumServices.Interfaces
         void EditPost(PostViewModel post);
         void DeletePost(int id);
         IEnumerable<PostViewModel> GetPostsByThread(int id);
-        List<PostViewModel> GetPaginatedResult(int currentPage, int pageSize = 3);
+        List<PostViewModel> GetPaginatedResult(List<PostViewModel> list,int currentPage, int pageSize = 3);
         int GetCount();
     }
 }

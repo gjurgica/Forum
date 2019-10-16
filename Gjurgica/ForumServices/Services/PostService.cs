@@ -47,11 +47,9 @@ namespace ForumServices.Services
             return data.Count;
         }
 
-        public List<PostViewModel> GetPaginatedResult(int currentPage = 1, int pageSize = 3)
+        public List<PostViewModel> GetPaginatedResult(List<PostViewModel> list,int currentPage = 1, int pageSize = 3)
         {
-            var data = GetAllPosts();
-            var orderedData = data.OrderByDescending(d => d.Created).Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-            return orderedData;
+            return list.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
         }
 
         public PostViewModel GetPostById(int id)

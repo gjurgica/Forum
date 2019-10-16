@@ -17,23 +17,32 @@ namespace ForumWeb.Controllers
         private readonly IThreadService _threadService;
         private readonly ICategoryService _categoryService;
         private readonly IUserService _userService;
-        public ThreadController(IThreadService threadService, ICategoryService categoryService, IUserService userService)
+        private readonly IPostService _postService;
+        public ThreadController(IThreadService threadService, ICategoryService categoryService, IUserService userService,IPostService postService)
         {
             _threadService = threadService;
             _categoryService = categoryService;
             _userService = userService;
+            _postService = postService;
 
         }
-        public IActionResult Thread(int id)
+        public IActionResult Thread(int id,int currentpage)
         {
             var thread =  _threadService.GetThreadById(id);
+            thread.Posts = thread.Posts.OrderByDescending(x => x.Created);
+            var model = new PaginationModel()
+            {
+                Data = _postService.GetPaginatedResult(thread.Posts.ToList(), currentpage),
+                Count = thread.Posts.Count()
+            };
+            ViewBag.thread = thread;
             if (User.Identity.IsAuthenticated)
             {
                 var user = _userService.GetCurrentUser(User.Identity.Name);
                 ViewBag.user = user;
-                return View(thread);
+                return View(model);
             }
-            return View(thread);
+            return View(model);
         }
         public IActionResult AddThread(int id)
         {
