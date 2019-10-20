@@ -34,12 +34,17 @@ namespace ForumWeb.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel user)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View();
+
+                var result = _userService.Login(user);
+                if (result == "Succeeded")
+                {
+
+                    return RedirectToAction("Index", "Category");
+                }
             }
-                _userService.Login(user);
-                return RedirectToAction("Index", "Category");
+            return View();
         }
         [AllowAnonymous]
         public IActionResult Register()
@@ -82,6 +87,17 @@ namespace ForumWeb.Controllers
 
             }
             return RedirectToAction("Profile", "Users" ,new {username = User.Identity.Name});
+        }
+        public IActionResult EditUser(string id)
+        {
+            UserViewModel user = _userService.GetUserById(id);
+            return View(user);
+        }
+        [HttpPost]
+        public IActionResult EditUser(UserViewModel user)
+        {
+            _userService.UpdateUser(user);
+            return RedirectToAction("Profile", "Users", new { username = user.UserName });
         }
     }
 }

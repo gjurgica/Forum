@@ -11,20 +11,23 @@
             @Html.ActionLink(post.User.UserName, "Profile", "Users", new { username = post.User.UserName }, new { @class = "btn btn-back" })
             <br /><span class="post-date">@post.Created</span>
         </div>
-        <div class="col-md-9 post-content-container">
+        <div class="col-md-8 post-content-container">
             <div class="post-content">
                 @Html.Raw(post.Content)
             </div>
+        </div>
+        <div class="col-md-1 post-content-container">
             @if (ViewBag.user != null)
             {
                 @if (ViewBag.user.UserName == post.User.UserName)
                 {
-                    <div>
-                        @Html.ActionLink("Edit", "EditPost", "Post", new { id = post.Id }, new { @class = "btn btn-back" })
-                        @Html.ActionLink("Delete", "DeletePost", "Post", new { id = post.Id }, new { @class = "btn btn-back" })
-                    </div>
+            <div>
+                <a asp-controller="Post" asp-action="EditPost" asp-route-id="@post.Id"><i class="glyphicon glyphicon-pencil" style="font-size:28px"></i></a><br/><br/>
+                <a asp-controller="Post" asp-action="DeletePost" asp-route-id="@post.Id"><i class="glyphicon glyphicon-trash" style="font-size:28px"></i></a>
+            </div>
                 }
             }
+
         </div>
     </div>
     <br />

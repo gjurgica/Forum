@@ -8,29 +8,36 @@
     </div>
     <div class="row user-profile">
         <div class="col-md-4">
-                <img style="width:120px; height:120px;border:1px solid black" src="@Model.ImageUrl" />
-            @if(Model.UserName == User.Identity.Name)
+            <img style="width:120px; height:120px;border:1px solid black" src="@Model.ImageUrl" />
+            @if (Model.UserName == User.Identity.Name)
             {
 
-            <form asp-action="UploadPhoto" asp-controller="Users" method="post" enctype="multipart/form-data">
-                <div id="upload">
-                    <label class="btn btn-default btn-file">
-                        Browse<input class="btn btn-back" type="file" name="photo" style="display:none"/>
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        <input type="submit" value="Submit" id="btn-profile" class="btn btn-default"/>
-                </label>
-                </div>
-            </form>
+                <form asp-action="UploadPhoto" asp-controller="Users" method="post" enctype="multipart/form-data">
+                    <div id="upload">
+                        <label class="btn btn-default btn-file">
+                            Browse<input class="btn btn-back" type="file" name="photo" style="display:none" />
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="submit" value="Submit" id="btn-profile" class="btn btn-default" />
+                        </label>
+                    </div>
+                </form>
             }
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
             <span class="user-name">@Model.FirstName @Model.LastName</span>
-            <span class="user-email">Email:@Model.Email</span><br/><br/>
+            <span class="user-email">Email:@Model.Email</span><br /><br />
             <span><span style="font-weight:bold">Member since:</span>@Model.Joined</span>
         </div>
+            @if (Model.UserName == User.Identity.Name)
+            {
+                <div>
+                    <a asp-controller="Users" asp-action="EditUser" asp-route-id="@Model.Id"><i class="glyphicon glyphicon-pencil" style="font-size:28px"></i></a><br /><br />                   
+                </div>
+            }
+
     </div>
 </div>
 

@@ -44,18 +44,19 @@ namespace ForumServices.Services
             return _mapper.Map<UserViewModel>(user);
         }
 
-        public void Login(LoginViewModel loginModel)
+        public string Login(LoginViewModel loginModel)
         {
-            var result = _signInManager.PasswordSignInAsync(
+            SignInResult result = _signInManager.PasswordSignInAsync(
                 loginModel.UserName,
                 loginModel.Password,
                 false,
                 false).Result;
 
-            if (result.IsNotAllowed)
+            if (!result.Succeeded)
             {
-                throw new Exception("Username or password is wrong!");
+                return "Failed";
             }
+            return "Succeeded";
         }
 
         public void Logout()
@@ -85,12 +86,12 @@ namespace ForumServices.Services
             }
             else
                 throw new Exception(result.Errors.ToString());
-
             Login(new LoginViewModel
             {
                 UserName = registerModel.UserName,
                 Password = registerModel.Password
             });
+
         }
 
         public void UpdateUser(UserViewModel user)

@@ -46,8 +46,13 @@ namespace ForumDataAccess
         public int Update(User entity)
         {
             //_context.Users.Update(entity);
-               User user = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
-               user.ImageUrl = entity.ImageUrl;
+            User user = _context.Users.FirstOrDefault(u => u.Id == entity.Id);
+            user.ImageUrl = entity.ImageUrl;
+            user.FirstName = entity.FirstName;
+            user.LastName = entity.LastName;
+            user.UserName = entity.UserName;
+            user.Email = entity.Email;
+
             return _context.SaveChanges();
         }
     }

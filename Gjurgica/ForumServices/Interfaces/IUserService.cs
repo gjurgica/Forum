@@ -8,7 +8,7 @@ namespace ForumServices.Interfaces
     public interface IUserService
     {
         void Register(RegisterViewModel registerModel);
-        void Login(LoginViewModel loginModel);
+        string Login(LoginViewModel loginModel);
         UserViewModel GetCurrentUser(string username);
         void Logout();
         UserViewModel GetUserById(string id);
