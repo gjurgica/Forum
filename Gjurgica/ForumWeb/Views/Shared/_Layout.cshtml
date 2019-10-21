@@ -20,13 +20,12 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     <partial name="_Favicons" />
-    @*@Html.Partial("_Favicons")*@
 </head>
 <body>
 
     <partial name="_CookieConsentPartial" />
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand logo" href="#" style="font-size:30px;font-weight:bold;color:darkslateblue;font-family: 'Turret Road', cursive;">@*<i class="fab fa-android">*@</i><span><</span>CodeForum<span>></span></a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <a class="navbar-brand logo" href="#" style="font-size:30px;font-weight:bold;color:gray;font-family: 'Turret Road', cursive;">@*<i class="fab fa-android"></i>*@<span><</span>CodeForum<span>></span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -34,14 +33,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-info text-uppercase" href=@Url.Action("Index","Category")>Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-muted text-uppercase" href=@Url.Action("Index","Category")>Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-info text-uppercase" href="@Url.Action("GetRecentPosts","Post","currentpage=1")">Recent Posts</a>
+                    <a class="nav-link text-muted text-uppercase" href="@Url.Action("GetRecentPosts","Post","currentpage=1")">Recent Posts</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2 homeSearch" type="search" placeholder="Search" aria-label="Search">
+            <form asp-controller="Post" asp-action="SearhPost" method="get" class="form-inline my-2 my-lg-0">
+                <input  class="form-control mr-sm-2 homeSearch" type="search" name="searchquery" placeholder="Search" aria-label="Search">
+                <button type="submit" class="btn" style="background-color:transparent"><i class="glyphicon glyphicon-search" style="color:gray;font-size:20px"></i></button>
             </form>
             <partial name="_LoginPartial" />
         </div>

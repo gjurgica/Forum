@@ -10,10 +10,10 @@
     <form asp-action="Logout" asp-controller="Users"  class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-controller="Users" asp-action="Profile" asp-route-username="@UserManager.GetUserName(User)"  title="Manage" class="text-info">Hello @UserManager.GetUserName(User)!</a>
+                <a asp-controller="Users" asp-action="Profile" asp-route-username="@UserManager.GetUserName(User)"  title="Manage" class="text-muted">Hello @UserManager.GetUserName(User)!</a>
             </li>
             <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link text-info">Logout</button>
+                <button type="submit" class="btn btn-link navbar-btn navbar-link text-muted">Logout</button>
             </li>
         </ul>
     </form>
@@ -21,7 +21,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a asp-action="Register" asp-controller="Users" class="text-info">Register</a></li>
-        <li><a asp-action="Login" asp-controller="Users" class="text-info">Login</a></li>
+        <li><a asp-action="Register" asp-controller="Users" class="text-muted">Register</a></li>
+        <li><a asp-action="Login" asp-controller="Users" class="text-muted">Login</a></li>
     </ul>
 }

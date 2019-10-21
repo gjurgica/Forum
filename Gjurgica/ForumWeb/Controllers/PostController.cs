@@ -77,5 +77,14 @@ namespace ForumWeb.Controllers
             return RedirectToAction("Thread", "Thread", new { deletedPost.Thread.Id });
 
         }
+        public IActionResult SearhPost(string searchquery)
+        {
+            if(searchquery != null)
+            {
+                var selected = _postService.GetAllPosts().Where(x => x.Content.Contains(searchquery, StringComparison.OrdinalIgnoreCase)).OrderByDescending(x => x.Created).ToList();
+                return View(selected);
+            }
+            return Redirect("/Category/Index");
+        }
     }
 }
