@@ -9,6 +9,7 @@
     IEnumerable<AlertViewModel> alerts = (IEnumerable<AlertViewModel>)ViewData["Alerts"];
     int page = ViewBag.Page;
     int totalCount = ViewBag.TotalCount;
+    string loggedUser = User.Identity.Name;
 }
 
 <h2>Recent Posts</h2>
@@ -114,9 +115,13 @@
                             ViewData["PostId"] = post.Id;
                             ViewData["ThreadId2"] = threads.FirstOrDefault(t => t.Id == post.ThreadId).Id;
                             string postId = $"#postId{post.Id}";
-
-                            <a class="btn btn-success btn-sm" data-toggle="modal" data-target="@postId">Reply</a>
-                            <partial name="_PostReply" view-data="ViewData" />
+                            string loggedUserId = users.FirstOrDefault(u => u.Username == loggedUser).Id;
+                            var isCurrentUserSuspended = users.FirstOrDefault(u => u.Id == loggedUserId).IsItSuspended;
+                            @if (User.Identity.Name != users.FirstOrDefault(u => u.Id == post.UserId).Username && !isCurrentUserSuspended)
+                            {
+                                <a class="btn btn-success btn-sm" data-toggle="modal" data-target="@postId">Reply</a>
+                                <partial name="_PostReply" view-data="ViewData" />
+                            }
                             <a class="btn btn-danger btn-sm" asp-action="CreateAlert2" asp-controller="Alert" asp-route-userId="@user.Id" asp-route-postId="@post.Id" asp-route-threadId="@post.ThreadId">Report</a>
                         }
                     </td>

@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using Forum.Services;
 using Forum.Services.Interfaces;
 using Forum.WebModels.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.WebApp.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -19,6 +21,8 @@ namespace Forum.WebApp.Controllers
             _categoryService = categoryService;
             _threadService = threadService;
         }
+
+        [AllowAnonymous]
         public IActionResult ShowAllCategories()
         {
 
@@ -30,6 +34,7 @@ namespace Forum.WebApp.Controllers
             return View(menu);
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult CreateCategory(string title)
         {
             CategoryViewModel category = new CategoryViewModel();
@@ -41,6 +46,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("ShowAllCategories");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteCategory(string id)
         {
             _categoryService.DeleteCategory(id);
@@ -48,6 +54,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("ShowAllCategories");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult EditCategory(string categoryId, string title)
         {
             _categoryService.UpdateCategory(categoryId, title);
@@ -55,6 +62,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("ShowAllCategories");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult AddThread(string categoryId, string title)
         {
             ThreadViewModel thread = new ThreadViewModel();
@@ -68,6 +76,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("ShowAllCategories");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult EditThread(string threadId, string title)
         {
             ThreadViewModel thread = _threadService.GetThreadById(threadId);
@@ -77,6 +86,8 @@ namespace Forum.WebApp.Controllers
 
             return RedirectToAction("ShowAllCategories");
         }
+
+        [Authorize(Roles = "admin")]
         public IActionResult RemoveThread(string threadId)
         {
             _threadService.DeleteThread(threadId);
@@ -84,6 +95,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("ShowAllCategories");
         }
 
+        [AllowAnonymous]
         public IActionResult ShowThread(string id)
         {
             return RedirectToAction("ShowPosts", "Post", new { threadId = id });

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Forum.Services.Interfaces;
 using Forum.WebModels.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.WebApp.Controllers
 {
+    [Authorize]
     public class MessageController : Controller
     {
         private readonly IPrivateMessageService _messageService;

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Forum.Services.Interfaces;
 using Forum.WebModels.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.WebApp.Controllers
 {
+    [Authorize]
     public class PostController : Controller
     {
         private readonly IPostService _postService;
@@ -23,6 +25,7 @@ namespace Forum.WebApp.Controllers
             _alertService = alertService;
         }
 
+        [AllowAnonymous]
         public IActionResult ShowPosts(string threadId, string page)
         {
             ViewData["ThreadTitle"] = _threadService.GetThreadById(threadId).Title;
@@ -83,6 +86,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("RecentPosts");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult DeletePost3(string id, string alertId)
         {
             _postService.DeletePost(id);
@@ -109,7 +113,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("ShowPosts", new { threadId });
         }
 
-        
+        [AllowAnonymous]
         public IActionResult Search(string search, string page)
         {
             if (search != null)
@@ -136,6 +140,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("ShowAllCategories", "Category");
         }
 
+        [AllowAnonymous]
         public IActionResult RecentPosts(string page)
         {
             ViewData["Users"] = _userService.GetAllUsers();

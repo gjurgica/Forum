@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Forum.Services.Interfaces;
 using Forum.WebModels.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.WebApp.Controllers
 {
+    [Authorize]
     public class ThreadController : Controller
     {
         private readonly IThreadService _threadService;
@@ -20,6 +22,8 @@ namespace Forum.WebApp.Controllers
             _categoryService = categoryService;
             _userService = userService;
         }
+
+        [AllowAnonymous]
         public IActionResult ShowAllThreads(string categoryId, string categoryTitle)
         {
             ViewData["CategoryTitle"] = categoryTitle;
@@ -44,6 +48,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("ShowAllThreads", new { categoryId, categoryTitle = title});
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult EditThread2(string threadId, string title)
         {
             ThreadViewModel thread = _threadService.GetThreadById(threadId);
@@ -56,6 +61,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("ShowAllThreads", new { categoryId = thread.CategoryId, categoryTitle});
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult RemoveThread2(string threadId)
         {
             ThreadViewModel thread = _threadService.GetThreadById(threadId);

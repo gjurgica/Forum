@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Forum.Services.Interfaces;
 using Forum.WebModels.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.WebApp.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -27,11 +29,14 @@ namespace Forum.WebApp.Controllers
             _messageService = messageService;
             _alertService = alertService;
         }
+
+        [AllowAnonymous]
         public IActionResult Registration()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult Registration(RegisterViewModel registration)
         {
@@ -44,11 +49,13 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("registration", "user");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult RegisterAdmin()
         {
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult RegisterAdmin(RegisterViewModel registration)
         {
@@ -61,11 +68,13 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("RegisterAdmin", "User");
         }
 
+        [AllowAnonymous]
         public IActionResult LogIn()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult LogIn(LoginViewModel model)
         {
@@ -92,6 +101,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("ShowAllCategories", "Category");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Members()
         {
             List<UserViewModel> members = _userService.GetAllUsers().ToList();
@@ -169,6 +179,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("Profile");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteUser(string userId)
         {
             bool result = _userService.DeleteUser(userId);
@@ -181,6 +192,7 @@ namespace Forum.WebApp.Controllers
             return View("Failed");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult DeleteUser2(string userId)
         {
             bool result = _userService.DeleteUser(userId);
@@ -193,6 +205,7 @@ namespace Forum.WebApp.Controllers
             return View("Failed2");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Suspend(string userId)
         {
             _userService.SuspendUser(userId);
@@ -200,6 +213,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("Members");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Suspend2(string userId, string alertId, string postId)
         {
             _userService.SuspendUser(userId);
@@ -209,6 +223,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("ShowAlerts", "Alert");
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Unsuspend(string userId)
         {
             _userService.UnsuspendUser(userId);

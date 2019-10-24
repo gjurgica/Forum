@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Forum.Services.Interfaces;
 using Forum.WebModels.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.WebApp.Controllers
 {
+    [Authorize]
     public class AlertController : Controller
     {
         private readonly IAlertService _alertService;
@@ -21,6 +23,7 @@ namespace Forum.WebApp.Controllers
             _postService = postService;
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult ShowAlerts()
         {
             List<AlertViewModel> alerts = _alertService.GetAllAlerts().ToList();
@@ -54,6 +57,7 @@ namespace Forum.WebApp.Controllers
             return RedirectToAction("RecentPosts", "Post", new { threadId });
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult RemoveAlert(string alertId)
         {
             _alertService.DeleteAlert(alertId);
