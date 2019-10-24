@@ -1,0 +1,158 @@
+﻿@using Forum.WebModels.ViewModels
+@model List<PostViewModel>
+
+@{
+    ViewData["Title"] = "Search";
+    IEnumerable<UserViewModel> users = (IEnumerable<UserViewModel>)ViewData["Users"];
+    string categoryId = (string)ViewData["ThreadId"];
+    string loggedUser = User.Identity.Name;
+    IEnumerable<ThreadViewModel> threads = (IEnumerable<ThreadViewModel>)ViewData["Threads"];
+    IEnumerable<AlertViewModel> alerts = (IEnumerable<AlertViewModel>)ViewData["Alerts"];
+
+    int count = (int)ViewData["SearchResultCount"];
+    int page = ViewBag.Page;
+    int totalCount = ViewBag.TotalCount;
+    string searchTerm = ViewBag.SearchTerm;
+}
+
+
+@if (Model.Count() > 0)
+{
+
+    <h2>Search results</h2>
+
+    @foreach (PostViewModel post in Model)
+    {
+        bool onOffLine = users.FirstOrDefault(u => u.Id == post.UserId).IsItOnline;
+        var usersAvatar = users.FirstOrDefault(u => u.Id == users.FirstOrDefault(match => match.Id == post.UserId).Id).Avatar;
+        var isItSuspended = users.FirstOrDefault(u => u.Id == post.UserId).IsItSuspended;
+        <table class="table-striped">
+            <tbody>
+                <tr>
+                    <td colspan="3" style="background-color:#2b3e50">
+                        @{
+                            string threadId = threads.FirstOrDefault(t => t.Id == post.ThreadId).Id;
+                            string threadTitle = threads.FirstOrDefault(t => t.Id == post.ThreadId).Title;
+                        }
+
+                        <a asp-action="ShowThread" asp-controller="Category" asp-route-Id="@threadId">@threadTitle</a>
+                    </td>
+                </tr>
+                <tr class="post-row" style="background-color:#4e5d6c">
+                    <td class="verticalSplit col-md-2">
+                        <ul class="user-info">
+                            <li>
+                                <img style="width:70px; height:70px;border:1px solid white" src="@usersAvatar" />
+                            </li>
+                            <li>
+                                <b><u>@users.FirstOrDefault(u => u.Id == post.UserId).Username</u></b>
+                            </li>
+                            <li>
+                                Joined: @users.FirstOrDefault(u => u.Id == post.UserId).Joined.ToShortDateString()
+                            </li>
+                            @if (onOffLine)
+                            {
+                                <li>Status:&nbsp;<b style="color: lightseagreen;">Online</b></li>
+                            }
+                            else
+                            {
+                                <li>Status:&nbsp;<span style="color:#ff794d"><b>Offline</b></span></li>
+                            }
+                            @if (isItSuspended == true)
+                            {
+                                <li>Account status:&nbsp;<span style="color:#ff794d"><b>Suspended</b></span></li>
+                            }
+                            else
+                            {
+                                <li>Account status:&nbsp;<span style="color:lightseagreen"><b>Active</b></span></li>
+                            }
+                        </ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (users.FirstOrDefault(u => u.Id == post.UserId).Username != User.Identity.Name)
+                            {
+                                <button class="btn btn-sm" style="background-color:#6c757d; color:#fff; border:1px solid white">PM</button>
+                            }
+                        }
+                    </td>
+                    @if (post.Content.Contains("e3f79af2"))
+                    {
+                        string[] arr = post.Content.Split(new string[] { "e3f79af2" }, StringSplitOptions.None);
+                        var part1 = arr[0];
+                        var part2 = arr[1];
+                        var part3 = arr[2];
+
+                        <td class="content col-md-8"><span style="color:darkorange">@part1</span> <br /> <span style="color:darkorange"><i><q>@part2</q></i></span> <br /> <br /> @part3 <br /></td>
+                    }
+                    else
+                    {
+                        <td class="content col-md-8">@post.Content</td>
+                    }
+                    <td class="verticalSplit col-md-2 date">Created: @post.DateCreated.ToShortDateString() @post.DateCreated.ToShortTimeString()</td>
+                </tr>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <tr class="buttons" style="background-color:#2b3e50">
+                        <td colspan="3" class="text-right">
+                            @if (users.FirstOrDefault(u => u.Id == post.UserId).Username == User.Identity.Name || User.IsInRole("admin"))
+                            {
+                                ViewData["OriginalPost2"] = post.Content;
+                                ViewData["PostId2"] = post.Id;
+                                ViewData["ThreadId"] = @threadId;
+                                string postId2 = $"#postId{post.Id}";
+                                <a class="btn btn-warning btn-sm" data-toggle="modal" data-target="@postId2">Edit Post</a>
+                                <partial name="_EditPost" view-data="ViewData" />
+                                <a class="btn btn-danger btn-sm" asp-action="DeletePost" asp-controller="Post" asp-route-id="@post.Id" asp-route-threadId="@threadId">Delete Post</a>
+                            }
+                            @{
+                                ViewData["OriginalPost"] = post.Content.Replace("e3f79af2", "");
+                                ViewData["OriginalPoster"] = users.FirstOrDefault(u => u.Id == post.UserId).Username;
+                                ViewData["PostId"] = post.Id;
+                                ViewData["ThreadId2"] = @threadId;
+                                string postId = $"#postId{post.Id}";
+                                var isItReported = alerts.FirstOrDefault(a => a.PostId == post.Id);
+                                string loggedUserId = users.FirstOrDefault(u => u.Username == loggedUser).Id;
+                                var isCurrentUserSuspended = users.FirstOrDefault(u => u.Id == loggedUserId).IsItSuspended;
+                            }
+                            @if (User.Identity.Name != users.FirstOrDefault(u => u.Id == post.UserId).Username && !isCurrentUserSuspended)
+                            {
+                                <a class="btn btn-success btn-sm" data-toggle="modal" data-target="@postId">Reply</a>
+                                <partial name="_PostReply" view-data="ViewData" />
+                            }
+                            @if (isItReported == null && !User.IsInRole("admin") && User.Identity.Name != users.FirstOrDefault(u => u.Id == post.UserId).Username)
+                            {
+                                <a class="btn btn-danger btn-sm" asp-action="CreateAlert" asp-controller="Alert" asp-route-userId="@post.UserId" asp-route-postId="@post.Id" asp-route-threadId="@post.ThreadId">Report</a>
+                            }
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="blank-row"></tr>
+                }
+            </tbody>
+        </table>
+    }
+    @if (!(totalCount < 5))
+    {
+        <div class="text-center">
+            @for (int i = 0; i < count; i++)
+            {
+                var index = i + 1;
+
+                if (index == page + 1)
+                {
+                    <a style="padding:0px 7px; text-decoration:underline; color:white" asp-action="RecentPosts" asp-controller="Post" asp-route-page="@i"><strong>@index</strong></a>
+                    continue;
+                }
+
+                <a style="padding:0px 7px" asp-action="Search" asp-controller="Post" asp-route-search="@searchTerm" asp-route-page="@i">@index</a>
+            }
+        </div>
+    }
+    <br />
+}
+else
+{
+    <h3>Sorry, no matches...</h3>
+}
