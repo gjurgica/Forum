@@ -1,0 +1,29 @@
+﻿@{
+    string categoryId = $"categoryId{ViewData["CategoryId"]}";
+    string categoryTitle = $"{ViewData["CategoryTitle"]}";
+}
+
+<div id="@categoryId" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">Edit Category</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-action="EditCategory" asp-controller="Category" asp-route-categoryId="@ViewData["CategoryId"]" method="post">
+                    <div class="form-group">
+                        <textarea name="title" class="form-control" id="title" rows="3">@categoryTitle</textarea>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-info" style="margin-right:10px; border-radius:7%">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-left:10px; border-radius:7%">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
