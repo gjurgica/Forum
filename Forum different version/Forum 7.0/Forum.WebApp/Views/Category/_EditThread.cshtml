@@ -1,0 +1,28 @@
+﻿@{
+    string editThread = $"thread{ViewData["ThreadId"]}";
+}
+
+<div id="@editThread" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title text-center">Edit Thread</h4>
+            </div>
+            <div class="modal-body">
+                <form asp-action="EditThread" asp-controller="Category" asp-route-threadId="@ViewData["ThreadId"]" method="post">
+                    <div class="form-group">
+                        <textarea name="title" class="form-control" id="title" rows="3">@ViewData["ThreadTitle"]</textarea>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-info" style="margin-right:10px; border-radius:7%">Save</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-left:10px; border-radius:7%">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@using Forum.WebModels.ViewModels
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<br />
+<div class="text-center"><h3>Login</h3></div>
+<br />
+<br />
+<form asp-controller="User" asp-action="LogIn" method="post" class="form-group w-100 text-center">
+    <label asp-for="Username"></label><br />
+    <input asp-for="Username" /> <br />
+    <span asp-validation-for="Username" class="label-warning"></span><br />
+    <label asp-for="Password"></label><br />
+    <input type="password" asp-for="Password" /> <br />
+    <span asp-validation-for="Password" class="label-warning"></span><br />
+    <br />
+    <button class="btn btn-info" type="submit" style="border-radius:7%">Log In</button>
+</form>
+<br />
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

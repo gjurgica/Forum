@@ -1,0 +1,65 @@
+﻿@using Forum.WebModels.ViewModels
+@model List<CategoryViewModel>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<h2>Categories</h2>
+<br />
+
+@foreach (CategoryViewModel category in Model)
+{
+    <table class="table" style="border: 1px solid #808080">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    <div style="display:inline-block; padding:0.7%"><a asp-action="ShowAllThreads" asp-controller="Thread" asp-route-categoryId="@category.Id" asp-route-categoryTitle="@category.Title">@category.Title</a></div>
+
+                    @if (User.IsInRole("admin"))
+                    {
+                        string categoryId = $"#categoryId{category.Id}";
+                        string newThread = $"#category{category.Id}";
+                        ViewData["CategoryId"] = category.Id;
+                        ViewData["CategoryTitle"] = category.Title;
+
+                        <a class="btn btn-danger btn-xs" style="float:right; margin-top:0.8%" asp-action="DeleteCategory" asp-controller="Category" asp-route-id="@category.Id">Delete</a>
+                        <a class="btn btn-xs" style="background-color:#db9833; color:white; float:right; margin-right:0.5%; margin-top:0.8%" data-toggle="modal" data-target="@categoryId">Edit</a>
+                        <partial name="_EditCategory" view-data="ViewData" />
+                        <a class="btn btn-primary btn-xs" style="float:right; margin-right:0.5%; margin-top:0.8%" data-toggle="modal" data-target="@newThread">Add Thread</a>
+                        <partial name="_AddThread" view-data="ViewData" />
+                    }
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (ThreadViewModel thread in category.Threads.TakeLast(3).OrderByDescending(t => t.DateCreated.Date).ThenByDescending(t => t.DateCreated.TimeOfDay))
+            {
+                <tr style="background-color: #4e5d6c">
+                    <td style="width: 70%; border-bottom: 1px solid #df691a;  padding:1.5%">
+                        <a asp-action="ShowThread" asp-controller="Category" asp-route-Id="@thread.Id">@thread.Title</a>
+
+                        @if (User.IsInRole("admin"))
+                        {
+                            ViewData["ThreadId"] = thread.Id;
+                            ViewData["ThreadTitle"] = thread.Title;
+
+                            string editThread = $"#thread{ViewData["ThreadId"]}";
+
+                            <a class="btn btn-danger btn-xs" style="float:right" asp-action="RemoveThread" asp-controller="Category" asp-route-threadId="@thread.Id">Delete</a>
+                            <a class="btn btn-warning btn-xs" style="background-color:#db9833; float:right; margin-right:0.5%" data-toggle="modal" data-target="@editThread">Edit</a>
+                            <partial name="_EditThread" view-data="ViewData" />
+                        }
+
+                    </td>
+                    <td style="width: 15%; border-bottom: 1px solid #df691a;  padding:1.5%">Posts:&nbsp;&nbsp;@thread.Posts.Count()</td>
+                    <td style="width: 15%; border-bottom: 1px solid #df691a;  padding:0.9%">Created:&nbsp;&nbsp;@thread.DateCreated</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <br />
+}
