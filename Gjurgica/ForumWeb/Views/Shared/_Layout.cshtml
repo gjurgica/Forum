@@ -22,8 +22,6 @@
     <partial name="_Favicons" />
 </head>
 <body>
-
-    <partial name="_CookieConsentPartial" />
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
         <a class="navbar-brand logo" href="#" style="font-size:30px;font-weight:bold;color:gray;font-family: 'Turret Road', cursive;">@*<i class="fab fa-android"></i>*@<span><</span>CodeForum<span>></span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,12 +38,13 @@
                 </li>
             </ul>
             <form asp-controller="Post" asp-action="SearhPost" method="get" class="form-inline my-2 my-lg-0">
-                <input  class="form-control mr-sm-2 homeSearch" type="search" name="searchquery" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2 homeSearch" type="search" name="searchquery" placeholder="Search" aria-label="Search">
                 <button type="submit" class="btn" style="background-color:transparent"><i class="glyphicon glyphicon-search" style="color:gray;font-size:20px"></i></button>
             </form>
             <partial name="_LoginPartial" />
         </div>
     </nav>
+    <partial name="_CookieConsentPartial" />
     <div class="container body-content">
         @RenderBody()
 

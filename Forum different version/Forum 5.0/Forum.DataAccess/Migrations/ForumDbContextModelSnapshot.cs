@@ -50,9 +50,9 @@ namespace Forum.DataAccess.Migrations
                     b.ToTable("Categories");
 
                     b.HasData(
-                        new { Id = "6378176c-7cdc-4244-9b01-9b8393d40def", Title = "Software" },
-                        new { Id = "8418e314-2f90-4927-a8f1-75676a0044c8", Title = "Games" },
-                        new { Id = "2a8b43b5-306f-4561-b32e-69018b8e6a69", Title = "News" }
+                        new { Id = "aa0b05c2-378e-4fd4-b08e-d491986de36a", Title = "Software" },
+                        new { Id = "fdb4759d-8052-437e-80b4-cd7c6f1cd3f5", Title = "Games" },
+                        new { Id = "92184928-eae8-40af-aa57-b948fbf4b2a4", Title = "News" }
                     );
                 });
 
@@ -81,10 +81,10 @@ namespace Forum.DataAccess.Migrations
                     b.ToTable("Posts");
 
                     b.HasData(
-                        new { Id = "9032b9b6-6da1-489b-87a5-1454f98ceaaa", Content = "The best free antivirus is Kaspersky Cloud Free", DateCreated = new DateTime(2019, 10, 7, 19, 47, 44, 371, DateTimeKind.Utc), ThreadId = "097b47f6-2ca9-482a-a5ea-49c15e5112ab", UserId = "7d61ae6a-c786-497e-9955-b144476f596f" },
-                        new { Id = "71edf604-f239-49f6-bd72-fd192f0f242b", Content = "Avast is another good free antivirus", DateCreated = new DateTime(2019, 10, 7, 19, 47, 44, 371, DateTimeKind.Utc), ThreadId = "097b47f6-2ca9-482a-a5ea-49c15e5112ab", UserId = "f6a3b03d-90b8-4dd4-ab61-1d93e22bc3ef" },
-                        new { Id = "a5c9e54c-efbd-4740-84d8-ae59b57dd8bd", Content = "I hope they've pathed some of the security holes", DateCreated = new DateTime(2019, 10, 7, 19, 47, 44, 371, DateTimeKind.Utc), ThreadId = "fab5cc4d-3c42-419a-a547-dbd49d41d451", UserId = "f6a3b03d-90b8-4dd4-ab61-1d93e22bc3ef" },
-                        new { Id = "b8426a2a-f293-4d42-a777-4676a3384237", Content = "Call of Duty: Modern Warfare is the best one so far.", DateCreated = new DateTime(2019, 10, 7, 19, 47, 44, 371, DateTimeKind.Utc), ThreadId = "be00757b-8c5e-4717-af05-658a8c7f8039", UserId = "23d43032-30f1-4a0b-b553-4374d2352397" }
+                        new { Id = "d7c9a1b1-9463-4a9c-9dd0-92288dfece6d", Content = "The best free antivirus is Kaspersky Cloud Free", DateCreated = new DateTime(2019, 10, 25, 11, 51, 42, 864, DateTimeKind.Utc), ThreadId = "1559a0cf-95cb-406c-a359-3d603f0e09f1", UserId = "bd33909e-f7d4-4434-b8c3-8896173a505a" },
+                        new { Id = "8a34f7ca-6bba-46ae-acba-2535334de0d7", Content = "Avast is another good free antivirus", DateCreated = new DateTime(2019, 10, 25, 11, 51, 42, 865, DateTimeKind.Utc), ThreadId = "1559a0cf-95cb-406c-a359-3d603f0e09f1", UserId = "356bd980-c826-455c-8cf5-64fd54a57c47" },
+                        new { Id = "ed37484d-ee52-4ab0-b815-d0cc81f5dfc9", Content = "I hope they've pathed some of the security holes", DateCreated = new DateTime(2019, 10, 25, 11, 51, 42, 865, DateTimeKind.Utc), ThreadId = "13b7c725-9472-4919-b736-3fd68c84cf69", UserId = "356bd980-c826-455c-8cf5-64fd54a57c47" },
+                        new { Id = "b754b16b-1ae3-4194-b152-f2ca557488df", Content = "Call of Duty: Modern Warfare is the best one so far.", DateCreated = new DateTime(2019, 10, 25, 11, 51, 42, 865, DateTimeKind.Utc), ThreadId = "a8d53df6-8066-4860-baa1-52063f9e2fef", UserId = "1bf9bf05-690b-4f95-8cf8-e3ce7c6aee30" }
                     );
                 });
 
@@ -131,9 +131,9 @@ namespace Forum.DataAccess.Migrations
                     b.ToTable("Threads");
 
                     b.HasData(
-                        new { Id = "097b47f6-2ca9-482a-a5ea-49c15e5112ab", CategoryId = "6378176c-7cdc-4244-9b01-9b8393d40def", DateCreated = new DateTime(2019, 10, 7, 21, 47, 44, 370, DateTimeKind.Local), Title = "Best Free AV" },
-                        new { Id = "fab5cc4d-3c42-419a-a547-dbd49d41d451", CategoryId = "2a8b43b5-306f-4561-b32e-69018b8e6a69", DateCreated = new DateTime(2019, 10, 7, 21, 47, 44, 371, DateTimeKind.Local), Title = "New version of FireFox is released" },
-                        new { Id = "be00757b-8c5e-4717-af05-658a8c7f8039", CategoryId = "8418e314-2f90-4927-a8f1-75676a0044c8", DateCreated = new DateTime(2019, 10, 7, 21, 47, 44, 371, DateTimeKind.Local), Title = "The best FPS game in 2019" }
+                        new { Id = "1559a0cf-95cb-406c-a359-3d603f0e09f1", CategoryId = "aa0b05c2-378e-4fd4-b08e-d491986de36a", DateCreated = new DateTime(2019, 10, 25, 13, 51, 42, 864, DateTimeKind.Local), Title = "Best Free AV" },
+                        new { Id = "13b7c725-9472-4919-b736-3fd68c84cf69", CategoryId = "92184928-eae8-40af-aa57-b948fbf4b2a4", DateCreated = new DateTime(2019, 10, 25, 13, 51, 42, 864, DateTimeKind.Local), Title = "New version of FireFox is released" },
+                        new { Id = "a8d53df6-8066-4860-baa1-52063f9e2fef", CategoryId = "fdb4759d-8052-437e-80b4-cd7c6f1cd3f5", DateCreated = new DateTime(2019, 10, 25, 13, 51, 42, 864, DateTimeKind.Local), Title = "The best FPS game in 2019" }
                     );
                 });
 
@@ -198,9 +198,9 @@ namespace Forum.DataAccess.Migrations
                     b.ToTable("AspNetUsers");
 
                     b.HasData(
-                        new { Id = "f6a3b03d-90b8-4dd4-ab61-1d93e22bc3ef", AccessFailedCount = 0, Avatar = "/avatars/no-image.jpg", ConcurrencyStamp = "d7584e60-c278-4fbd-8c06-31e0e9c11132", Email = "ga@forum.com", EmailConfirmed = true, FullName = "Gjurgica Anastasovska", IsItOnline = false, IsItSuspended = false, Joined = new DateTime(2019, 10, 7, 21, 47, 44, 351, DateTimeKind.Local), LockoutEnabled = false, NormalizedEmail = "GA@FORUM.COM", NormalizedUserName = "GJURGICA", PasswordHash = "AQAAAAEAACcQAAAAENuRpZXMlFhSQ6UXER0aAAr9yJ9kCkO7fBAXq+Ma7yChlY9po5goPAPMhOiNIc9CqQ==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "gjurgica" },
-                        new { Id = "23d43032-30f1-4a0b-b553-4374d2352397", AccessFailedCount = 0, Avatar = "/avatars/no-image.jpg", ConcurrencyStamp = "72e82a3a-5ebc-487f-8ff6-3510c0177a4f", Email = "fm@forum.com", EmailConfirmed = true, FullName = "Florent Memedi", IsItOnline = false, IsItSuspended = false, Joined = new DateTime(2019, 10, 7, 21, 47, 44, 361, DateTimeKind.Local), LockoutEnabled = false, NormalizedEmail = "FM@FORUM.COM", NormalizedUserName = "FLORENT", PasswordHash = "AQAAAAEAACcQAAAAEJqeGFEWor19cs23dt8UQu7XHwlUdWPYuqYPH2nRrvYv0ZlozEgXVFz9baOCSozozQ==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "florent" },
-                        new { Id = "7d61ae6a-c786-497e-9955-b144476f596f", AccessFailedCount = 0, Avatar = "/avatars/no-image.jpg", ConcurrencyStamp = "3275c9a9-4b0d-4b3c-89f1-ea815f5457f9", Email = "vp@forum.com", EmailConfirmed = true, FullName = "Vladimir Prokopiev", IsItOnline = false, IsItSuspended = false, Joined = new DateTime(2019, 10, 7, 21, 47, 44, 370, DateTimeKind.Local), LockoutEnabled = false, NormalizedEmail = "VP@FORUM.COM", NormalizedUserName = "VLADIMIR", PasswordHash = "AQAAAAEAACcQAAAAEEjKsx6D4rUXFqDl9vvHw/LmX13Cadog/Z2/u5qCb125e1h/tIaycTNIe+i47lNjQw==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "vladimir" }
+                        new { Id = "356bd980-c826-455c-8cf5-64fd54a57c47", AccessFailedCount = 0, Avatar = "/avatars/no-image.jpg", ConcurrencyStamp = "a0231b33-689e-47d2-880a-cc847cea278d", Email = "ga@forum.com", EmailConfirmed = true, FullName = "Gjurgica Anastasovska", IsItOnline = false, IsItSuspended = false, Joined = new DateTime(2019, 10, 25, 13, 51, 42, 845, DateTimeKind.Local), LockoutEnabled = false, NormalizedEmail = "GA@FORUM.COM", NormalizedUserName = "GJURGICA", PasswordHash = "AQAAAAEAACcQAAAAECu2QAZPJBrPOSd/OmLYkcCVDqAbLbLSjzhfL2NwgtoH13E101S0fXUCgTnQo6xuuA==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "gjurgica" },
+                        new { Id = "1bf9bf05-690b-4f95-8cf8-e3ce7c6aee30", AccessFailedCount = 0, Avatar = "/avatars/no-image.jpg", ConcurrencyStamp = "b42f2427-2a35-457a-91a3-2970229b01e3", Email = "fm@forum.com", EmailConfirmed = true, FullName = "Florent Memedi", IsItOnline = false, IsItSuspended = false, Joined = new DateTime(2019, 10, 25, 13, 51, 42, 856, DateTimeKind.Local), LockoutEnabled = false, NormalizedEmail = "FM@FORUM.COM", NormalizedUserName = "FLORENT", PasswordHash = "AQAAAAEAACcQAAAAEC4DQU7m2/g4YLcifgO4Vk8Wft36mYR/h4Y35zTvIYbmnhgkQJXd5kdhVTbYuDNHgw==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "florent" },
+                        new { Id = "bd33909e-f7d4-4434-b8c3-8896173a505a", AccessFailedCount = 0, Avatar = "/avatars/no-image.jpg", ConcurrencyStamp = "ba7f6115-45e2-4d57-9253-271235c56142", Email = "vp@forum.com", EmailConfirmed = true, FullName = "Vladimir Prokopiev", IsItOnline = false, IsItSuspended = false, Joined = new DateTime(2019, 10, 25, 13, 51, 42, 864, DateTimeKind.Local), LockoutEnabled = false, NormalizedEmail = "VP@FORUM.COM", NormalizedUserName = "VLADIMIR", PasswordHash = "AQAAAAEAACcQAAAAEI4ZCExSsMw2fJeomQT+2UzyhX7X3NYsKrUUeezjWFk2p3d/r7q39DbLTBHol3gdzQ==", PhoneNumberConfirmed = false, SecurityStamp = "", TwoFactorEnabled = false, UserName = "vladimir" }
                     );
                 });
 
@@ -228,8 +228,8 @@ namespace Forum.DataAccess.Migrations
                     b.ToTable("AspNetRoles");
 
                     b.HasData(
-                        new { Id = "5e10bb0e-5c55-4f4f-8c52-5ab5c1751523", ConcurrencyStamp = "c79d9a96-16e3-400a-931b-206ca843f6ad", Name = "admin", NormalizedName = "ADMIN" },
-                        new { Id = "dab6d0ec-60e0-4d8b-bf81-62d9a7334b17", ConcurrencyStamp = "a0c0b935-03b7-422b-a0e8-a3bba110e1f1", Name = "user", NormalizedName = "USER" }
+                        new { Id = "a2fc4853-643b-499e-a905-2f76f8e42d8a", ConcurrencyStamp = "5d55cc9d-988c-41d9-adeb-4006ea5e0649", Name = "admin", NormalizedName = "ADMIN" },
+                        new { Id = "dda4b08f-21dd-406c-803c-cedc4e15f9d9", ConcurrencyStamp = "d46640b6-0cc8-4acd-8ba1-8e509e80ec5a", Name = "user", NormalizedName = "USER" }
                     );
                 });
 
@@ -304,9 +304,9 @@ namespace Forum.DataAccess.Migrations
                     b.ToTable("AspNetUserRoles");
 
                     b.HasData(
-                        new { UserId = "7d61ae6a-c786-497e-9955-b144476f596f", RoleId = "5e10bb0e-5c55-4f4f-8c52-5ab5c1751523" },
-                        new { UserId = "f6a3b03d-90b8-4dd4-ab61-1d93e22bc3ef", RoleId = "5e10bb0e-5c55-4f4f-8c52-5ab5c1751523" },
-                        new { UserId = "23d43032-30f1-4a0b-b553-4374d2352397", RoleId = "5e10bb0e-5c55-4f4f-8c52-5ab5c1751523" }
+                        new { UserId = "bd33909e-f7d4-4434-b8c3-8896173a505a", RoleId = "a2fc4853-643b-499e-a905-2f76f8e42d8a" },
+                        new { UserId = "356bd980-c826-455c-8cf5-64fd54a57c47", RoleId = "a2fc4853-643b-499e-a905-2f76f8e42d8a" },
+                        new { UserId = "1bf9bf05-690b-4f95-8cf8-e3ce7c6aee30", RoleId = "a2fc4853-643b-499e-a905-2f76f8e42d8a" }
                     );
                 });
 
