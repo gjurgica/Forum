@@ -5,18 +5,22 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
+
 @if (SignInManager.IsSignedIn(User))
 {
-    <form asp-action="Logout" asp-controller="Users"  class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-controller="Users" asp-action="Profile" asp-route-username="@UserManager.GetUserName(User)"  title="Manage" class="text-muted">Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link text-muted">Logout</button>
-            </li>
-        </ul>
-    </form>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item dropdown">
+            <button class="nav-link dropdown-toggle text-muted btn" style="background-color:transparent" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Hello @UserManager.GetUserName(User)!
+            </button>
+            <div class="dropdown-menu p-3 text-muted" style="max-width: 120px;border-radius:5px" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="@Url.Action("Profile","Users",new { username = UserManager.GetUserName(User)})">Profile</a>
+                <a class="dropdown-item" href="@Url.Action("EditUser","Users",new { id = UserManager.GetUserId(User)})">Settings</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="@Url.Action("LogOut","Users")">Logout</a>
+            </div>
+        </li>
+    </ul>
 }
 else
 {
